@@ -1,0 +1,10 @@
+{application, foo, [
+    {description, "Default Zotonic webblog site"},
+    {vsn, "git"},
+    {registered, []},
+    {applications, [kernel, stdlib, zotonic_core]},
+    {env, []},
+    {modules, []},
+    {maintainers, []},
+    {licenses, ["Apache-2.0"]}
+]}.

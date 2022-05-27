@@ -1,0 +1,9 @@
+files
+zotonic_site.config
+.eunit
+.rebar3
+*.beam
+*.o
+*.plt
+*~
+*#
