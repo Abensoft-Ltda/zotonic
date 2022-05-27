@@ -35,7 +35,7 @@ deps/
 
 /modules/*/translations/template/*.pot
 
-/user
-/user/*
+# /user
+# /user/*
 
 .rebar
