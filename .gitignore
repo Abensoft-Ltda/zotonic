@@ -70,3 +70,10 @@ doc/ref/models/model_.rst
 docker-data
 
 apps/zotonic_launcher/bin/zotonic-completion.bash
+/.idea/.gitignore
+/.idea/emacs.xml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/vcs.xml
+/winehq.key
+/zotonic_1x.iml
