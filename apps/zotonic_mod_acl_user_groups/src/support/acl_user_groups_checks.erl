@@ -265,18 +265,23 @@ acl_is_allowed_prop(_Id, _Prop, #context{ user_id = 1 }) ->
 acl_is_allowed_prop(UserId, _Prop, #context{ user_id = UserId}) when is_integer(UserId) ->
     true;
 acl_is_allowed_prop(Id, Prop, Context) ->
-    case is_private_property(Prop) of
+    case is_always_private_property(Prop) of
         true ->
-            case privacy(Id, Context) of
-                ?ACL_PRIVACY_PUBLIC -> true;
-                ?ACL_PRIVACY_MEMBER -> z_acl:user(Context) =/= undefined;
-                ?ACL_PRIVACY_PRIVATE -> can_rsc(Id, update, Context);
-                N ->
-                    privacy_check(N, m_rsc:is_a(Id, person, Context), Id, Context)
-                    orelse can_rsc(Id, update, Context)
-            end;
+            can_rsc(Id, update, Context);
         false ->
-            undefined
+            case is_private_property(Prop) of
+                true ->
+                    case privacy(Id, Context) of
+                        ?ACL_PRIVACY_PUBLIC -> true;
+                        ?ACL_PRIVACY_MEMBER -> z_acl:user(Context) =/= undefined;
+                        ?ACL_PRIVACY_PRIVATE -> can_rsc(Id, update, Context);
+                        N ->
+                            privacy_check(N, m_rsc:is_a(Id, person, Context), Id, Context)
+                            orelse can_rsc(Id, update, Context)
+                    end;
+                false ->
+                    undefined
+            end
     end.
 
 %% The privacy levels are:
@@ -361,6 +366,15 @@ is_private_property(<<"pivot_location_lng">>) -> true;
 is_private_property(<<"pivot_geocode">>) -> true;
 is_private_property(<<"pivot_geocode_qhash">>) -> true;
 is_private_property(_) -> false.
+
+is_always_private_property(<<"billing_email">>) -> true;
+is_always_private_property(<<"billing_street_1">>) -> true;
+is_always_private_property(<<"billing_street_2">>) -> true;
+is_always_private_property(<<"billing_postcode">>) -> true;
+is_always_private_property(<<"billing_city">>) -> true;
+is_always_private_property(<<"billing_state">>) -> true;
+is_always_private_property(<<"billing_country">>) -> true;
+is_always_private_property(_) -> false.
 
 
 acl_logon(#acl_logon{ id = UserId, options = Options }, Context) ->
@@ -605,7 +619,7 @@ acl_add_sql_check(#acl_add_sql_check{alias=Alias, args=Args, search_sql=SearchSq
                     % User can see some content groups
                     Clause = lists:flatten([
                                 " (",Alias,".content_group_id is null or ",
-                                     Alias,".content_group_id in (SELECT(unnest($",integer_to_list(length(Args)+1),"::int[]))))",
+                                     Alias,".content_group_id = any($",integer_to_list(length(Args)+1),"::int[]))",
                                 publish_check(" and ", Alias, SearchSql, Context)]),
                     {Clause, Args ++ [Ids]}
             end

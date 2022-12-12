@@ -507,11 +507,11 @@ is_update_medium_allowed(_RscId, #{ <<"mime">> := Mime }, _RscProps, Context) ->
 insert_url(Url, Context) ->
     insert_url(Url, #{}, [], Context).
 
--spec insert_url(media_url(), z_props:props_all(), z:context()) -> {ok, pos_integer()} | {error, term()}.
+-spec insert_url(media_url(), m_rsc:props_all(), z:context()) -> {ok, pos_integer()} | {error, term()}.
 insert_url(Url, RscProps, Context) ->
     insert_url(Url, RscProps, [], Context).
 
--spec insert_url(media_url(), z_props:props_all(), list(), z:context()) -> {ok, pos_integer()} | {error, term()}.
+-spec insert_url(media_url(), m_rsc:props_all(), list(), z:context()) -> {ok, pos_integer()} | {error, term()}.
 insert_url(Url, RscProps, Options, Context) when is_list(RscProps) ->
     {ok, PropsMap} = z_props:from_list(RscProps),
     insert_url(Url, PropsMap, Options, Context);
@@ -581,6 +581,9 @@ replace_file(#upload{filename = OriginalFilename, tmpfile = TmpFile}, RscId, Rsc
         false ->
             {error, upload_not_tempfile}
     end;
+replace_file(File, RscId, RscProps, MInfo, Opts, Context) when is_list(File) ->
+    File1 = unicode:characters_to_binary(File),
+    replace_file(File1, RscId, RscProps, MInfo, Opts, Context);
 replace_file(File, RscId, RscProps, MInfo, Opts, Context) ->
     OriginalFilename = maps:get(<<"original_filename">>, RscProps, File),
     MInfo1 = MInfo#{
