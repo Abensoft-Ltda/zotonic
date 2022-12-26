@@ -172,6 +172,8 @@ request_arg(<<"is_authoritative">>)    -> is_authoritative;
 request_arg(<<"is_featured">>)         -> is_featured;
 request_arg(<<"is_published">>)        -> is_published;
 request_arg(<<"is_public">>)           -> is_public;
+request_arg(<<"is_findable">>)         -> is_findable;
+request_arg(<<"is_unfindable">>)       -> is_unfindable;
 request_arg(<<"date_start_after">>)    -> date_start_after;
 request_arg(<<"date_start_before">>)   -> date_start_before;
 request_arg(<<"date_start_year">>)     -> date_start_year;
@@ -204,15 +206,16 @@ request_arg(<<"pagelen">>)             -> undefined;
 request_arg(<<"options">>)             -> undefined;
 % Complain about all else
 request_arg(<<"custompivot">>)         ->
-    ?LOG_ERROR("The query term 'custompivot' has been removed. Use filters with 'pivot.pivotname.field' instead."),
+    ?LOG_ERROR(#{
+        in => zotonic_mod_search,
+        text => <<"The query term 'custompivot' has been removed. Use filters with 'pivot.pivotname.field' instead.">>,
+        result => error,
+        reason => unknown_query_term,
+        term => <<"custompivot">>
+    }),
     throw({error, {unknown_query_term, custompivot}});
 request_arg(Term) ->
-    ?LOG_ERROR(#{
-        text => <<"Skipping unknown query term">>,
-        in => zotonic_mod_search,
-        term => Term
-    }),
-    undefined.
+    {custom, Term}.
 
 
 %% Private methods start here
@@ -491,6 +494,28 @@ qterm({is_public, Boolean}, _Context) ->
                     }
           end
     end;
+qterm({is_findable, Boolean}, _Context) ->
+    %% is_findable or is_findable={false,true}
+    %% Filter on whether an item is findable or not.
+    #search_sql_term{
+        where = [
+            <<"rsc.is_unfindable = ">>, '$1'
+        ],
+        args = [
+            not z_convert:to_bool(Boolean)
+        ]
+    };
+qterm({is_unfindable, Boolean}, _Context) ->
+    %% is_unfindable or is_unfindable={false,true}
+    %% Filter on whether an item is unfindable or not.
+    #search_sql_term{
+        where = [
+            <<"rsc.is_unfindable = ">>, '$1'
+        ],
+        args = [
+            z_convert:to_bool(Boolean)
+        ]
+    };
 qterm({upcoming, Boolean}, _Context) ->
     %% upcoming
     %% Filter on items whose start date lies in the future
@@ -714,8 +739,8 @@ qterm({{facet, Field}, V}, Context) ->
 qterm({filter, R}, Context) ->
     add_filters(R, Context);
 qterm({{filter, Field}, V}, Context) ->
-    {Tab, Col, Q1} = map_filter_column(Field, #search_sql_term{}),
-    case pivot_qterm(Tab, Col, V, Q1, Context) of
+    {Tab, Alias, Col, Q1} = map_filter_column(Field, #search_sql_term{}),
+    case pivot_qterm(Tab, Alias, Col, V, Q1, Context) of
         {ok, QTerm} ->
             QTerm;
         {error, _} ->
@@ -897,6 +922,23 @@ qterm({publication_before, Date}, Context) ->
             z_datetime:to_datetime(Date, Context)
         ]
     };
+qterm({{custom, Term}, Arg}, Context) ->
+    case z_notifier:first(#search_query_term{ term = Term, arg = Arg }, Context) of
+        undefined ->
+            ?LOG_WARNING(#{
+                in => zotonic_mod_search,
+                text => <<"Ignored unknown query search term">>,
+                term => Term,
+                arg => Arg,
+                result => error,
+                reason => unknown_query_term
+            }),
+            [];
+        [] ->
+            [];
+        #search_sql_term{} = SQL ->
+            SQL
+    end;
 qterm(Term, _Context) ->
     %% No match found
     throw({error, {unknown_query_term, Term}}).
@@ -1189,22 +1231,23 @@ assure_category_1(Name, Context) ->
 %             ok
 %     end.
 
--spec pivot_qterm(Table, Column, Value, Q, Context) -> {ok, QResult} | {error, term()}
+-spec pivot_qterm(Table, Alias, Column, Value, Q, Context) -> {ok, QResult} | {error, term()}
     when Table :: binary(),
+         Alias :: binary(),
          Column :: binary(),
          Value :: term(),
          Q :: #search_sql_term{},
          QResult :: #search_sql_term{},
          Context :: z:context().
-pivot_qterm(_Tab, _Col, [], Q, _Context) ->
+pivot_qterm(_Tab, _Alias, _Col, [], Q, _Context) ->
     {ok, Q};
-pivot_qterm(Tab, Col, [Value], Q, Context) ->
-    pivot_qterm_1(Tab, Col, Value, Q, Context);
-pivot_qterm(Tab, Col, Vs, Q, Context) when is_list(Vs) ->
+pivot_qterm(Tab, Alias, Col, [Value], Q, Context) ->
+    pivot_qterm_1(Tab, Alias, Col, Value, Q, Context);
+pivot_qterm(Tab, Alias, Col, Vs, Q, Context) when is_list(Vs) ->
     % 'OR' query for all values
     Q2 = lists:foldl(
         fun(V, QAcc) ->
-            case pivot_qterm_1(Tab, Col, V, QAcc, Context) of
+            case pivot_qterm_1(Tab, Alias, Col, V, QAcc, Context) of
                 {ok, QAcc1} ->
                     QAcc1;
                 {error, _} ->
@@ -1221,16 +1264,16 @@ pivot_qterm(Tab, Col, Vs, Q, Context) when is_list(Vs) ->
         ]
     },
     {ok, Q3};
-pivot_qterm(Tab, Col, Value, Q, Context) ->
-    pivot_qterm_1(Tab, Col, Value, Q, Context).
+pivot_qterm(Tab, Alias, Col, Value, Q, Context) ->
+    pivot_qterm_1(Tab, Alias, Col, Value, Q, Context).
 
-pivot_qterm_1(Tab, Col, Value, Query, Context) ->
+pivot_qterm_1(Tab, Alias, Col, Value, Query, Context) ->
     {Op, Value1} = extract_op(Value),
     case z_db:to_column_value(Tab, Col, Value1, Context) of
         {ok, Value2} ->
             {ArgN, Query2} = add_term_arg(Value2, Query),
             W = [
-                <<Tab/binary, $., Col/binary>>, Op, ArgN
+                <<Alias/binary, $., Col/binary>>, Op, ArgN
             ],
             Query3 = Query2#search_sql_term{
                 where = Query2#search_sql_term.where ++ [ W ]
@@ -1243,6 +1286,7 @@ pivot_qterm_1(Tab, Col, Value, Query, Context) ->
                 result => error,
                 reason => Reason,
                 table => Tab,
+                alias => Alias,
                 column => Col,
                 value => Value1
             }),
@@ -1289,12 +1333,21 @@ add_filters({'or', Filters}, Q, Context) ->
 add_filters([Column, Value], R, Context) ->
     add_filters([Column, eq, Value], R, Context);
 add_filters([Column, Operator, Value], Q, Context) ->
-    {Tab, Col, Q1} = map_filter_column(Column, Q),
+    {Tab, Alias, Col, Q1} = map_filter_column(Column, Q),
     case z_db:to_column_value(Tab, Col, Value, Context) of
         {ok, V1} ->
-            {Expr, Q2} = create_filter(Tab, Col, Operator, V1, Q1),
+            {Expr, Q2} = create_filter(Tab, Alias, Col, Operator, V1, Q1),
             add_filter_where(Expr, Q2);
-        {error, _} ->
+        {error, Reason} ->
+            ?LOG_INFO(#{
+                text => <<"Search query filter could not be added">>,
+                result => error,
+                reason => Reason,
+                filter_column => Column,
+                table => Tab,
+                column => Col,
+                value => Value
+            }),
             Q
     end.
 
@@ -1309,10 +1362,10 @@ add_filters_or(Filters, Q, Context) ->
     add_filter_where(Or, Q1).
 
 add_filters_or_1([ C, O, V ], {Es, QAcc}, Context) ->
-    {Tab, Col, QAcc1} = map_filter_column(C, QAcc),
+    {Tab, Alias, Col, QAcc1} = map_filter_column(C, QAcc),
     case z_db:to_column_value(Tab, Col, V, Context) of
         {ok, V1} ->
-            {E, QAcc2} = create_filter(Tab, Col, O, V1, QAcc1),
+            {E, QAcc2} = create_filter(Tab, Alias, Col, O, V1, QAcc1),
             {[E|Es], QAcc2};
         {error, _} ->
             {Es, QAcc}
@@ -1320,15 +1373,15 @@ add_filters_or_1([ C, O, V ], {Es, QAcc}, Context) ->
 add_filters_or_1([ C, V ], {Es, QAcc}, Context) ->
     add_filters_or_1([ C, eq, V ], {Es, QAcc}, Context).
 
-create_filter(Tab, Col, Operator, null, Q) ->
-    create_filter(Tab, Col, Operator, undefined, Q);
-create_filter(Tab, Col, Operator, undefined, Q) ->
+create_filter(Tab, Alias, Col, Operator, null, Q) ->
+    create_filter(Tab, Alias, Col, Operator, undefined, Q);
+create_filter(_Tab, Alias, Col, Operator, undefined, Q) ->
     Operator1 = map_filter_operator(Operator),
-    {create_filter_null(Tab, Col, Operator1), Q};
-create_filter(Tab, Col, Operator, Value, Q) ->
+    {create_filter_null(Alias, Col, Operator1), Q};
+create_filter(_Tab, Alias, Col, Operator, Value, Q) ->
     {Arg, Q1} = add_filter_arg(Value, Q),
     Operator1 = map_filter_operator(Operator),
-    {[Tab, $., Col, <<" ">>, Operator1, <<" ">>, Arg], Q1}.
+    {[Alias, $., Col, <<" ">>, Operator1, <<" ">>, Arg], Q1}.
 
 
 map_filter_column(<<"pivot.", P/binary>>, #search_sql_term{ join_inner = Join } = Q) ->
@@ -1342,22 +1395,22 @@ map_filter_column(<<"pivot.", P/binary>>, #search_sql_term{ join_inner = Join } 
                     T2 => {T2, <<T2/binary, ".id = rsc.id">>}
                 }
             },
-            {T2, F1, Q1};
+            {T2, T2, F1, Q1};
         [ Field ] ->
             F1 = z_convert:to_binary(sql_safe(Field)),
-            {<<"rsc">>, <<"pivot_", F1/binary>>, Q}
+            {<<"rsc">>, <<"rsc">>, <<"pivot_", F1/binary>>, Q}
     end;
 map_filter_column(<<"facet.", P/binary>>, #search_sql_term{ join_inner = Join } = Q) ->
     Q1 = Q#search_sql_term{
         join_inner = Join#{
-            <<"facet">> => {<<"facet">>, <<"facet.id = rsc.id">>}
+            <<"facet">> => {<<"search_facet">>, <<"facet.id = rsc.id">>}
         }
     },
     Field = sql_safe(P),
-    {<<"facet">>, <<"f_", Field/binary>>, Q1};
+    {<<"search_facet">>, <<"facet">>, <<"f_", Field/binary>>, Q1};
 map_filter_column(Column, Q) ->
     Field = sql_safe(Column),
-    {<<"rsc">>, Field, Q}.
+    {<<"rsc">>, <<"rsc">>, Field, Q}.
 
 %% Add an AND clause to the WHERE of a #search_sql_term
 %% Clause is already supposed to be safe.
@@ -1371,10 +1424,10 @@ add_filter_arg(ArgValue, #search_sql_term{ args = Args } = Q) ->
     Arg = [$$] ++ integer_to_list(length(Args) + 1),
     {list_to_atom(Arg), Q#search_sql_term{args = Args ++ [ ArgValue ]}}.
 
-create_filter_null(Tab, Col, "=") ->
-    [ Tab, $., Col, <<" is null">> ];
-create_filter_null(Tab, Col, "<>") ->
-    [ Tab, $., Col, <<" is not null">> ];
+create_filter_null(Alias, Col, "=") ->
+    [ Alias, $., Col, <<" is null">> ];
+create_filter_null(Alias, Col, "<>") ->
+    [ Alias, $., Col, <<" is not null">> ];
 create_filter_null(_Tab, _Col, _Op) ->
     "false".
 
