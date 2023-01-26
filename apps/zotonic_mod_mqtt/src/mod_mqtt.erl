@@ -71,8 +71,23 @@
     handle_model_request(Model, delete, Path, Msg, Context).
 
 %% @doc Call the module and publish the result back to the 'response_topic'
-handle_model_request(Model, Verb, Path, Msg, Context) ->
-    Res = z_model:callback(Model, Verb, Path, Msg, Context),
+%%handle_model_request(Model, Verb, Path, Msg, Context) ->
+%%    Res = z_model:callback(Model, Verb, Path, Msg, Context),
+%%    publish_response(Msg, Res, Context).
+
+handle_model_request(Model, Verb, Path, Msg, Context) when is_atom(Model) ->
+    handle_model_request(atom_to_binary(Model), Verb, Path, Msg, Context);
+handle_model_request(Model, Verb, Path, Msg, Context) when is_binary(Model) ->
+    Process =
+        case Model of
+            <<"sl_", _/binary>> -> z_auth:is_auth(Context);
+            _ -> true
+        end,
+    Res =
+        case Process of
+            true -> z_model:callback(Model, Verb, Path, Msg, Context);
+            false -> {error, eacces}
+        end,
     publish_response(Msg, Res, Context).
 
 publish_response(#{ properties := #{ response_topic := Topic } } = Msg, {ok, Res}, Context) ->
