@@ -40,9 +40,9 @@
         <div class="col-md-3">
             {% with m.acl.user.s.hascollabmanager as cmgr %}
             {% with m.acl.user.s.hascollabmember as cmbr %}
-                <select class="form-control" name="find_cg">
+                <select class="form-control" name="find_cg" id="{{ #find_cg }}">
                     <option value="">{_ Anybody’s _}</option>
-                    <option value="me"  {% if cid == 'me' %}selected{% endif %}>{_ Mine _}</option>
+                    <option value="me" {% if content_group == 'me' %}selected{% endif %}>{_ Mine _}</option>
                     {% if cmgr or cmbr %}
                         <optgroup label="{_ Collaboration groups _}">
                             {% for cid in cmgr ++ (cmbr -- cmgr) %}
@@ -64,6 +64,28 @@
                 </select>
             {% endwith %}
             {% endwith %}
+
+            {% javascript %}
+                switch (window.sessionStorage.getItem('dialog_connect_created_me')) {
+                    case "true":
+                        $("#{{ #find_cg }}").val('me');
+                        break;
+                    case "false":
+                        break;
+                    default:
+                        {% if m.admin.connect_created_me and not content_group %}
+                            $("#{{ #find_cg }}").val('me');
+                        {% endif %}
+                        break;
+                }
+                $("#{{ #find_cg }}").change(function() {
+                    if ($(this).val() == 'me') {
+                        window.sessionStorage.setItem('dialog_connect_created_me', "true");
+                    } else {
+                        window.sessionStorage.setItem('dialog_connect_created_me', "false");
+                    }
+                });
+            {% endjavascript %}
         </div>
 	</form>
 
@@ -91,6 +113,7 @@
             action=action
             actions=actions
             autoclose=autoclose
+            is_connect_toggle=not is_zmedia
         }
     }
 %}

@@ -22,7 +22,7 @@
 -mod_title("Survey").
 -mod_description("Create and publish questionnaires.").
 -mod_prio(400).
--mod_schema(4).
+-mod_schema(5).
 -mod_depends([ admin, mod_wires ]).
 -mod_provides([ survey, poll ]).
 
@@ -140,22 +140,7 @@ event(#postback{message={survey_remove_result, Args}}, Context) ->
                 ], Context);
         false ->
             z_render:growl(?__("You are not allowed to change these results.", Context), Context)
-    end;
-
-event(#postback{message={admin_show_emails, Args}}, Context) ->
-    {id, SurveyId} = proplists:lookup(id, Args),
-    case m_survey:is_allowed_results_download(SurveyId, Context) of
-        true ->
-            [ Headers | Data ] = m_survey:survey_results(SurveyId, true, Context),
-            All = [lists:zip(Headers, Row) || {_Id,Row} <- Data],
-            z_render:dialog(?__("E-mail addresses", Context),
-                            "_dialog_survey_email_addresses.tpl",
-                            [{id, SurveyId}, {all, All}],
-                            Context);
-        false ->
-            Context
     end.
-
 
 %% @doc Append the possible blocks for a survey's edit page.
 observe_admin_edit_blocks(#admin_edit_blocks{id=Id}, Menu, Context) ->

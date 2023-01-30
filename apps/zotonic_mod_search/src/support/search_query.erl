@@ -1,5 +1,5 @@
 %% @author Arjan Scherpenisse <arjan@scherpenisse.net>
-%% @copyright 2009-2022 Arjan Scherpenisse
+%% @copyright 2009-2023 Arjan Scherpenisse
 %% @doc Handler for m.search[{query, Args..}]
 
 %% Licensed under the Apache License, Version 2.0 (the "License");
@@ -48,6 +48,12 @@ search(Query, Context) ->
                     A -> {true, {A, V}}
                 end;
             ({K, _} = KV) when is_atom(K) ->
+                {true, KV};
+            ({{filter, _}, _} = KV) ->
+                {true, KV};
+            ({{facet, _}, _} = KV) ->
+                {true, KV};
+            ({{custom, _}, _} = KV) ->
                 {true, KV}
         end,
         Query1),
@@ -149,6 +155,7 @@ split_arg(B) ->
 
 % Convert known request arguments to atoms.
 request_arg(<<"content_group">>)       -> content_group;
+request_arg(<<"visible_for">>)         -> visible_for;
 request_arg(<<"cat">>)                 -> cat;
 request_arg(<<"cat_exact">>)           -> cat_exact;
 request_arg(<<"cat_exclude">>)         -> cat_exclude;
@@ -305,6 +312,51 @@ qterm({content_group, ContentGroup}, Context) ->
                         ]
                     }
             end
+    end;
+qterm({visible_for, VisFor}, _Context) when is_list(VisFor) ->
+    %% visible_for=[5,6]
+    %% Filter results for visibility levels
+    try
+        VisFor1 = lists:map(fun z_convert:to_integer/1, VisFor),
+        VisFor2 = lists:filter(fun is_integer/1, VisFor1),
+        #search_sql_term{
+            where = [ <<"rsc.visible_for = any(">>, '$1', <<"::int[])">> ],
+            args = [ VisFor2 ]
+        }
+    catch
+        error:badarg ->
+            ?LOG_WARNING(#{
+                in => zotonic_mod_search,
+                text => <<"Search: error converting visible_for search term">>,
+                result => error,
+                reason => badarg,
+                visible_for => VisFor
+            }),
+            []
+    end;
+qterm({visible_for, VisFor}, _Context) ->
+    %% visible_for=5
+    %% Filter results for a certain visibility level
+    try
+        case z_convert:to_integer(VisFor) of
+            undefined ->
+                [];
+            VisFor1 ->
+                #search_sql_term{
+                    where = [ <<"rsc.visible_for = ">>, '$1'],
+                    args = [ VisFor1 ]
+                }
+        end
+    catch
+        error:badarg ->
+            ?LOG_WARNING(#{
+                in => zotonic_mod_search,
+                text => <<"Search: error converting visible_for search term">>,
+                result => error,
+                reason => badarg,
+                visible_for => VisFor
+            }),
+            []
     end;
 qterm({id_exclude, Ids}, Context) when is_list(Ids) ->
     %% id_exclude=resource-id
@@ -630,14 +682,15 @@ qterm({query_id, Id}, Context) ->
     QArgs = try
         parse_query_text(z_html:unescape(m_rsc:p(Id, 'query', Context)))
     catch
-        throw:{error,{unknown_query_term,Term}} ->
+        throw:{error,{unknown_query_term,Term}}:S ->
             ?LOG_ERROR(#{
                 text => <<"Unknown query term in search query">>,
                 in => zotonic_mod_search,
                 result => error,
                 reason => unknown_query_term,
                 query_id => Id,
-                term => Term
+                term => Term,
+                stack => S
             }),
             []
     end,
