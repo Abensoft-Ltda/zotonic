@@ -1086,7 +1086,41 @@ function z_init_postback_forms()
                 args = validations;
             } else {
                 transport = '';
-                args = validations.concat($(theForm).formToArray());
+
+                const formArgs = $(theForm).formToArray()
+                const formData = []
+                for (const elem of Array.from(theForm.elements)) {
+                    if (!elem.name || elem.disabled) continue
+                    const dataIndex = formData.findIndex(({ name }) => name === elem.name)
+                    if (dataIndex !== -1) continue
+                    let value = elem.value
+                    if (elem instanceof HTMLInputElement) {
+                        const index = formArgs.findIndex(({ name }) => name === elem.name)
+                        const formElem = formArgs[index]
+                        if (formElem) {
+                            const formValue = formElem.value
+                            switch(elem.type) {
+                                case "checkbox":
+                                case "radio":
+                                    const elems = document.querySelectorAll(`input[name="${elem.name}"]`)
+                                    if (elems.length > 1) {
+                                        value = []
+                                        elems.forEach(({ checked, value: val }) => { checked && value.push(val) })
+                                    } else {
+                                        value = formValue
+                                    }
+                                    break
+                                default:
+                                    value = formValue
+                            }
+                        }
+                    } else if (elem instanceof HTMLSelectElement) {
+                        if (elem.selectedIndex >= 0) value = $(elem).val();
+                        else value = elem.getAttribute("multiple") ? [] : "";
+                    }
+                    formData.push({name: elem.name, value})
+                }
+                args = validations.concat(formData)
             }
 
             // add submitting element to data if we know it
