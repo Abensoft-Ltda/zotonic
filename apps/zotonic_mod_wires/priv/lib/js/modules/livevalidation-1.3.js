@@ -282,9 +282,21 @@ LiveValidation.prototype = {
             return LiveValidation.TEXT;
         if (nodeName == 'INPUT' && this.element.type.toUpperCase() == 'HIDDEN')
             return LiveValidation.TEXT;
+        if (nodeName == 'INPUT' && this.element.type.toUpperCase() == 'COLOR')
+            return LiveValidation.TEXT;
         if (nodeName == 'INPUT' && this.element.type.toUpperCase() == 'DATE')
             return LiveValidation.TEXT;
         if (nodeName == 'INPUT' && this.element.type.toUpperCase() == 'DATETIME-LOCAL')
+            return LiveValidation.TEXT;
+        if (nodeName == 'INPUT' && this.element.type.toUpperCase() == 'MONTH')
+            return LiveValidation.TEXT;
+        if (nodeName == 'INPUT' && this.element.type.toUpperCase() == 'WEEK')
+            return LiveValidation.TEXT;
+        if (nodeName == 'INPUT' && this.element.type.toUpperCase() == 'TIME')
+            return LiveValidation.TEXT;
+        if (nodeName == 'INPUT' && this.element.type.toUpperCase() == 'RANGE')
+            return LiveValidation.TEXT;
+        if (nodeName == 'INPUT' && this.element.type.toUpperCase() == 'SEARCH')
             return LiveValidation.TEXT;
         if (nodeName == 'SELECT')
             return LiveValidation.SELECT;
@@ -388,23 +400,23 @@ LiveValidation.prototype = {
 
     getValue: function() {
         switch (this.elementType) {
-            case LiveValidation.SELECT:
-                if (this.element.selectedIndex >= 0) return $(this.element).val();
-                else return "";
-            case LiveValidation.RADIO:
-                return $('input[name="'+this.element.name+'"]:checked').val();
-            case LiveValidation.CHECKBOX:
-                var val = [];
-                $('input[name="'+this.element.name+'"]:checked').each(function() { val.push($(this).val()); });
-                if (val.length === 0) {
-                    return undefined;
-                } else {
-                    return val;
-                }
-            case LiveValidation.FORM:
-                return "";
-            default:
-                return this.element.value;
+        case LiveValidation.SELECT:
+            if (this.element.selectedIndex >= 0) return this.element.options[this.element.selectedIndex].value;
+            else return "";
+        case LiveValidation.RADIO:
+            return $('input[name="'+this.element.name+'"]:checked').val();
+        case LiveValidation.CHECKBOX:
+            var val = [];
+            $('input[name="'+this.element.name+'"]:checked').each(function() { val.push($(this).val()); });
+            if (val.length === 0) {
+                return undefined;
+            } else {
+                return val;
+            }
+        case LiveValidation.FORM:
+            return "";
+        default:
+            return this.element.value;
         }
     },
 
