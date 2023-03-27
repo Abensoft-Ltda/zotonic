@@ -642,6 +642,12 @@ update_result({rollback, {error, _} = Er}, _RscUpd, _Context) ->
     Er;
 update_result({rollback, {_Why, _} = Er}, _RscUpd, _Context) ->
     {error, Er};
+update_result({error, {expected, _, _}} = Error, #rscupd{ id = Id }, Context) ->
+    % We might have an out-of-date cached value, flush caches to force
+    % an update from the database.
+    z_depcache:flush_process_dict(),
+    flush(Id, Context),
+    Error;
 update_result({error, _} = Error, _RscUpd, _Context) ->
     Error.
 
@@ -1288,8 +1294,16 @@ props_filter(P, DT, Acc, _Context)
     when P =:= <<"created">>;           P =:= <<"modified">>;
          P =:= <<"date_start">>;        P =:= <<"date_end">>;
          P =:= <<"publication_start">>; P =:= <<"publication_end">>  ->
+    DateTime = case z_datetime:to_datetime(DT) of
+        undefined when P =:= <<"publication_end">> ->
+            ?ST_JUTTEMIS;
+        undefined when P =:= <<"publication_start">> ->
+            {{1970,1,1}, {0,0,0}};
+        DT1 ->
+            DT1
+    end,
     Acc#{
-        P => z_datetime:to_datetime(DT)
+        P => DateTime
     };
 props_filter(P, Id, Acc, Context)
     when P =:= <<"creator_id">>;
