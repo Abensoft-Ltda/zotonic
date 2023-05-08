@@ -1,8 +1,8 @@
 %% @author Marc Worrell <marc@worrell.nl>
-%% @copyright 2009-2020 Marc Worrell, Arjan Scherpenisse
+%% @copyright 2009-2023 Marc Worrell, Arjan Scherpenisse
 %% @doc Update routines for resources.  For use by the m_rsc module.
 
-%% Copyright 2009-2020 Marc Worrell, Arjan Scherpenisse
+%% Copyright 2009-2023 Marc Worrell, Arjan Scherpenisse
 %%
 %% Licensed under the Apache License, Version 2.0 (the "License");
 %% you may not use this file except in compliance with the License.
@@ -41,7 +41,7 @@
 -include_lib("zotonic.hrl").
 
 -record(rscupd, {
-    id = undefined,
+    id = undefined :: m_rsc:resource_id() | insert_rsc,
     is_escape_texts = true,
     is_acl_check = true,
     is_import = false,
@@ -586,6 +586,7 @@ update_transaction(RscUpd, Func, Context) ->
     update_result(Result, RscUpd, Context).
 
 update_result({ok, NewId, notchanged}, _RscUpd, _Context) ->
+    z_acl:flush(NewId),
     {ok, NewId};
 update_result({ok, NewId, {OldProps, NewProps, OldCatList, IsCatInsert}}, #rscupd{id = Id}, Context) ->
     % Flush some low level caches
@@ -597,6 +598,7 @@ update_result({ok, NewId, {OldProps, NewProps, OldCatList, IsCatInsert}}, #rscup
         undefined -> nop;
         Uri -> z_depcache:flush({rsc_uri, z_convert:to_binary(Uri)}, Context)
     end,
+    z_acl:flush(NewId),
 
     % Flush category caches if a category is inserted.
     case IsCatInsert of
@@ -958,7 +960,7 @@ update_transaction_fun_db_1({ok, UpdatePropsN}, Id, RscUpd, Raw, IsABefore, IsCa
     NewPropsLangPruned = z_props:prune_languages(NewPropsLang, maps:get(<<"language">>, NewPropsLang)),
 
     % 5. Diff the update
-    NewPropsLangPruned1 = clear_empty(NewPropsLangPruned, Context),
+    NewPropsLangPruned1 = set_forced_props(Id, clear_empty(NewPropsLangPruned, Context)),
     NewPropsDiff = diff(NewPropsLangPruned1, Raw),
 
     % 6. Ensure that there is a Timezone set in the saved resource
@@ -973,7 +975,9 @@ update_transaction_fun_db_1({ok, UpdatePropsN}, Id, RscUpd, Raw, IsABefore, IsCa
 
     % 7. Perform optional update, check diff
     IsInsert = (RscUpd#rscupd.id =:= insert_rsc),
-    case is_update_allowed(IsInsert, Id, NewPropsLangPruned, Context) of
+    case RscUpd#rscupd.is_acl_check =:= false
+        orelse is_update_allowed(IsInsert, Id, NewPropsLangPruned, Context)
+    of
         true ->
             case (IsInsert orelse is_changed(Raw, NewPropsDiffTz)) of
                 true ->
@@ -988,6 +992,14 @@ update_transaction_fun_db_1({ok, UpdatePropsN}, Id, RscUpd, Raw, IsABefore, IsCa
         false ->
             {error, eacces}
     end.
+
+%% @doc Some forced props, depending on the resource being updated.
+set_forced_props(1, Props) ->
+    Props#{
+        <<"is_protected">> => true
+    };
+set_forced_props(_Id, Props) ->
+    Props.
 
 %% Set all non-column fields with empty values to 'undefined'.
 %% This makes the props blob smaller by removing all empty address (etc) fields.

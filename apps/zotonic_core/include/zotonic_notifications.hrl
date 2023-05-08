@@ -1062,17 +1062,54 @@
 
 %% @doc A survey has been filled in and submitted.
 %% Type: first
--record(survey_submit, {id, handler, answers, missing, answers_raw}).
+%% Return: ``undefined``, ``ok``, ``{ok, Context | #render{}}``, ``{save, Context | #render{}`` or ``{error, term()}``
+-record(survey_submit, {
+    id :: m_rsc:resource_id(),
+    handler :: binary() | undefined,
+    answers :: list(),
+    missing :: list(),
+    answers_raw :: list(),
+    submit_args :: proplists:proplist()
+}).
 
 %% @doc Check if the current user is allowed to download a survey.
 %% Type: first
 %% Return: ``true``, ``false`` or ``undefined``
--record(survey_is_allowed_results_download, {id}).
+-record(survey_is_allowed_results_download, {
+    id :: m_rsc:resource_id()
+}).
 
 %% @doc Check if a question is a submitting question.
 %% Type: first
 %% Return: ``true``, ``false`` or ``undefined``
--record(survey_is_submit, {block = []}).
+-record(survey_is_submit, {
+    block = #{} :: map()
+}).
+
+%% @doc Add header columns for export. The values are the names of the answers and
+%% the text displayed above the column. The ``text`` format is for a complete export, the
+%% ``html`` format is for the limited result overview of the Survey Results Editor.
+%% Type: foldl
+%% Return: ``list( {binary(), binary() | #trans{}} )``
+-record(survey_result_columns, {
+    id :: m_rsc:resource_id(),
+    handler :: binary() | undefined,
+    format :: html | text
+}).
+
+%% @doc Modify row with answers for export. The header columns are given and the
+%% values that are known are set in the folded value. The user_id is the user who
+%% filled in the answers for this row.
+%% Type: foldl
+%% Return: ``#{ binary() => iodata() }``
+-record(survey_result_column_values, {
+    id :: m_rsc:resource_id(),
+    handler :: binary() | undefined,
+    format :: html | text,
+    user_id :: m_rsc:resource_id(),
+    answer :: proplists:proplist(),
+    columns :: list( {binary(), binary() | #trans{}} )
+}).
 
 %% @doc Put a value into the typed key/value store
 %% Type: notify

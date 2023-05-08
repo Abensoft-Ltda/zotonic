@@ -130,10 +130,21 @@ m_get([ <<"lookup">>, Type, Key | Rest ], _Msg, Context) ->
             {error, eacces}
     end;
 m_get([ <<"generate_password">> | Rest ], _Msg, _Context) ->
-    Password = iolist_to_binary([ z_ids:id(5), $-, z_ids:id(5), $-, z_ids:id(5) ]),
-    {ok, {Password, Rest}};
-m_get([ <<"is_email_verified">> | Rest ], _Msg, Context) ->
-    {ok, {is_email_verified(Context), Rest}};
+    {ok, {z_ids:password(), Rest}};
+m_get([ <<"is_email_verified">> ], _Msg, Context) ->
+    {ok, {is_email_verified(Context), []}};
+m_get([ <<"is_email_verified">>, UserId | Rest ], _Msg, Context) ->
+    case m_rsc:rid(UserId, Context) of
+        undefined ->
+            {error, enoent};
+        Id ->
+            case z_acl:rsc_editable(Id, Context) of
+                true ->
+                    {ok, {is_email_verified(Id, Context), Rest}};
+                false ->
+                    {error, eacces}
+            end
+    end;
 m_get([ Id, <<"is_user">> | Rest ], _Msg, Context) ->
     case z_acl:rsc_visible(Id, Context) of
         true ->
