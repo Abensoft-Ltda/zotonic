@@ -161,6 +161,7 @@ request_arg(<<"cat_exact">>)           -> cat_exact;
 request_arg(<<"cat_exclude">>)         -> cat_exclude;
 request_arg(<<"creator_id">>)          -> creator_id;
 request_arg(<<"modifier_id">>)         -> modifier_id;
+request_arg(<<"facet">>)               -> facet;
 request_arg(<<"facet.", F/binary>>)    -> {facet, F};
 request_arg(<<"filter">>)              -> filter;
 request_arg(<<"filter.facet.", F/binary>>)-> {facet, F};
@@ -726,10 +727,10 @@ qterm({language, [ Lang | _ ] = Langs}, Context) when is_list(Lang) ->
             qterm({language, Code}, Context)
         end,
         Langs);
-qterm({language, [ Lang | _ ] = Langs}, _Context) when is_atom(Lang); is_binary(Lang) ->
+qterm({language, [ Lang | _ ] = Langs}, Context) when is_atom(Lang); is_binary(Lang) ->
     Langs1 = lists:map(
         fun(Lng) ->
-            case z_language:to_language_atom(Lng) of
+            case to_language_atom(Lng, Context) of
                 {ok, Code} ->
                     z_convert:to_binary(Code);
                 {error, _} ->
@@ -741,10 +742,13 @@ qterm({language, [ Lang | _ ] = Langs}, _Context) when is_atom(Lang); is_binary(
         where = [
             <<"rsc.language && ">>, '$1'
         ],
-        args = [ Langs1 ]
+        args = [ lists:usort(Langs1) ]
     };
-qterm({language, Lang}, _Context) ->
-    case z_language:to_language_atom(Lang) of
+qterm({language, <<"[", _/binary>> = Langs}, Context) ->
+    Langs1 = maybe_split_list(Langs),
+    qterm({language, Langs1}, Context);
+qterm({language, Lang}, Context) ->
+    case to_language_atom(Lang, Context) of
         {ok, Code} ->
             #search_sql_term{
                 where = [
@@ -766,6 +770,14 @@ qterm({asort, Sort}, _Context) ->
     asort_term(Sort);
 qterm({zsort, Sort}, _Context) ->
     zsort_term(Sort);
+qterm({facet, Facets}, Context) when is_map(Facets) ->
+    maps:fold(
+        fun(Facet, Value, Acc) ->
+            Terms = qterm({{facet, Facet}, Value}, Context),
+            [ Terms | Acc ]
+        end,
+        [],
+        Facets);
 qterm({{facet, Field}, <<"[", _>> = V}, Context) ->
     %% facet.foo=value
     %% Add a join with the search_facet table.
@@ -988,6 +1000,12 @@ qterm(Term, _Context) ->
 %%
 %% Helper functions
 %%
+
+to_language_atom(<<"z_language">>, Context) ->
+    {ok, z_context:language(Context)};
+to_language_atom(Code, _Context) ->
+    z_language:to_language_atom(Code).
+
 
 %% @doc Parse hassubject and hasobject edges.
 -spec parse_edges(hassubject | hasobject, list(), z:context()) -> #search_sql_term{}.
