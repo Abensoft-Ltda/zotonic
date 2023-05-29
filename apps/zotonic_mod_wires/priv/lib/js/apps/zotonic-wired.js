@@ -627,7 +627,7 @@ function z_reload(args)
     if (page.length > 0 && page.val() !== "" && page.val() !== '#reload') {
         window.location.href = `${ window.location.protocol }//${ window.location.host }${ page.val() }`;
         return;
-    } 
+    }
 
     if (typeof args === "undefined") {
         window.location.reload(true);
@@ -637,7 +637,7 @@ function z_reload(args)
     newLanguage = args.z_language;
 
     if (typeof newLanguage === "string") {
-        // Change the language cookie when it is set. 
+        // Change the language cookie when it is set.
         for (const cookie of document.cookie.split(';') ){
             const kv = cookie.trim().split("=");
             if(kv[0] === "z.lang" && kv[1] !== newLanguage) {
@@ -681,7 +681,7 @@ function z_reload(args)
     if (window.location.search == "") {
         window.location.href = href;
         return;
-    } 
+    }
 
     // remove z_language and z_rewrite_url, keep other query params
     var kvs;
@@ -1112,6 +1112,7 @@ function z_init_postback_forms()
                     if (elem instanceof HTMLInputElement) {
                         const index = formArgs.findIndex(({ name }) => name === elem.name)
                         const formElem = formArgs[index]
+                        const formValue = formElem.value
                         if (formElem && (elem.type === "checkbox" || elem.type === "radio")) {
                             const dataIndex = formData.findIndex(({ name }) => name === elem.name)
                             if (dataIndex !== -1) continue
@@ -1119,6 +1120,8 @@ function z_init_postback_forms()
                             if (elems.length > 1) {
                                 value = []
                                 elems.forEach(({ checked, value: val }) => { checked && value.push(val) })
+                            } else {
+                                value = formValue
                             }
                         }
                     } else if (elem instanceof HTMLSelectElement) {
