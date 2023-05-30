@@ -1112,7 +1112,7 @@ function z_init_postback_forms()
                     if (elem instanceof HTMLInputElement) {
                         const index = formArgs.findIndex(({ name }) => name === elem.name)
                         const formElem = formArgs[index]
-                        const formValue = formElem.value
+
                         if (formElem && (elem.type === "checkbox" || elem.type === "radio")) {
                             const dataIndex = formData.findIndex(({ name }) => name === elem.name)
                             if (dataIndex !== -1) continue
@@ -1120,8 +1120,9 @@ function z_init_postback_forms()
                             if (elems.length > 1) {
                                 value = []
                                 elems.forEach(({ checked, value: val }) => { checked && value.push(val) })
-                            } else {
-                                value = formValue
+                            }
+                            else {
+                                value = elems[0].checked ? "on" : "";
                             }
                         }
                     } else if (elem instanceof HTMLSelectElement) {
