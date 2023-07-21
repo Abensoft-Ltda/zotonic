@@ -177,7 +177,10 @@ m_get(_Vs, _Msg, _Context) ->
 %% @doc API to update or insert resources.
 -spec m_post( list( binary() ), zotonic_model:opt_msg(), z:context() ) -> {ok, term()} | ok | {error, term()}.
 m_post([ Id ], #{ payload := Payload }, Context) when is_map(Payload) ->
-    m_rsc:update(Id, Payload, Context);
+    case m_rsc:rid(Id, Context) of
+        undefined -> {error, enoent};
+        RId -> m_rsc:update(RId, Payload, Context)
+    end;
 m_post([], #{ payload := Payload }, Context) when is_map(Payload) ->
     m_rsc:insert(Payload, Context).
 
@@ -877,7 +880,7 @@ uri_dispatch(Id, Context) ->
         {true, Name} -> Name;
         false -> Id
     end,
-    case z_dispatcher:url_for(id, [{id, DispatchId}], z_context:set_language(undefined, Context)) of
+    case z_dispatcher:url_for(id, [{id, DispatchId}], z_context:set_language('x-default', Context)) of
         undefined ->
             iolist_to_binary(z_context:abs_url(<<"/id/", (z_convert:to_binary(DispatchId))/binary>>, Context));
         Url ->
@@ -1219,15 +1222,17 @@ is_cat(Id, Cat, Context) ->
             false
     end.
 
-%% @doc Return the categories and the inherited categories of the resource. Returns a list with category atoms
+%% @doc Return the categories and the inherited categories of the resource. Returns a list with category atoms.
+%% The first atom is the most generic category, the last is the most specific. Example:
+%% [text, article, news, local_news]
 -spec is_a(resource(), z:context()) -> list(atom()).
 is_a(Id, Context) ->
     RscCatId = p(Id, category_id, Context),
     m_category:is_a(RscCatId, Context).
 
 %% @doc Return the categories and the inherited categories of the resource. Returns a list with
-%% category ids
--spec is_a_id(resource(), z:context()) -> list(pos_integer()).
+%% category ids. The first id is the most generic category, the last is the most specific.
+-spec is_a_id(resource(), z:context()) -> list(m_rsc:resource_id()).
 is_a_id(Id, Context) ->
     RscCatId = p(Id, <<"category_id">>, Context),
     [RscCatId | m_category:get_path(RscCatId, Context)].

@@ -37,9 +37,12 @@
     set_default_value/4,
     set_value/4,
     set_prop/5,
+    get_prop/4,
 
     delete/3,
-    get_id/3
+    get_id/3,
+
+    is_public_config_key/1
 ]).
 
 -include_lib("zotonic.hrl").
@@ -57,7 +60,7 @@ m_get([ Module ], _Msg, Context) ->
         false -> {error, eacces}
     end;
 m_get([ Module, Key | Rest ], _Msg, Context) ->
-    case z_acl:is_admin(Context) of
+    case is_public_config_key(Key) orelse z_acl:is_admin(Context) of
         true -> {ok, {get(Module, Key, Context), Rest}};
         false -> {error, eacces}
     end;
@@ -359,6 +362,20 @@ set_prop(Module, Key, Prop, PropValue, Context) ->
             Error
     end.
 
+%% @doc Get a "complex" config value.
+-spec get_prop(Module, Key, Prop, Context) -> Value | undefined when
+    Module :: atom() | binary(),
+    Key :: atom() | binary(),
+    Prop :: atom() | binary(),
+    Context :: z:context(),
+    Value :: term().
+get_prop(Module, Key, Prop, Context) ->
+    case m_config:get(Module, Key, Context) of
+        undefined ->
+            undefined;
+        Config when is_list(Config) ->
+            proplists:get_value(z_convert:to_atom(Prop), Config)
+    end.
 
 %% @doc Delete the specified module/key combination
 -spec delete( atom()|binary(), atom()|binary(), z:context() ) -> ok.
@@ -383,4 +400,11 @@ delete(Module, Key, Context) ->
 get_id(Module, Key, Context) ->
     z_db:q1("select id from config where module = $1 and key = $2", [Module, Key], Context).
 
-
+%% @doc Return true when the argument is a public readable configuration key "public_" prefix.
+-spec is_public_config_key(atom() | binary()) -> boolean().
+is_public_config_key(Atom) when is_atom(Atom) ->
+    is_public_config_key(z_convert:to_binary(Atom));
+is_public_config_key(<<"public_", _/binary>>) ->
+    true;
+is_public_config_key(_) ->
+    false.
