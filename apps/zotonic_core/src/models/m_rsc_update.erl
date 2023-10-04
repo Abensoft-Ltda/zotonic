@@ -511,8 +511,11 @@ update(Name, PropsOrFun, Options, Context) ->
     case m_rsc:name_to_id(Name, Context) of
         {ok, Id} ->
             update(Id, PropsOrFun, Options, Context);
-        {error, _} = Error ->
-            Error
+        {error, _} ->
+            case m_rsc:rid(Name, Context) of
+                undefined -> {error, enoent};
+                Id -> update(Id, PropsOrFun, Options, Context)
+            end
     end.
 
 update_imported_check(#rscupd{is_import = true, id = Id} = RscUpd, PropsOrFun, Context) when is_integer(Id) ->
@@ -1562,7 +1565,7 @@ is_protected(_, _IsNormal) -> false.
 
 is_trimmable(_, V) when not is_binary(V) -> false;
 is_trimmable(<<"title">>, _) -> true;
-is_trimmable(<<"title_short">>, _) -> true;
+is_trimmable(<<"short_title">>, _) -> true;
 is_trimmable(<<"summary">>, _) -> true;
 is_trimmable(<<"chapeau">>, _) -> true;
 is_trimmable(<<"subtitle">>, _) -> true;

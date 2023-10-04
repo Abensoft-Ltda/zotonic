@@ -1,8 +1,9 @@
 %% @author Marc Worrell <marc@worrell.nl>
-%% @copyright 2009-2020 Marc Worrell
+%% @copyright 2009-2023 Marc Worrell
 %% @doc Support functions for development.
+%% @end
 
-%% Copyright 2009-2020 Marc Worrell
+%% Copyright 2009-2023 Marc Worrell
 %%
 %% Licensed under the Apache License, Version 2.0 (the "License");
 %% you may not use this file except in compliance with the License.
@@ -30,6 +31,9 @@
 
 %% interface functions
 -export([
+    event/2,
+    task_xref_check/2,
+    task_graph/2,
     reload/1,
     make/1,
     debug_stream/3,
@@ -57,15 +61,81 @@
 
 -record(state, { site :: atom() | undefined }).
 
-% Interval for checking for new and/or changed files.
--define(DEV_POLL_INTERVAL, 10000).
-
 
 %%====================================================================
 %% API
 %%====================================================================
 
-%% @spec start_link(Args) -> {ok,Pid} | ignore | {error,Error}
+%% @doc Handle wired postback events.
+event(#postback{ message = {template_xref_check, Args} }, Context) ->
+    {element_id, EltId} = proplists:lookup(element_id, Args),
+    case z_acl:is_allowed(use, mod_development, Context) of
+        true ->
+            sidejob_supervisor:spawn(
+                    zotonic_sidejobs,
+                    {?MODULE, task_xref_check, [ EltId, Context ]}),
+            z_render:wire({mask, [
+                    {target, EltId},
+                    {message, ?__("Checking all templates...", Context)}
+                ]}, Context);
+        false ->
+            z_render:update(
+                EltId,
+                ?__("No permission to use mod_development.", Context),
+                Context)
+    end;
+event(#postback{ message = {template_graph, Args} }, Context) ->
+    {element_id, EltId} = proplists:lookup(element_id, Args),
+    case z_acl:is_allowed(use, mod_development, Context) of
+        true ->
+            sidejob_supervisor:spawn(
+                    zotonic_sidejobs,
+                    {?MODULE, task_graph, [ EltId, Context ]}),
+            z_render:wire({mask, [
+                    {target, EltId},
+                    {message, ?__("Checking all templates...", Context)}
+                ]}, Context);
+        false ->
+            z_render:update(
+                EltId,
+                ?__("No permission to use mod_development.", Context),
+                Context)
+    end.
+
+
+task_xref_check(EltId, Context) ->
+    {ok, XRef} = z_development_template_xref:check(Context),
+    Vars = [
+        {xref, XRef}
+    ],
+    Context1 = z_render:update(
+        EltId,
+        #render{
+            template = "_development_template_xref.tpl",
+            vars = Vars
+        },
+        Context),
+    Context2 = z_render:wire({unmask, [ {target, EltId} ]}, Context1),
+    Script = z_render:get_script(Context2),
+    z_transport:reply(Script, Context).
+
+task_graph(EltId, Context) ->
+    {ok, Dot} = z_development_template_graph:dot(Context),
+    Vars = [
+        {dot, Dot}
+    ],
+    Context1 = z_render:update(
+        EltId,
+        #render{
+            template = "_development_template_graph.tpl",
+            vars = Vars
+        },
+        Context),
+    Context2 = z_render:wire({unmask, [ {target, EltId} ]}, Context1),
+    Script = z_render:get_script(Context2),
+    z_transport:reply(Script, Context).
+
+
 %% @doc Starts the server
 start_link(Args) when is_list(Args) ->
     gen_server:start_link(?MODULE, Args, []).

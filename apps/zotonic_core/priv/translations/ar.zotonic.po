@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zotonic\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2023-06-26 10:06\n"
+"PO-Revision-Date: 2023-10-02 12:06\n"
 "Last-Translator: \n"
 "Language-Team: Arabic\n"
 "MIME-Version: 1.0\n"
@@ -142,7 +142,7 @@ msgstr "مجموعة مستخدمي ACL"
 
 #: apps/zotonic_mod_acl_user_groups/priv/templates/_admin_edit_content_acl.tpl:8
 #: apps/zotonic_mod_admin/priv/templates/_action_dialog_edit_basics.tpl:19./apps/zotonic_mod_admin/priv/templates/_admin_edit_content_acl.tpl:6./apps/zotonic_mod_admin/priv/templates/_admin_edit_content_acl.tpl:8
-#: apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:71./apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:108
+#: apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:70./apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:107
 #: apps/zotonic_mod_admin_identity/priv/templates/_action_dialog_edit_basics.person.tpl:7
 msgid "Access control"
 msgstr "التحكم في الوصول"
@@ -165,7 +165,7 @@ msgid "All"
 msgstr "كل"
 
 #: apps/zotonic_mod_acl_user_groups/priv/templates/_admin_acl_rule_row_collab.tpl:5./apps/zotonic_mod_acl_user_groups/priv/templates/_admin_acl_rule_row_rsc.tpl:35
-#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:47./apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:44./apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:69
+#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:53./apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:49./apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:75
 msgid "All Categories"
 msgstr "كل الفئات"
 
@@ -202,7 +202,7 @@ msgid "Are you sure you want to restore all ACL rules to their currently publish
 msgstr "هل أنت متأكد أنك تريد استعادة كل قواعد ACL إلى إصدارهم المنشور حالياً؟"
 
 #: apps/zotonic_mod_acl_user_groups/priv/templates/_action_dialog_change_category.tpl:16./apps/zotonic_mod_acl_user_groups/priv/templates/_action_dialog_delete_rsc.acl_user_group.tpl:36./apps/zotonic_mod_acl_user_groups/priv/templates/_action_dialog_delete_rsc.acl_user_group.tpl:50./apps/zotonic_mod_acl_user_groups/priv/templates/_dialog_acl_rule_edit.tpl:150./apps/zotonic_mod_acl_user_groups/priv/templates/admin_acl_rules_upload.tpl:78
-#: apps/zotonic_mod_admin/priv/templates/_action_dialog_change_category.tpl:39./apps/zotonic_mod_admin/priv/templates/_action_dialog_connect_tab_find.tpl:98./apps/zotonic_mod_admin/priv/templates/_action_dialog_delete_rsc.tpl:6./apps/zotonic_mod_admin/priv/templates/_action_dialog_duplicate_rsc.tpl:7./apps/zotonic_mod_admin/priv/templates/_action_dialog_edit_basics.tpl:70./apps/zotonic_mod_admin/priv/templates/_action_dialog_media_upload_tab_upload.tpl:68./apps/zotonic_mod_admin/priv/templates/_action_dialog_media_upload_tab_url.tpl:35./apps/zotonic_mod_admin/priv/templates/_action_dialog_new_rsc_tab.tpl:251./apps/zotonic_mod_admin/priv/templates/_admin_edit_blocks.tpl:40./apps/zotonic_mod_admin/priv/templates/_admin_edit_content_publish.tpl:18./apps/zotonic_mod_admin/priv/templates/_dialog_admin_rsc_note.tpl:28
+#: apps/zotonic_mod_admin/priv/templates/_action_dialog_change_category.tpl:39./apps/zotonic_mod_admin/priv/templates/_action_dialog_connect_tab_find.tpl:171./apps/zotonic_mod_admin/priv/templates/_action_dialog_delete_rsc.tpl:6./apps/zotonic_mod_admin/priv/templates/_action_dialog_duplicate_rsc.tpl:7./apps/zotonic_mod_admin/priv/templates/_action_dialog_edit_basics.tpl:70./apps/zotonic_mod_admin/priv/templates/_action_dialog_media_upload_tab_upload.tpl:68./apps/zotonic_mod_admin/priv/templates/_action_dialog_media_upload_tab_url.tpl:35./apps/zotonic_mod_admin/priv/templates/_action_dialog_new_rsc_tab.tpl:251./apps/zotonic_mod_admin/priv/templates/_admin_edit_blocks.tpl:40./apps/zotonic_mod_admin/priv/templates/_admin_edit_content_publish.tpl:18./apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:282./apps/zotonic_mod_admin/priv/templates/_dialog_admin_bulk_delete.tpl:17./apps/zotonic_mod_admin/priv/templates/_dialog_admin_bulk_update.tpl:85./apps/zotonic_mod_admin/priv/templates/_dialog_admin_rsc_note.tpl:28
 #: apps/zotonic_mod_admin_category/priv/templates/_action_dialog_delete_rsc.category.tpl:38./apps/zotonic_mod_admin_category/priv/templates/_action_dialog_delete_rsc.category.tpl:52
 #: apps/zotonic_mod_admin_config/priv/templates/_action_dialog_config_delete.tpl:7./apps/zotonic_mod_admin_config/priv/templates/_action_dialog_config_edit.tpl:21
 #: apps/zotonic_mod_admin_frontend/priv/templates/page_admin_frontend_edit.tpl:88./apps/zotonic_mod_admin_frontend/priv/templates/page_admin_frontend_edit.tpl:90./apps/zotonic_mod_admin_frontend/priv/templates/page_admin_frontend_edit.tpl:92
@@ -215,7 +215,7 @@ msgstr "هل أنت متأكد أنك تريد استعادة كل قواعد AC
 #: apps/zotonic_mod_base/priv/templates/_action_dialog_confirm.tpl:7./apps/zotonic_mod_base/priv/templates/_action_dialog_confirm.tpl:10
 #: apps/zotonic_mod_content_groups/priv/templates/_action_dialog_delete_rsc.content_group.tpl:36./apps/zotonic_mod_content_groups/priv/templates/_action_dialog_delete_rsc.content_group.tpl:50
 #: apps/zotonic_mod_custom_redirect/priv/templates/admin_custom_redirect.tpl:102
-#: apps/zotonic_mod_editor_tinymce/priv/templates/_tinymce_dialog_zmedia_props.tpl:101
+#: apps/zotonic_mod_editor_tinymce/priv/templates/_tinymce_dialog_zmedia_props.tpl:106
 #: apps/zotonic_mod_image_edit/priv/templates/_overlay_image_edit.tpl:134
 #: apps/zotonic_mod_mailinglist/priv/templates/_admin_dialog_mailinglist_combine.tpl:50./apps/zotonic_mod_mailinglist/priv/templates/_dialog_mail_page.tpl:14./apps/zotonic_mod_mailinglist/priv/templates/_dialog_mailing_page.tpl:33./apps/zotonic_mod_mailinglist/priv/templates/_dialog_mailing_testaddress.tpl:13./apps/zotonic_mod_mailinglist/priv/templates/_dialog_mailinglist_delete_confirm.tpl:9./apps/zotonic_mod_mailinglist/priv/templates/_dialog_mailinglist_recipients_upload.tpl:26./apps/zotonic_mod_mailinglist/priv/templates/_mailinglist_subscribe_form.tpl:77
 #: apps/zotonic_mod_oauth2/priv/templates/_dialog_oauth2_app.tpl:69./apps/zotonic_mod_oauth2/priv/templates/_dialog_oauth2_app.tpl:88./apps/zotonic_mod_oauth2/priv/templates/_dialog_oauth2_app_new.tpl:39./apps/zotonic_mod_oauth2/priv/templates/_dialog_oauth2_consumer.tpl:15./apps/zotonic_mod_oauth2/priv/templates/_dialog_oauth2_consumer.tpl:51./apps/zotonic_mod_oauth2/priv/templates/_dialog_oauth2_consumer_new.tpl:26./apps/zotonic_mod_oauth2/priv/templates/oauth2_logon_authorize.tpl:60
@@ -227,7 +227,7 @@ msgid "Cancel"
 msgstr "ألغي"
 
 #: apps/zotonic_mod_acl_user_groups/priv/templates/_admin_acl_rules_list_header.tpl:6./apps/zotonic_mod_acl_user_groups/priv/templates/_admin_acl_rules_list_header.tpl:8./apps/zotonic_mod_acl_user_groups/priv/templates/_admin_catcg.tpl:5./apps/zotonic_mod_acl_user_groups/priv/templates/_dialog_acl_rule_edit.tpl:87
-#: apps/zotonic_mod_admin/priv/templates/_action_dialog_new_rsc_tab.tpl:192./apps/zotonic_mod_admin/priv/templates/_action_dialog_new_rsc_tab_find_description.tpl:3./apps/zotonic_mod_admin/priv/templates/_action_dialog_new_rsc_tab_find_description.tpl:8./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:21./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:86./apps/zotonic_mod_admin/priv/templates/admin_referrers.tpl:22./apps/zotonic_mod_admin/priv/templates/admin_widget_dashboard_latest.tpl:37./apps/zotonic_mod_admin/priv/templates/admin_widget_dashboard_latest.tpl:40
+#: apps/zotonic_mod_admin/priv/templates/_action_dialog_new_rsc_tab.tpl:192./apps/zotonic_mod_admin/priv/templates/_action_dialog_new_rsc_tab_find_description.tpl:3./apps/zotonic_mod_admin/priv/templates/_action_dialog_new_rsc_tab_find_description.tpl:8./apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:62./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:21./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:96./apps/zotonic_mod_admin/priv/templates/_dialog_admin_bulk_update.tpl:29./apps/zotonic_mod_admin/priv/templates/admin_referrers.tpl:22./apps/zotonic_mod_admin/priv/templates/admin_widget_dashboard_latest.tpl:37./apps/zotonic_mod_admin/priv/templates/admin_widget_dashboard_latest.tpl:40
 #: apps/zotonic_mod_admin_identity/priv/templates/_action_dialog_user_add.tpl:45./apps/zotonic_mod_admin_identity/priv/templates/_admin_overview_list_page1.tpl:11
 #: apps/zotonic_mod_backup/priv/templates/admin_backup_deleted.tpl:26
 #: apps/zotonic_mod_survey/src/mod_survey.erl:159
@@ -243,7 +243,7 @@ msgid "Change category and/or content group..."
 msgstr "قم بتغيير الفئة و/أو مجموعة المحتوى..."
 
 #: apps/zotonic_mod_acl_user_groups/priv/templates/_dialog_acl_rules_try.tpl:22
-#: apps/zotonic_mod_admin/priv/templates/_action_dialog_connect_tab_find.tpl:98
+#: apps/zotonic_mod_admin/priv/templates/_action_dialog_connect_tab_find.tpl:171
 #: apps/zotonic_mod_admin_frontend/priv/templates/page_admin_frontend_edit.tpl:67./apps/zotonic_mod_admin_frontend/priv/templates/page_admin_frontend_edit.tpl:69
 #: apps/zotonic_mod_auth2fa/priv/templates/_dialog_auth2fa_passcode.tpl:31./apps/zotonic_mod_auth2fa/priv/templates/_dialog_auth2fa_passcode.tpl:46
 #: apps/zotonic_mod_editor_tinymce/priv/templates/_admin_configure_module.tpl:30
@@ -252,7 +252,7 @@ msgstr "قم بتغيير الفئة و/أو مجموعة المحتوى..."
 #: apps/zotonic_mod_mqtt/priv/templates/_admin_configure_module.tpl:16
 #: apps/zotonic_mod_oauth2/priv/templates/_dialog_oauth2_app_token.tpl:24
 #: apps/zotonic_mod_site_update/priv/templates/_admin_configure_module.tpl:26
-#: apps/zotonic_mod_survey/priv/templates/_dialog_survey_email_addresses.tpl:7./apps/zotonic_mod_survey/priv/templates/_survey_end.tpl:13./apps/zotonic_mod_survey/priv/templates/_survey_end.tpl:20./apps/zotonic_mod_survey/priv/templates/_survey_end.tpl:27./apps/zotonic_mod_survey/priv/templates/_survey_end_edit.tpl:7./apps/zotonic_mod_survey/priv/templates/_survey_end_edit.tpl:14./apps/zotonic_mod_survey/priv/templates/_survey_end_edit.tpl:21./apps/zotonic_mod_survey/priv/templates/_survey_results.tpl:54./apps/zotonic_mod_survey/priv/templates/_survey_results.tpl:59./apps/zotonic_mod_survey/priv/templates/_survey_start.tpl:43./apps/zotonic_mod_survey/priv/templates/_survey_start.tpl:48./apps/zotonic_mod_survey/priv/templates/_survey_start_button.tpl:27./apps/zotonic_mod_survey/priv/templates/_survey_start_button.tpl:32./apps/zotonic_mod_survey/priv/templates/_survey_start_button.tpl:37
+#: apps/zotonic_mod_survey/priv/templates/_dialog_survey_email_addresses.tpl:7./apps/zotonic_mod_survey/priv/templates/_survey_end.tpl:13./apps/zotonic_mod_survey/priv/templates/_survey_end.tpl:20./apps/zotonic_mod_survey/priv/templates/_survey_end.tpl:27./apps/zotonic_mod_survey/priv/templates/_survey_end_edit.tpl:7./apps/zotonic_mod_survey/priv/templates/_survey_end_edit.tpl:14./apps/zotonic_mod_survey/priv/templates/_survey_end_edit.tpl:21./apps/zotonic_mod_survey/priv/templates/_survey_results.tpl:54./apps/zotonic_mod_survey/priv/templates/_survey_results.tpl:59./apps/zotonic_mod_survey/priv/templates/_survey_start.tpl:45./apps/zotonic_mod_survey/priv/templates/_survey_start.tpl:50./apps/zotonic_mod_survey/priv/templates/_survey_start_button.tpl:27./apps/zotonic_mod_survey/priv/templates/_survey_start_button.tpl:32./apps/zotonic_mod_survey/priv/templates/_survey_start_button.tpl:37
 msgid "Close"
 msgstr "إغلاق"
 
@@ -265,7 +265,7 @@ msgid "Collaboration group members"
 msgstr "أعضاء مجموعات التعاون"
 
 #: apps/zotonic_mod_acl_user_groups/priv/templates/admin_acl_rules_base.tpl:22./apps/zotonic_mod_acl_user_groups/src/mod_acl_user_groups.erl:540
-#: apps/zotonic_mod_admin/priv/templates/_action_dialog_connect_tab_find.tpl:47
+#: apps/zotonic_mod_admin/priv/templates/_action_dialog_connect_tab_find.tpl:120
 msgid "Collaboration groups"
 msgstr "مجموعات التعاون"
 
@@ -279,17 +279,18 @@ msgstr "مجموعات التعاون هي مجموعات مستخدمين حي�
 
 #: apps/zotonic_mod_acl_user_groups/priv/templates/admin_acl_rules_base.tpl:19
 #: apps/zotonic_mod_admin/priv/templates/_admin_edit_body.tpl:4./apps/zotonic_mod_admin/src/mod_admin.erl:95
-#: apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:66
+#: apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:65
 #: apps/zotonic_mod_logging/priv/templates/admin_log_email.tpl:108
 msgid "Content"
 msgstr "محتوى"
 
 #: apps/zotonic_mod_acl_user_groups/priv/templates/_admin_acl_rules_list_header.tpl:5./apps/zotonic_mod_acl_user_groups/priv/templates/_admin_catcg.tpl:16./apps/zotonic_mod_acl_user_groups/priv/templates/_admin_edit_visible_for.tpl:16./apps/zotonic_mod_acl_user_groups/priv/templates/_dialog_acl_rule_edit.tpl:58
+#: apps/zotonic_mod_content_groups/priv/templates/_admin_overview_filter_panel.tpl:6./apps/zotonic_mod_content_groups/priv/templates/_dialog_admin_bulk_update.tpl:5
 msgid "Content group"
 msgstr "مجموعة محتوى"
 
 #: apps/zotonic_mod_acl_user_groups/priv/templates/_admin_acl_rule_collab_select.tpl:16
-#: apps/zotonic_mod_admin/priv/templates/_action_dialog_connect_tab_find.tpl:55
+#: apps/zotonic_mod_admin/priv/templates/_action_dialog_connect_tab_find.tpl:128
 #: apps/zotonic_mod_content_groups/src/mod_content_groups.erl:197
 msgid "Content groups"
 msgstr "مجموعات المحتوى"
@@ -308,14 +309,13 @@ msgid "Define who can see or edit this page."
 msgstr "حدد من يمكنه رؤية أو التعديل على هذه الصفحة."
 
 #: apps/zotonic_mod_acl_user_groups/priv/templates/_action_dialog_delete_rsc.acl_user_group.tpl:51./apps/zotonic_mod_acl_user_groups/priv/templates/_dialog_acl_rule_edit.tpl:158
-#: apps/zotonic_mod_admin/priv/templates/_action_dialog_delete_rsc.tpl:7./apps/zotonic_mod_admin/priv/templates/_admin_edit_blocks.tpl:41./apps/zotonic_mod_admin/priv/templates/_admin_edit_content_publish.tpl:71./apps/zotonic_mod_admin/priv/templates/_admin_edit_media.tpl:58./apps/zotonic_mod_admin/priv/templates/_admin_edit_media.tpl:67./apps/zotonic_mod_admin/priv/templates/_dialog_admin_rsc_note.tpl:21./apps/zotonic_mod_admin/priv/templates/_dialog_admin_rsc_note.tpl:25
+#: apps/zotonic_mod_admin/priv/templates/_action_dialog_delete_rsc.tpl:7./apps/zotonic_mod_admin/priv/templates/_admin_edit_blocks.tpl:41./apps/zotonic_mod_admin/priv/templates/_admin_edit_content_publish.tpl:71./apps/zotonic_mod_admin/priv/templates/_admin_edit_media.tpl:58./apps/zotonic_mod_admin/priv/templates/_admin_edit_media.tpl:67./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:83./apps/zotonic_mod_admin/priv/templates/_dialog_admin_bulk_delete.tpl:18./apps/zotonic_mod_admin/priv/templates/_dialog_admin_rsc_note.tpl:21./apps/zotonic_mod_admin/priv/templates/_dialog_admin_rsc_note.tpl:25./apps/zotonic_mod_admin/priv/templates/admin_media.tpl:110
 #: apps/zotonic_mod_admin_category/priv/templates/_action_dialog_delete_rsc.category.tpl:53
 #: apps/zotonic_mod_admin_config/priv/templates/_action_dialog_config_delete.tpl:8./apps/zotonic_mod_admin_config/priv/templates/admin_config.tpl:52
 #: apps/zotonic_mod_admin_identity/priv/templates/_action_dialog_delete_username.tpl:8./apps/zotonic_mod_admin_identity/priv/templates/_action_dialog_set_username_password.tpl:25./apps/zotonic_mod_admin_identity/priv/templates/_identity_verify_table.tpl:30./apps/zotonic_mod_admin_identity/priv/templates/_identity_verify_table.tpl:53./apps/zotonic_mod_admin_identity/src/mod_admin_identity.erl:186
 #: apps/zotonic_mod_admin_predicate/priv/templates/_action_dialog_delete_rsc.predicate.tpl:47
 #: apps/zotonic_mod_content_groups/priv/templates/_action_dialog_delete_rsc.content_group.tpl:51
 #: apps/zotonic_mod_custom_redirect/priv/templates/admin_custom_redirect.tpl:51./apps/zotonic_mod_custom_redirect/priv/templates/admin_custom_redirect.tpl:73./apps/zotonic_mod_custom_redirect/priv/templates/admin_custom_redirect.tpl:94
-#: apps/zotonic_mod_editor_tinymce/priv/templates/_tinymce_dialog_zmedia_props.tpl:99
 #: apps/zotonic_mod_mailinglist/priv/templates/_dialog_mailinglist_delete_confirm.tpl:10./apps/zotonic_mod_mailinglist/priv/templates/admin_mailinglist.tpl:43
 #: apps/zotonic_mod_menu/priv/templates/_menu_edit_scripts.tpl:249
 #: apps/zotonic_mod_oauth2/priv/templates/_dialog_oauth2_consumer.tpl:19./apps/zotonic_mod_oauth2/priv/templates/_dialog_oauth2_consumer.tpl:34
@@ -432,7 +432,7 @@ msgstr "أعضاء من نفس مجموعة المستخدمين"
 #: apps/zotonic_mod_admin_config/priv/templates/_action_dialog_config_edit.tpl:4./apps/zotonic_mod_admin_config/priv/templates/_action_dialog_config_edit.tpl:5./apps/zotonic_mod_admin_config/priv/templates/_action_dialog_config_new.tpl:7./apps/zotonic_mod_admin_config/priv/templates/_action_dialog_config_new.tpl:8./apps/zotonic_mod_admin_config/priv/templates/admin_config.tpl:19
 #: apps/zotonic_mod_admin_modules/priv/templates/_dialog_admin_modules_activate_depending.tpl:8./apps/zotonic_mod_admin_modules/priv/templates/admin_modules.tpl:15
 #: apps/zotonic_mod_base/priv/templates/error.tpl:78
-#: apps/zotonic_mod_development/priv/templates/_development_template.tpl:3
+#: apps/zotonic_mod_development/priv/templates/_development_template.tpl:3./apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:10./apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:60./apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:122./apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:189
 #: apps/zotonic_mod_logging/priv/templates/admin_log.tpl:24
 msgid "Module"
 msgstr "وحدة"
@@ -529,10 +529,10 @@ msgstr "القواعد التي تم إرجاعها"
 #: apps/zotonic_mod_acl_user_groups/priv/templates/_action_dialog_change_category.tpl:17./apps/zotonic_mod_acl_user_groups/priv/templates/_dialog_acl_rule_edit.tpl:151./apps/zotonic_mod_acl_user_groups/priv/templates/admin_acl_rules.tpl:64
 #: apps/zotonic_mod_admin/priv/templates/_action_dialog_change_category.tpl:40./apps/zotonic_mod_admin/priv/templates/_action_dialog_edit_basics.tpl:77./apps/zotonic_mod_admin/priv/templates/_admin_edit_content_publish.tpl:20./apps/zotonic_mod_admin/priv/templates/_admin_edit_floating_buttons.tpl:2./apps/zotonic_mod_admin/priv/templates/_dialog_admin_rsc_note.tpl:29
 #: apps/zotonic_mod_admin_config/priv/templates/_action_dialog_config_edit.tpl:22./apps/zotonic_mod_admin_config/priv/templates/admin_config_email.tpl:139
-#: apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:126./apps/zotonic_mod_admin_frontend/priv/templates/page_admin_frontend_edit.tpl:79
+#: apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:125./apps/zotonic_mod_admin_frontend/priv/templates/page_admin_frontend_edit.tpl:79
 #: apps/zotonic_mod_admin_identity/priv/templates/_action_dialog_set_username_password.tpl:30
 #: apps/zotonic_mod_custom_redirect/priv/templates/admin_custom_redirect.tpl:101
-#: apps/zotonic_mod_editor_tinymce/priv/templates/_tinymce_dialog_zmedia_props.tpl:100
+#: apps/zotonic_mod_editor_tinymce/priv/templates/_tinymce_dialog_zmedia_props.tpl:105
 #: apps/zotonic_mod_image_edit/priv/templates/_overlay_image_edit.tpl:136
 #: apps/zotonic_mod_mailinglist/priv/templates/_mailinglist_subscribe_form.tpl:81./apps/zotonic_mod_mailinglist/priv/templates/mailinglist_subscriptions.tpl:54
 msgid "Save"
@@ -774,7 +774,7 @@ msgstr "+ إضافة"
 msgid "+ add block"
 msgstr "+ إضافة كتلة"
 
-#: apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:46./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:116./apps/zotonic_mod_admin/priv/templates/_admin_query_preview.tpl:6./apps/zotonic_mod_admin/priv/templates/admin_media.tpl:113./apps/zotonic_mod_admin/priv/templates/admin_referrers.tpl:32./apps/zotonic_mod_admin/priv/templates/admin_widget_dashboard_latest.tpl:53
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:46./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:129./apps/zotonic_mod_admin/priv/templates/_admin_query_preview.tpl:6./apps/zotonic_mod_admin/priv/templates/admin_media.tpl:141./apps/zotonic_mod_admin/priv/templates/admin_referrers.tpl:32./apps/zotonic_mod_admin/priv/templates/admin_widget_dashboard_latest.tpl:53
 msgid "<em>Untitled</em>"
 msgstr "<em>بدون عنوان</em>"
 
@@ -794,7 +794,7 @@ msgstr "نسخة محلية غير متصلة بالموقع البعيد."
 msgid "About categories"
 msgstr "حول الفئات"
 
-#: apps/zotonic_mod_admin/priv/templates/_admin_query_preview.tpl:16./apps/zotonic_mod_admin/priv/templates/admin_media.tpl:159./apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:116./apps/zotonic_mod_admin/priv/templates/admin_referrers.tpl:56
+#: apps/zotonic_mod_admin/priv/templates/_admin_query_preview.tpl:16./apps/zotonic_mod_admin/priv/templates/admin_media.tpl:187./apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:131./apps/zotonic_mod_admin/priv/templates/admin_referrers.tpl:56
 #: apps/zotonic_mod_admin_predicate/priv/templates/admin_edges.tpl:96
 msgid "About {n} items found."
 msgstr "تم العثور على حوالي {n} عنصر."
@@ -827,7 +827,7 @@ msgstr "أضف عنصر وسائط إلى المحتوى"
 msgid "Add note"
 msgstr "اضف ملاحظة"
 
-#: apps/zotonic_mod_admin/src/mod_admin.erl:600./apps/zotonic_mod_admin/src/actions/action_admin_link.erl:80
+#: apps/zotonic_mod_admin/src/mod_admin.erl:661./apps/zotonic_mod_admin/src/actions/action_admin_link.erl:80
 msgid "Added the connection to"
 msgstr "تمت إضافة الاتصال إلى"
 
@@ -847,7 +847,7 @@ msgstr "متقدم"
 msgid "After the duplication you can edit the new page. The new page will unpublished."
 msgstr "بعد التكرار يمكنك تحرير الصفحة الجديدة. سيتم إلغاء نشر الصفحة الجديدة."
 
-#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:30./apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:27
+#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:36./apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:32
 msgid "All Content"
 msgstr "كافة المحتويات"
 
@@ -855,12 +855,12 @@ msgstr "كافة المحتويات"
 msgid "All day"
 msgstr "طيلة اليوم"
 
-#: apps/zotonic_mod_admin/priv/templates/_admin_dashboard_buttons.tpl:14./apps/zotonic_mod_admin/priv/templates/admin_media.tpl:88./apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:96
+#: apps/zotonic_mod_admin/priv/templates/_admin_dashboard_buttons.tpl:14./apps/zotonic_mod_admin/priv/templates/admin_media.tpl:94./apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:103
 #: apps/zotonic_mod_admin_predicate/priv/templates/admin_edges.tpl:82
 msgid "All media"
 msgstr "كل الوسائط"
 
-#: apps/zotonic_mod_admin/priv/templates/_admin_dashboard_buttons.tpl:13./apps/zotonic_mod_admin/priv/templates/admin_media.tpl:87./apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:95
+#: apps/zotonic_mod_admin/priv/templates/_admin_dashboard_buttons.tpl:13./apps/zotonic_mod_admin/priv/templates/admin_media.tpl:93./apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:102
 #: apps/zotonic_mod_admin_predicate/priv/templates/admin_edges.tpl:81
 msgid "All pages"
 msgstr "كل الصفحات"
@@ -877,20 +877,20 @@ msgstr "مخصصة"
 msgid "Alternative telephone"
 msgstr "الهاتف البديل"
 
-#: apps/zotonic_mod_admin/priv/templates/_admin_system_status.tpl:72./apps/zotonic_mod_admin/priv/templates/admin_status.tpl:149
+#: apps/zotonic_mod_admin/priv/templates/_admin_system_status.tpl:72
 msgid "Amount"
 msgstr "مقدار"
 
-#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:76
+#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:82
 msgid "And media can also be viewed on their own page."
 msgstr "و يمكن أيضا عرض الوسائط على صفحتهم الخاصة."
 
-#: apps/zotonic_mod_admin/priv/templates/_action_dialog_connect_tab_find.tpl:20
+#: apps/zotonic_mod_admin/priv/templates/_action_dialog_connect_tab_find.tpl:93
 #: apps/zotonic_mod_admin_merge/priv/templates/_merge_find.tpl:14
 msgid "Any category"
 msgstr "أي فئة"
 
-#: apps/zotonic_mod_admin/priv/templates/_action_dialog_connect_tab_find.tpl:44
+#: apps/zotonic_mod_admin/priv/templates/_action_dialog_connect_tab_find.tpl:117
 msgid "Anybody’s"
 msgstr "أي شخص"
 
@@ -901,6 +901,10 @@ msgstr "هل أنت متأكد أنك تريد حذف الوسائط من هذه
 #: apps/zotonic_mod_admin/priv/templates/_action_dialog_delete_rsc.tpl:2
 msgid "Are you sure you want to delete the page"
 msgstr "هل انت متأكد أنك تريد حذف هذه الصفحة"
+
+#: apps/zotonic_mod_admin/priv/templates/_dialog_admin_bulk_delete.tpl:2
+msgid "Are you sure you want to delete these {n} pages?"
+msgstr "هل أنت متأكد أنك تريد حذف هذه الصفحات {n}؟"
 
 #: apps/zotonic_mod_admin/priv/templates/_dialog_admin_rsc_note.tpl:19
 msgid "Are you sure you want to delete this note?"
@@ -922,6 +926,10 @@ msgstr "الوسائط المرفقة"
 #: apps/zotonic_mod_oauth2/priv/templates/admin_oauth2_consumers.tpl:50
 msgid "Auth"
 msgstr "المصادقة"
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:233
+msgid "Authoritative"
+msgstr "موثوق"
 
 #: apps/zotonic_mod_admin/priv/templates/_admin_media_import_list.tpl:151
 #: apps/zotonic_mod_survey/priv/templates/_survey_end.tpl:28./apps/zotonic_mod_survey/priv/templates/_survey_end_edit.tpl:22./apps/zotonic_mod_survey/priv/templates/_survey_end_edit.tpl:23./apps/zotonic_mod_survey/priv/templates/_survey_question_page.tpl:62./apps/zotonic_mod_survey/priv/templates/_survey_start_button.tpl:38
@@ -969,6 +977,14 @@ msgstr "تغيير الفئة"
 #: apps/zotonic_mod_admin/priv/templates/_action_dialog_change_category.tpl:34
 msgid "Change the category of this page"
 msgstr "تغيير فئة هذه الصفحة"
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_bulk_actions.tpl:41
+msgid "Check the pages you want to delete."
+msgstr "تحقق من الصفحات التي تريد حذفها."
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_bulk_actions.tpl:53
+msgid "Check the pages you want to update."
+msgstr "تحقق من الصفحات التي تريد تحديثها."
 
 #: apps/zotonic_mod_admin/priv/templates/_action_dialog_zmedia_choose.tpl:10
 msgid "Choose a media item from this page to insert in the body text."
@@ -1036,13 +1052,17 @@ msgstr "تم نسخ رابط التنزيل إلى الحافظة"
 msgid "Copy download link"
 msgstr "انسخ رابط التنزيل"
 
-#: apps/zotonic_mod_admin/src/support/z_admin_media_discover.erl:145
+#: apps/zotonic_mod_admin/src/support/z_admin_media_discover.erl:147
 msgid "Could not connect to the website."
 msgstr "تعذر الاتصال بالموقع."
 
 #: apps/zotonic_mod_admin/priv/templates/_admin_media_import_list.tpl:11
 msgid "Could not detect anything to import on that URL or embed code."
 msgstr "لم يستطيع الكشف عن أي شئ للاستيراد من عنوان URL هذا أو كود التضمين."
+
+#: apps/zotonic_mod_admin/priv/templates/admin_status.tpl:149
+msgid "Count"
+msgstr "عدد"
 
 #: apps/zotonic_mod_admin/priv/templates/_admin_edit_content_address.tpl:78./apps/zotonic_mod_admin/priv/templates/_admin_edit_content_address.tpl:80./apps/zotonic_mod_admin/priv/templates/_admin_edit_content_address.tpl:128./apps/zotonic_mod_admin/priv/templates/_admin_edit_content_address.tpl:195./apps/zotonic_mod_admin/priv/templates/_admin_system_status.tpl:70
 #: apps/zotonic_mod_survey/priv/templates/_admin_survey_question_editor.tpl:106./apps/zotonic_mod_survey/priv/templates/_dialog_survey_link_person_new.tpl:45./apps/zotonic_mod_survey/priv/templates/_dialog_survey_link_person_new.tpl:47
@@ -1062,7 +1082,7 @@ msgstr "انشأ من قبل"
 msgid "Created by me"
 msgstr "التي أنشأتها بنفسي"
 
-#: apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:24./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:92./apps/zotonic_mod_admin/priv/templates/_rsc_preview.tpl:9
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:24./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:102./apps/zotonic_mod_admin/priv/templates/_rsc_preview.tpl:9
 #: apps/zotonic_mod_admin_identity/priv/templates/_admin_overview_list_page1.tpl:12./apps/zotonic_mod_admin_identity/priv/templates/admin_users.tpl:52
 #: apps/zotonic_mod_oauth2/priv/templates/admin_oauth2_apps.tpl:51./apps/zotonic_mod_oauth2/priv/templates/admin_oauth2_consumers.tpl:53
 msgid "Created on"
@@ -1071,6 +1091,14 @@ msgstr "تم إنشاؤها على"
 #: apps/zotonic_mod_admin/priv/templates/_admin_edit_header.tpl:8
 msgid "Created:"
 msgstr "تم الإنشاء:"
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:257
+msgid "Creation date, newest first"
+msgstr "تاريخ الإنشاء ، الأحدث أولاً"
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:258
+msgid "Creation date, oldest first"
+msgstr "تاريخ الخلق ، الأقدم أولاً"
 
 #: apps/zotonic_mod_admin/priv/templates/admin.tpl:4./apps/zotonic_mod_admin/priv/templates/admin.tpl:8./apps/zotonic_mod_admin/src/mod_admin.erl:90
 msgid "Dashboard"
@@ -1100,6 +1128,10 @@ msgstr "نطاق التاريخ"
 msgid "Date ranges"
 msgstr "نطاقات التاريخ"
 
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:158
+msgid "Date start/end"
+msgstr "تاريخ البدء / الانتهاء"
+
 #: apps/zotonic_mod_admin/priv/templates/_admin_edit_content_publish.tpl:46
 msgid "Delete if no other page is connected to this page."
 msgstr "تحذف إذا لم يكن هناك صفحات متصلة بهذه الصفحة."
@@ -1107,6 +1139,10 @@ msgstr "تحذف إذا لم يكن هناك صفحات متصلة بهذه ال
 #: apps/zotonic_mod_admin/priv/templates/_action_dialog_media_upload_tab_upload.tpl:49./apps/zotonic_mod_admin/priv/templates/_action_dialog_new_rsc_tab.tpl:235./apps/zotonic_mod_admin/priv/templates/_admin_media_import_list.tpl:90
 msgid "Delete if not connected anymore"
 msgstr "احذف إذا لم يعد متصلاً"
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_bulk_actions.tpl:7
+msgid "Delete selected pages"
+msgstr "حذف الصفحات المختارة"
 
 #: apps/zotonic_mod_admin/priv/templates/_admin_edit_content_publish.tpl:72
 msgid "Delete this page."
@@ -1116,7 +1152,7 @@ msgstr "احذف هذه الصحفة."
 msgid "Deleted."
 msgstr "تم الحذف."
 
-#: apps/zotonic_mod_admin/priv/templates/_admin_edit_content_publish.tpl:48
+#: apps/zotonic_mod_admin/priv/templates/_admin_edit_content_publish.tpl:48./apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:222./apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:226./apps/zotonic_mod_admin/priv/templates/_dialog_admin_bulk_update.tpl:63./apps/zotonic_mod_admin/priv/templates/_dialog_admin_bulk_update.tpl:67
 msgid "Dependent"
 msgstr "يعتمد"
 
@@ -1219,7 +1255,7 @@ msgstr "سيتم تطهير كود التضمين للمواقع و html الم�
 msgid "Embed page"
 msgstr "تضمين الصفحة"
 
-#: apps/zotonic_mod_admin/src/support/z_admin_media_discover.erl:209
+#: apps/zotonic_mod_admin/src/support/z_admin_media_discover.erl:211
 #: apps/zotonic_mod_oembed/src/mod_oembed.erl:245
 msgid "Embedded Content"
 msgstr "المحتوى الذي تم تضمينه"
@@ -1244,12 +1280,12 @@ msgstr "جذر التثبيت Erlang"
 msgid "Erlang Version"
 msgstr "نسخة إرلانج"
 
-#: apps/zotonic_mod_admin/src/support/z_admin_media_discover.erl:178
+#: apps/zotonic_mod_admin/src/support/z_admin_media_discover.erl:180
 msgid "Error checking the website."
 msgstr "خطأ التحقق من الموقع."
 
 #: apps/zotonic_mod_admin/src/actions/action_admin_dialog_new_rsc.erl:179
-#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:109
+#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:113
 msgid "Error creating the page."
 msgstr "خطأ في إنشاء الصفحة."
 
@@ -1281,16 +1317,24 @@ msgstr "يمكن أن تحتوي كل صفحة على نطاق زمني. على 
 msgid "Every page is categorized in exactly one category. The category defines what the page represents. For example an event, a product or a person. The categories are hierarchically defined. In that way you can have a vehicles category with subcategories car and bicycle."
 msgstr "يتم تصنيف كل صفحة في فئة واحدة بالضبط. تحدد الفئة ما تمثله الصفحة. على سبيل المثال حدث، منتج أو شخص. يتم تعريف الفئات بشكل هرمي. وبهذه الطريقة يمكن أن يكون لديك فئة السيارات مع فئات فرعية للسيارات والدراجات."
 
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:80
+msgid "Exact category"
+msgstr "الفئة الدقيقة"
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:98
+msgid "Exclude category"
+msgstr "فئة الاستبعاد"
+
 #: apps/zotonic_mod_admin/priv/templates/_action_dialog_new_rsc_tab.tpl:279
 msgid "Existing pages"
 msgstr "الصفحات الموجودة"
 
-#: apps/zotonic_mod_admin/src/actions/action_admin_dialog_media_upload.erl:175./apps/zotonic_mod_admin/src/actions/action_admin_dialog_new_rsc.erl:165./apps/zotonic_mod_admin/src/support/z_admin_media_discover.erl:153
-#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:95
+#: apps/zotonic_mod_admin/src/actions/action_admin_dialog_media_upload.erl:175./apps/zotonic_mod_admin/src/actions/action_admin_dialog_new_rsc.erl:165./apps/zotonic_mod_admin/src/support/z_admin_media_discover.erl:155
+#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:99
 msgid "Failed to download the file."
 msgstr "فشل في تحميل الملف."
 
-#: apps/zotonic_mod_admin/priv/templates/_admin_edit_content_publish.tpl:38
+#: apps/zotonic_mod_admin/priv/templates/_admin_edit_content_publish.tpl:38./apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:189./apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:193
 msgid "Featured"
 msgstr "متميز"
 
@@ -1314,11 +1358,16 @@ msgstr "الملف/محتوى الوسائط"
 msgid "File uploaded to the drop folder, will be handled shortly."
 msgstr "الملف الذي تم تحميله إلى مجلد الإسقاط ، سيتم التعامل معه قريبًا."
 
-#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:50./apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:47
+#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:24./apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:20
+#: apps/zotonic_mod_logging/priv/templates/admin_log.tpl:45./apps/zotonic_mod_logging/priv/templates/admin_log_email.tpl:157./apps/zotonic_mod_logging/priv/templates/admin_log_ui.tpl:44
+msgid "Filter"
+msgstr "منقي"
+
+#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:56./apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:52
 msgid "Filter on category"
 msgstr "تصفية حسب الفئة"
 
-#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:33./apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:30
+#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:39./apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:35
 msgid "Filter on content group"
 msgstr "تصفية حسب مجموعة المحتوى"
 
@@ -1334,6 +1383,14 @@ msgstr "البحث عن الصفحة"
 #: apps/zotonic_mod_survey/priv/templates/_admin_survey_question_editor.tpl:218
 msgid "Find page"
 msgstr "البحث عن الصفحة"
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:200./apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:204
+msgid "Findable"
+msgstr "يمكن العثور عليه"
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:170
+msgid "Finished"
+msgstr "انتهى"
 
 #: apps/zotonic_mod_admin/priv/templates/_admin_edit_content_person.tpl:19./apps/zotonic_mod_admin/priv/templates/_admin_edit_content_person.tpl:20
 #: apps/zotonic_mod_admin_identity/priv/templates/_action_dialog_user_add.tpl:15./apps/zotonic_mod_admin_identity/priv/templates/_action_dialog_user_add.tpl:16
@@ -1366,6 +1423,18 @@ msgstr "دور"
 msgid "Go back."
 msgstr "أرجع."
 
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:126
+msgid "Has connections with predicate"
+msgstr "لديه صلات مع المسند"
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:180
+msgid "Has medium"
+msgstr "متوسط"
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:176
+msgid "Has medium attached"
+msgstr "لديها متوسط مرفق"
+
 #: apps/zotonic_mod_admin/priv/templates/blocks/_admin_edit_block_li_header.tpl:21./apps/zotonic_mod_admin/priv/templates/blocks/_admin_edit_block_li_header.tpl:22./apps/zotonic_mod_admin/src/mod_admin.erl:174
 #: apps/zotonic_mod_survey/priv/templates/_admin_survey_question_editor.tpl:119
 msgid "Header"
@@ -1396,7 +1465,15 @@ msgstr "إذا كانت الصفحة تحتوي على نطاق تاريخ لل�
 msgid "Import only direct connections (shallow copy)."
 msgstr "استيراد التوصيلات المباشرة فقط (نسخة ضحلة)."
 
-#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:100
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:238
+msgid "Imported content"
+msgstr "المحتوى المستورد"
+
+#: apps/zotonic_mod_admin/priv/templates/_dialog_admin_bulk_update.tpl:78
+msgid "Indexed by search engines"
+msgstr "مفهرسة من قبل محركات البحث"
+
+#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:125
 #: apps/zotonic_mod_development/priv/templates/admin_development_observers.tpl:20
 #: apps/zotonic_mod_logging/priv/templates/admin_log_email.tpl:120
 msgid "Info"
@@ -1410,7 +1487,11 @@ msgstr "رابط المعلومات على شكل رسالة منبثقة"
 msgid "Inline block"
 msgstr "كتلة مضمنة"
 
-#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:63./apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:60
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:142
+msgid "Is connected with predicate"
+msgstr "متصل مع المسند"
+
+#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:69./apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:65
 #: apps/zotonic_mod_admin_predicate/priv/templates/admin_edges.tpl:39
 msgid "Items per page"
 msgstr "عناصر في كل صفحة"
@@ -1444,6 +1525,10 @@ msgstr "حلقة الوصل"
 msgid "Live query, send notifications when matching items are updated or inserted."
 msgstr "الاستعلام، يرسل الإشعارات عندما يتم تحديث أو إدراج عناصر مطابقة."
 
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:237
+msgid "Local content"
+msgstr "المحتوى المحلي"
+
 #: apps/zotonic_mod_admin/priv/templates/admin_status.tpl:42
 msgid "Log Directory"
 msgstr "دليل السجل"
@@ -1466,7 +1551,7 @@ msgstr "الرئيسية"
 msgid "Make"
 msgstr "أنشئ"
 
-#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:84
+#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:90
 msgid "Make a new media item"
 msgstr "أنشئ عنصر وسائط جديد"
 
@@ -1474,7 +1559,7 @@ msgstr "أنشئ عنصر وسائط جديد"
 msgid "Make a new page"
 msgstr "أنشئ صفحة جديدة"
 
-#: apps/zotonic_mod_admin/priv/templates/_admin_dashboard_buttons.tpl:4./apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:85
+#: apps/zotonic_mod_admin/priv/templates/_admin_dashboard_buttons.tpl:4./apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:92
 #: apps/zotonic_mod_admin_predicate/priv/templates/admin_edges.tpl:71
 msgid "Make a new page or media"
 msgstr "أنشئ صفحة جديدة أو عنصر وسائط جديد"
@@ -1484,7 +1569,7 @@ msgstr "أنشئ صفحة جديدة أو عنصر وسائط جديد"
 msgid "Matching"
 msgstr "مطابقة"
 
-#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:3./apps/zotonic_mod_admin/priv/templates/admin_media.tpl:72./apps/zotonic_mod_admin/src/mod_admin.erl:104
+#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:3./apps/zotonic_mod_admin/priv/templates/admin_media.tpl:78./apps/zotonic_mod_admin/src/mod_admin.erl:104
 #: apps/zotonic_mod_admin_merge/priv/templates/admin_merge_compare.tpl:100./apps/zotonic_mod_admin_merge/priv/templates/admin_merge_compare.tpl:103./apps/zotonic_mod_admin_merge/priv/templates/admin_merge_compare.tpl:113
 msgid "Media"
 msgstr "وسائط"
@@ -1493,7 +1578,7 @@ msgstr "وسائط"
 msgid "Media URL or HTML"
 msgstr "عنوان URL للوسائط أو HTML"
 
-#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:75
+#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:81
 msgid "Media encompasses all uploaded images, movies and documents. Media can be attached to pages."
 msgstr "الوسائط تشمل كل الصور التي تم رفعها و الافلام و المستندات. الوسائط يمكن إرفاقها في الصفحات."
 
@@ -1513,7 +1598,7 @@ msgstr "وسائط على هذه الصفحة"
 msgid "Media title"
 msgstr "عنوان الوسائط"
 
-#: apps/zotonic_mod_admin/src/support/z_admin_media_discover.erl:134
+#: apps/zotonic_mod_admin/src/support/z_admin_media_discover.erl:136
 msgid "Media updated."
 msgstr "تم تحديث الوسائط."
 
@@ -1525,7 +1610,7 @@ msgstr "ذاكرة"
 msgid "Middle"
 msgstr "الأوسط"
 
-#: apps/zotonic_mod_admin/priv/templates/_action_dialog_connect_tab_find.tpl:45
+#: apps/zotonic_mod_admin/priv/templates/_action_dialog_connect_tab_find.tpl:118
 msgid "Mine"
 msgstr "الخاص بي"
 
@@ -1533,17 +1618,25 @@ msgstr "الخاص بي"
 msgid "Mobile"
 msgstr "الهاتف المحمول"
 
-#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:101
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:259
+msgid "Modification date, newest first"
+msgstr "تاريخ التعديل ، الأحدث أولاً"
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:260
+msgid "Modification date, oldest first"
+msgstr "تاريخ التعديل ، الأقدم أولاً"
+
+#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:126
 #: apps/zotonic_mod_admin_config/priv/templates/admin_config.tpl:22
 msgid "Modified"
 msgstr "تم التعديل"
 
-#: apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:30./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:98./apps/zotonic_mod_admin/priv/templates/admin_referrers.tpl:25
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:30./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:108./apps/zotonic_mod_admin/priv/templates/admin_referrers.tpl:25
 #: apps/zotonic_mod_admin_identity/priv/templates/_admin_overview_list_page1.tpl:14
 msgid "Modified by"
 msgstr "تم التعديل بواسطة"
 
-#: apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:27./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:95./apps/zotonic_mod_admin/priv/templates/admin_referrers.tpl:24
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:27./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:105./apps/zotonic_mod_admin/priv/templates/admin_referrers.tpl:24
 #: apps/zotonic_mod_admin_identity/priv/templates/_admin_overview_list_page1.tpl:13./apps/zotonic_mod_admin_identity/priv/templates/admin_users.tpl:53
 #: apps/zotonic_mod_backup/priv/templates/admin_backup_deleted.tpl:32
 #: apps/zotonic_mod_oauth2/priv/templates/admin_oauth2_apps.tpl:50
@@ -1608,28 +1701,55 @@ msgstr "لا يوجد ميزات تم تمكينه لهذا المورد الف�
 msgid "No items"
 msgstr "لا يوجد عناصر"
 
-#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:151
+#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:179
 msgid "No media found."
 msgstr "لم يتم العثور على عناصر."
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:181
+msgid "No medium"
+msgstr "لا يوجد وسط"
 
 #: apps/zotonic_mod_admin/src/actions/action_admin_redirect_incat.erl:48./apps/zotonic_mod_admin/src/actions/action_admin_redirect_incat.erl:50
 msgid "No other pages found"
 msgstr "لم يتم العثور على صفحات أخرى"
 
-#: apps/zotonic_mod_admin/priv/templates/_action_dialog_connect_tab_find_results_loop.tpl:16./apps/zotonic_mod_admin/priv/templates/_action_dialog_new_rsc_tab_find_results_loop.tpl:12./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:139./apps/zotonic_mod_admin/priv/templates/admin_referrers.tpl:48
+#: apps/zotonic_mod_admin/priv/templates/_action_dialog_connect_tab_find_results_loop.tpl:16./apps/zotonic_mod_admin/priv/templates/_action_dialog_new_rsc_tab_find_results_loop.tpl:12./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:152./apps/zotonic_mod_admin/priv/templates/admin_referrers.tpl:48
 #: apps/zotonic_mod_admin_merge/priv/templates/_merge_find_results_loop.tpl:10
 msgid "No pages found."
 msgstr "لم يتم العثور على صفحات."
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_bulk_actions.tpl:40./apps/zotonic_mod_admin/priv/templates/_admin_overview_bulk_actions.tpl:52
+msgid "No pages selected"
+msgstr "لم يتم تحديد صفحات"
 
 #: apps/zotonic_mod_admin/priv/templates/_admin_query_preview.tpl:21
 #: apps/zotonic_mod_mailinglist/priv/templates/_admin_edit_content.mailinglist.tpl:46
 msgid "No results."
 msgstr "لا نتائج."
 
-#: apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:12
-#: apps/zotonic_mod_comment/priv/templates/admin_comments.tpl:20
-msgid "Page"
-msgstr "الصفحة"
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:227./apps/zotonic_mod_admin/priv/templates/_dialog_admin_bulk_update.tpl:68
+msgid "Not dependent"
+msgstr "لا تعتمد"
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:194
+msgid "Not featured"
+msgstr "غير مميز"
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:205
+msgid "Not findable"
+msgstr "لا يمكن العثور عليه"
+
+#: apps/zotonic_mod_admin/priv/templates/_dialog_admin_bulk_update.tpl:79
+msgid "Not indexed by search engines"
+msgstr "غير مفهرسة من قبل محركات البحث"
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:216./apps/zotonic_mod_admin/priv/templates/_dialog_admin_bulk_update.tpl:57
+msgid "Not protected"
+msgstr "غير محمية"
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:166
+msgid "Ongoing"
+msgstr "جاري التنفيذ"
 
 #: apps/zotonic_mod_admin/priv/templates/_admin_edit_content_page_connections.tpl:6./apps/zotonic_mod_admin/priv/templates/_admin_edit_content_page_connections.tpl:8
 #: apps/zotonic_mod_admin_predicate/priv/templates/admin_edges.tpl:3./apps/zotonic_mod_admin_predicate/src/mod_admin_predicate.erl:198
@@ -1652,7 +1772,7 @@ msgstr "الصفحات"
 msgid "Pages for"
 msgstr "صفحات لـ"
 
-#: apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:69./apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:69
+#: apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:75./apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:75
 msgid "Pages overview"
 msgstr "نظرة عامة على الصفحات"
 
@@ -1685,7 +1805,7 @@ msgstr "مشغل بواسطة"
 msgid "Predicate"
 msgstr "فاعل"
 
-#: apps/zotonic_mod_admin/priv/templates/_action_dialog_new_rsc_tab_find_results_item.tpl:28./apps/zotonic_mod_admin/priv/templates/_action_dialog_new_rsc_tab_preview.tpl:28./apps/zotonic_mod_admin/priv/templates/admin_media.tpl:98
+#: apps/zotonic_mod_admin/priv/templates/_action_dialog_new_rsc_tab_find_results_item.tpl:28./apps/zotonic_mod_admin/priv/templates/_action_dialog_new_rsc_tab_preview.tpl:28./apps/zotonic_mod_admin/priv/templates/admin_media.tpl:123
 msgid "Preview"
 msgstr "معاينة"
 
@@ -1705,6 +1825,10 @@ msgstr "يحمي"
 msgid "Protect from deletion"
 msgstr "حماية من الحذف"
 
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:211./apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:215./apps/zotonic_mod_admin/priv/templates/_dialog_admin_bulk_update.tpl:52./apps/zotonic_mod_admin/priv/templates/_dialog_admin_bulk_update.tpl:56
+msgid "Protected"
+msgstr "محمي"
+
 #: apps/zotonic_mod_admin/priv/templates/_admin_edit_content_pub_period.tpl:41
 msgid "Publication date of original article"
 msgstr "تاريخ نشر المقال الأصلي"
@@ -1721,17 +1845,33 @@ msgstr "فترة النشر"
 msgid "Publish this page"
 msgstr "انشر هذه الصفحة"
 
-#: apps/zotonic_mod_admin/priv/templates/_action_dialog_edit_basics.tpl:51./apps/zotonic_mod_admin/priv/templates/_action_dialog_media_upload_tab_upload.tpl:61./apps/zotonic_mod_admin/priv/templates/_action_dialog_new_rsc_tab.tpl:244./apps/zotonic_mod_admin/priv/templates/_admin_edit_content_publish.tpl:33./apps/zotonic_mod_admin/priv/templates/_admin_media_import_list.tpl:102
-#: apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:48
+#: apps/zotonic_mod_admin/priv/templates/_action_dialog_edit_basics.tpl:51./apps/zotonic_mod_admin/priv/templates/_action_dialog_media_upload_tab_upload.tpl:61./apps/zotonic_mod_admin/priv/templates/_action_dialog_new_rsc_tab.tpl:244./apps/zotonic_mod_admin/priv/templates/_admin_edit_content_publish.tpl:33./apps/zotonic_mod_admin/priv/templates/_admin_media_import_list.tpl:102./apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:49./apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:53./apps/zotonic_mod_admin/priv/templates/_dialog_admin_bulk_update.tpl:17./apps/zotonic_mod_admin/priv/templates/_dialog_admin_bulk_update.tpl:21
+#: apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:47
 #: apps/zotonic_mod_survey/priv/templates/_dialog_survey_mailinglist.tpl:44
 msgid "Published"
 msgstr "نشرت"
 
-#: apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:89
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:263
+msgid "Published ends, newest first"
+msgstr "النهايات المنشورة ، الأحدث أولاً"
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:264
+msgid "Published ends, oldest first"
+msgstr "النهايات المنشورة ، الأقدم أولاً"
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:99
 msgid "Published on"
 msgstr "نشرت في"
 
-#: apps/zotonic_mod_admin/priv/templates/_admin_edit_content.query.tpl:21
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:261
+msgid "Published on, newest first"
+msgstr "تم النشر على ، الأحدث أولاً"
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:262
+msgid "Published on, oldest first"
+msgstr "تم النشر في ، الأقدم أولاً"
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_edit_content.query.tpl:21./apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:16
 #: apps/zotonic_mod_mailinglist/priv/templates/_admin_edit_content.mailinglist.tpl:27
 msgid "Query"
 msgstr "استعلام"
@@ -1788,7 +1928,7 @@ msgstr "ملاحظات"
 msgid "Remove"
 msgstr "إزالة"
 
-#: apps/zotonic_mod_admin/src/mod_admin.erl:604
+#: apps/zotonic_mod_admin/src/mod_admin.erl:665
 msgid "Removed the connection to"
 msgstr "تمت إزالة الاتصال بـ"
 
@@ -1816,6 +1956,11 @@ msgstr "جارٍ استرداد الحالة ..."
 msgid "Runs the schema install command from the site's module again."
 msgstr "يقوم بتشغيل أمر تثبيت المخطط من وحدة الموقع مرة أخرى."
 
+#: apps/zotonic_mod_admin/priv/templates/_dialog_admin_bulk_update.tpl:74
+#: apps/zotonic_mod_seo/src/mod_seo.erl:42
+msgid "SEO"
+msgstr "SEO"
+
 #: apps/zotonic_mod_admin/priv/templates/_admin_status_alert.tpl:4
 msgid "SSL Application uses Erlang defaults, it is recommended to change this configuration in your <tt>erlang.config</tt>."
 msgstr "يستخدم تطبيق SSL إعدادات Erlang الافتراضية ، يوصى بتغيير هذا التكوين في <tt>erlang.config</tt>."
@@ -1825,14 +1970,18 @@ msgid "Save and View"
 msgstr "حفظ وعرض"
 
 #: apps/zotonic_mod_admin/priv/templates/_admin_edit_content_publish.tpl:23./apps/zotonic_mod_admin/priv/templates/_admin_edit_floating_buttons.tpl:6
-#: apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:129./apps/zotonic_mod_admin_frontend/priv/templates/page_admin_frontend_edit.tpl:83
+#: apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:128./apps/zotonic_mod_admin_frontend/priv/templates/page_admin_frontend_edit.tpl:83
 msgid "Save and view the page."
 msgstr "احفظ واعرض الصفحة."
 
 #: apps/zotonic_mod_admin/priv/templates/_admin_edit_content_publish.tpl:20./apps/zotonic_mod_admin/priv/templates/_admin_edit_floating_buttons.tpl:2
-#: apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:126./apps/zotonic_mod_admin_frontend/priv/templates/page_admin_frontend_edit.tpl:79
+#: apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:125./apps/zotonic_mod_admin_frontend/priv/templates/page_admin_frontend_edit.tpl:79
 msgid "Save this page."
 msgstr "احفظ هذه الصفحة."
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:284
+msgid "Search"
+msgstr "يبحث"
 
 #: apps/zotonic_mod_admin/priv/templates/_admin_status_update_pivot_count.tpl:56
 msgid "Search indices rebuilt."
@@ -1847,7 +1996,7 @@ msgstr "ابحث في الوسائط الأخرى"
 msgid "Search query"
 msgstr "استعلام بحث"
 
-#: apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:77
+#: apps/zotonic_mod_admin/priv/templates/_action_dialog_connect_tab_find_results.tpl:21./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:77
 msgid "Search results"
 msgstr "نتائج البحث"
 
@@ -1872,7 +2021,11 @@ msgstr "يختار"
 msgid "Select a connected image"
 msgstr "حدد صورة متصلة"
 
-#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:45./apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:42
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:80./apps/zotonic_mod_admin/priv/templates/admin_media.tpl:107
+msgid "Selected"
+msgstr "المحدد"
+
+#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:51./apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:47
 msgid "Selected Categories"
 msgstr "فئات مختارة"
 
@@ -1887,6 +2040,10 @@ msgstr "عنوان قصير"
 #: apps/zotonic_mod_admin/priv/templates/_admin_features.category.tpl:8
 msgid "Show address on edit page"
 msgstr "إظهار العنوان في صفحة التحرير"
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_edit_header.tpl:47
+msgid "Show all {title} pages"
+msgstr "إظهار كافة {title} صفحات"
 
 #: apps/zotonic_mod_admin/priv/templates/_admin_edit_block_show_as.tpl:3
 msgid "Show as"
@@ -1946,13 +2103,17 @@ msgstr "عذرًا ، لا يُسمح لك بتحميل ملفات المجلد 
 msgid "Sorry, you don't have permission to add the connection."
 msgstr "عذراً، ليس لديك إذن لإضافة الاتصال."
 
-#: apps/zotonic_mod_admin/src/mod_admin.erl:586
+#: apps/zotonic_mod_admin/src/mod_admin.erl:647
 msgid "Sorry, you have no permission to add the connection."
 msgstr "عذراً، ليس لديك إذن لإضافة الاتصال."
 
-#: apps/zotonic_mod_admin/src/mod_admin.erl:588
+#: apps/zotonic_mod_admin/src/mod_admin.erl:649
 msgid "Sorry, you have no permission to delete the connection."
 msgstr "عذراً، ليس لديك إذن لحذف الاتصال."
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:252
+msgid "Sort by"
+msgstr "ترتيب حسب"
 
 #: apps/zotonic_mod_admin/src/mod_admin.erl:173
 msgid "Standard"
@@ -2048,7 +2209,7 @@ msgstr "سيتم إعادة تجميع النماذج."
 msgid "Test query"
 msgstr "اختبار الاستعلام"
 
-#: apps/zotonic_mod_admin/src/mod_admin.erl:175
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:42./apps/zotonic_mod_admin/src/mod_admin.erl:175
 msgid "Text"
 msgstr "النص"
 
@@ -2085,7 +2246,7 @@ msgid "There are no tasks in the task queue."
 msgstr "لا توجد مهام في قائمة انتظار المهام."
 
 #: apps/zotonic_mod_admin/src/actions/action_admin_dialog_new_rsc.erl:159
-#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:89
+#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:93
 msgid "There is already a page with this name."
 msgstr "توجد بالفعل صفحة بهذا الاسم."
 
@@ -2097,8 +2258,8 @@ msgstr "لا يمكن التراجع عن ذلك. سيتم فقدان صفحتك
 msgid "This connection already exists."
 msgstr "هذا الاتصال موجود مسبقاً."
 
-#: apps/zotonic_mod_admin/src/actions/action_admin_dialog_media_upload.erl:179./apps/zotonic_mod_admin/src/actions/action_admin_dialog_new_rsc.erl:169./apps/zotonic_mod_admin/src/support/z_admin_media_discover.erl:157
-#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:99
+#: apps/zotonic_mod_admin/src/actions/action_admin_dialog_media_upload.erl:179./apps/zotonic_mod_admin/src/actions/action_admin_dialog_new_rsc.erl:169./apps/zotonic_mod_admin/src/support/z_admin_media_discover.erl:159
+#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:103
 msgid "This file contains links to other files or locations."
 msgstr "يحتوي هذا الملف على روابط لملفات أو مواقع أخرى."
 
@@ -2114,17 +2275,17 @@ msgstr "لم يتم فحص هذا الملف بحثًا عن فيروسات لأ
 msgid "This file has not been scanned for viruses."
 msgstr "لم يتم فحص هذا الملف بحثًا عن فيروسات."
 
-#: apps/zotonic_mod_admin/src/actions/action_admin_dialog_media_upload.erl:177./apps/zotonic_mod_admin/src/actions/action_admin_dialog_new_rsc.erl:167./apps/zotonic_mod_admin/src/support/z_admin_media_discover.erl:155
-#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:97
+#: apps/zotonic_mod_admin/src/actions/action_admin_dialog_media_upload.erl:177./apps/zotonic_mod_admin/src/actions/action_admin_dialog_new_rsc.erl:167./apps/zotonic_mod_admin/src/support/z_admin_media_discover.erl:157
+#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:101
 msgid "This file is infected with a virus."
 msgstr "هذا الملف مصاب بفيروس."
 
-#: apps/zotonic_mod_admin/src/actions/action_admin_dialog_media_upload.erl:181./apps/zotonic_mod_admin/src/actions/action_admin_dialog_new_rsc.erl:171./apps/zotonic_mod_admin/src/support/z_admin_media_discover.erl:159
-#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:101
+#: apps/zotonic_mod_admin/src/actions/action_admin_dialog_media_upload.erl:181./apps/zotonic_mod_admin/src/actions/action_admin_dialog_new_rsc.erl:171./apps/zotonic_mod_admin/src/support/z_admin_media_discover.erl:161
+#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:105
 msgid "This file is too large."
 msgstr "هذا الملف كبير جدًا."
 
-#: apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:38./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:108./apps/zotonic_mod_admin/priv/templates/_admin_system_content_warning.tpl:8
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:38./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:121./apps/zotonic_mod_admin/priv/templates/_admin_system_content_warning.tpl:8
 msgid "This is system content."
 msgstr "هذا هو محتوى النظام."
 
@@ -2164,11 +2325,11 @@ msgstr "لقد تم إنشاء هذا المورد بواسطة الوحدة"
 msgid "Till"
 msgstr "حتى"
 
-#: apps/zotonic_mod_admin/src/support/z_admin_media_discover.erl:147
+#: apps/zotonic_mod_admin/src/support/z_admin_media_discover.erl:149
 msgid "Timeout while trying to fetch data from the website."
 msgstr "مهلة أثناء محاولة جلب البيانات من الموقع."
 
-#: apps/zotonic_mod_admin/priv/templates/_action_dialog_new_rsc_tab.tpl:27./apps/zotonic_mod_admin/priv/templates/_action_dialog_new_rsc_tab.tpl:29./apps/zotonic_mod_admin/priv/templates/_admin_edit_basics_form.tpl:6./apps/zotonic_mod_admin/priv/templates/_admin_edit_basics_form.tpl:12./apps/zotonic_mod_admin/priv/templates/_admin_media_import_list.tpl:36./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:18./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:83./apps/zotonic_mod_admin/priv/templates/admin_media.tpl:99./apps/zotonic_mod_admin/priv/templates/admin_referrers.tpl:21./apps/zotonic_mod_admin/priv/templates/admin_widget_dashboard_latest.tpl:35./apps/zotonic_mod_admin/priv/templates/admin_widget_dashboard_latest.tpl:39
+#: apps/zotonic_mod_admin/priv/templates/_action_dialog_new_rsc_tab.tpl:27./apps/zotonic_mod_admin/priv/templates/_action_dialog_new_rsc_tab.tpl:29./apps/zotonic_mod_admin/priv/templates/_admin_edit_basics_form.tpl:6./apps/zotonic_mod_admin/priv/templates/_admin_edit_basics_form.tpl:12./apps/zotonic_mod_admin/priv/templates/_admin_media_import_list.tpl:36./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:18./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:93./apps/zotonic_mod_admin/priv/templates/admin_media.tpl:124./apps/zotonic_mod_admin/priv/templates/admin_referrers.tpl:21./apps/zotonic_mod_admin/priv/templates/admin_widget_dashboard_latest.tpl:35./apps/zotonic_mod_admin/priv/templates/admin_widget_dashboard_latest.tpl:39
 #: apps/zotonic_mod_admin_predicate/priv/templates/_action_dialog_predicate_new.tpl:9./apps/zotonic_mod_admin_predicate/priv/templates/_action_dialog_predicate_new.tpl:11./apps/zotonic_mod_admin_predicate/priv/templates/admin_predicate.tpl:26
 #: apps/zotonic_mod_backup/priv/templates/admin_backup_deleted.tpl:23
 #: apps/zotonic_mod_mailinglist/priv/templates/_admin_mailing_status_overview.tpl:16./apps/zotonic_mod_mailinglist/priv/templates/admin_mailinglist.tpl:20
@@ -2188,20 +2349,36 @@ msgstr "تبديل التصفح"
 msgid "Too many connections, only the first and last are shown."
 msgstr "عدد كبير جدًا من الاتصالات ، يتم عرض الأول والأخير فقط."
 
-#: apps/zotonic_mod_admin/priv/templates/_action_dialog_connect_tab_find.tpl:8
+#: apps/zotonic_mod_admin/priv/templates/_action_dialog_connect_tab_find.tpl:81
 #: apps/zotonic_mod_admin_merge/priv/templates/_merge_find.tpl:9
 msgid "Type text to search"
 msgstr "اكتب نص للبحث"
 
-#: apps/zotonic_mod_admin/priv/templates/_action_dialog_edit_basics.tpl:31./apps/zotonic_mod_admin/priv/templates/_action_dialog_edit_basics.tpl:44./apps/zotonic_mod_admin/priv/templates/_admin_edit_content_advanced.tpl:49./apps/zotonic_mod_admin/priv/templates/_admin_edit_content_advanced.tpl:51
+#: apps/zotonic_mod_admin/priv/templates/_action_dialog_connect_tab_find.tpl:11
+msgid "Type to filter the list below."
+msgstr "اكتب لتصفية القائمة أدناه."
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:12
+msgid "Unique Page"
+msgstr "صفحة فريدة"
+
+#: apps/zotonic_mod_admin/priv/templates/_action_dialog_edit_basics.tpl:31./apps/zotonic_mod_admin/priv/templates/_action_dialog_edit_basics.tpl:44./apps/zotonic_mod_admin/priv/templates/_admin_edit_content_advanced.tpl:49./apps/zotonic_mod_admin/priv/templates/_admin_edit_content_advanced.tpl:51./apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:244
 msgid "Unique name"
 msgstr "اسم فريد"
+
+#: apps/zotonic_mod_admin/priv/templates/_action_dialog_connect_tab_find_results.tpl:12
+msgid "Unique page"
+msgstr "صفحة فريدة من نوعها"
 
 #: apps/zotonic_mod_admin/priv/templates/_admin_edit_content_advanced.tpl:66./apps/zotonic_mod_admin/priv/templates/_admin_edit_content_advanced.tpl:67
 msgid "Unique uri"
 msgstr "uri فريد"
 
-#: apps/zotonic_mod_admin/src/mod_admin.erl:594./apps/zotonic_mod_admin/src/actions/action_admin_dialog_edit_basics.erl:69./apps/zotonic_mod_admin/src/actions/action_admin_dialog_edit_basics.erl:125
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:54./apps/zotonic_mod_admin/priv/templates/_dialog_admin_bulk_update.tpl:22
+msgid "Unpublished"
+msgstr "غير منشورة"
+
+#: apps/zotonic_mod_admin/src/mod_admin.erl:655./apps/zotonic_mod_admin/src/actions/action_admin_dialog_edit_basics.erl:69./apps/zotonic_mod_admin/src/actions/action_admin_dialog_edit_basics.erl:125
 #: apps/zotonic_mod_admin_predicate/priv/templates/admin_edges.tpl:58./apps/zotonic_mod_admin_predicate/priv/templates/admin_edges.tpl:61
 #: apps/zotonic_mod_backup/priv/templates/admin_backup_deleted.tpl:57
 #: apps/zotonic_mod_search/priv/templates/_search_view_list_item.media.tpl:13./apps/zotonic_mod_search/priv/templates/_search_view_list_item.tpl:8
@@ -2211,6 +2388,23 @@ msgstr "بدون عنوان"
 #: apps/zotonic_mod_admin/priv/templates/_admin_system_status.tpl:9
 msgid "Unused"
 msgstr "غير مستعمل"
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_filter_panel.tpl:162
+msgid "Upcoming"
+msgstr "القادمة"
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:82./apps/zotonic_mod_admin/priv/templates/_dialog_admin_bulk_update.tpl:86./apps/zotonic_mod_admin/priv/templates/admin_media.tpl:109
+#: apps/zotonic_mod_oauth2/priv/templates/_dialog_oauth2_consumer.tpl:16
+msgid "Update"
+msgstr "تحديث"
+
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_bulk_actions.tpl:17
+msgid "Update selected pages"
+msgstr "تحديث الصفحات المحددة"
+
+#: apps/zotonic_mod_admin/priv/templates/_dialog_admin_bulk_update.tpl:2
+msgid "Update {n} pages with the following properties:"
+msgstr "تحديث {n} صفحة بالخصائص التالية:"
 
 #: apps/zotonic_mod_admin/priv/templates/_action_dialog_connect.tpl:89./apps/zotonic_mod_admin/priv/templates/_action_dialog_new_rsc.tpl:17./apps/zotonic_mod_admin/priv/templates/admin_status.tpl:134
 msgid "Upload"
@@ -2233,7 +2427,7 @@ msgstr "تحميل ملف إلى مجلد الإسقاط. ستتم معالجة 
 msgid "Upload file"
 msgstr "تحميل الملف"
 
-#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:102
+#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:127
 #: apps/zotonic_mod_fileuploader/src/mod_fileuploader.erl:75
 msgid "Uploaded"
 msgstr "تم التحميل"
@@ -2258,12 +2452,12 @@ msgstr "مستخدم"
 msgid "User page"
 msgstr "مستخدم الصفحة"
 
-#: apps/zotonic_mod_admin/priv/templates/_action_dialog_connect_tab_find.tpl:18
+#: apps/zotonic_mod_admin/priv/templates/_action_dialog_connect_tab_find.tpl:91
 msgid "Valid for:"
 msgstr "صالح لـ:"
 
 #: apps/zotonic_mod_admin/priv/templates/_admin_edit_content_publish_view.tpl:2./apps/zotonic_mod_admin/priv/templates/_admin_edit_floating_buttons.tpl:8./apps/zotonic_mod_admin/priv/templates/_admin_edit_media.tpl:46
-#: apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:131
+#: apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:130
 #: apps/zotonic_mod_mailinglist/priv/templates/admin_mailinglist.tpl:41
 #: apps/zotonic_mod_survey/priv/templates/_admin_survey_results_tab.tpl:20
 #: apps/zotonic_mod_translation/priv/templates/admin_translation.tpl:38
@@ -2287,7 +2481,7 @@ msgid "View status"
 msgstr "عرض الحالة"
 
 #: apps/zotonic_mod_admin/priv/templates/_admin_edit_floating_buttons.tpl:8
-#: apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:131
+#: apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:130
 msgid "View this page."
 msgstr "اعرض هذه الصفحة."
 
@@ -2325,8 +2519,8 @@ msgid "Work Directory"
 msgstr "دليل العمل"
 
 #: apps/zotonic_mod_admin/priv/templates/_rsc_preview.tpl:9
-#: apps/zotonic_mod_admin_identity/priv/templates/_admin_edit_sidebar_identity_live.tpl:52
-#: apps/zotonic_mod_backup/priv/templates/admin_backup_revision.tpl:87
+#: apps/zotonic_mod_admin_identity/priv/templates/_admin_edit_sidebar_identity_live.tpl:54
+#: apps/zotonic_mod_backup/priv/templates/admin_backup_revision.tpl:90
 #: apps/zotonic_mod_survey/priv/templates/_admin_survey_editor_results.tpl:35
 msgid "Y-m-d H:i"
 msgstr "Y-m-d H:i"
@@ -2347,7 +2541,7 @@ msgstr "سوف تقوم بتكرار الصفحة"
 msgid "You are not allowed to delete this media."
 msgstr "لا يسمح لك بحذف هذه الوسائط."
 
-#: apps/zotonic_mod_admin/src/actions/action_admin_dialog_delete_rsc.erl:50
+#: apps/zotonic_mod_admin/src/actions/action_admin_delete_rsc.erl:47./apps/zotonic_mod_admin/src/actions/action_admin_dialog_delete_rsc.erl:50
 msgid "You are not allowed to delete this page."
 msgstr "لا يسمح لك بحذف هذه الصفحة."
 
@@ -2357,12 +2551,12 @@ msgstr "لا يسمح لك بحذف هذه الصفحة."
 msgid "You are not allowed to edit this page."
 msgstr "لا يسمح لك لتحرير هذه الصفحة."
 
-#: apps/zotonic_mod_admin/src/actions/action_admin_dialog_media_upload.erl:171./apps/zotonic_mod_admin/src/support/z_admin_media_discover.erl:149
+#: apps/zotonic_mod_admin/src/actions/action_admin_dialog_media_upload.erl:171./apps/zotonic_mod_admin/src/support/z_admin_media_discover.erl:151
 msgid "You don't have permission to change this media item."
 msgstr "ليس لديك إذن لتغيير عنصر الوسائط هذا."
 
 #: apps/zotonic_mod_admin/src/actions/action_admin_dialog_new_rsc.erl:161
-#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:91
+#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:95
 msgid "You don't have permission to create this page."
 msgstr "ليس لديك إذن لإنشاء هذه الصفحة."
 
@@ -2371,8 +2565,8 @@ msgstr "ليس لديك إذن لإنشاء هذه الصفحة."
 msgid "You don't have permission to edit this page."
 msgstr "ليس لديك إذن لتحرير هذه الصفحة."
 
-#: apps/zotonic_mod_admin/src/actions/action_admin_dialog_media_upload.erl:173./apps/zotonic_mod_admin/src/actions/action_admin_dialog_new_rsc.erl:163./apps/zotonic_mod_admin/src/support/z_admin_media_discover.erl:151
-#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:93
+#: apps/zotonic_mod_admin/src/actions/action_admin_dialog_media_upload.erl:173./apps/zotonic_mod_admin/src/actions/action_admin_dialog_new_rsc.erl:163./apps/zotonic_mod_admin/src/support/z_admin_media_discover.erl:153
+#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:97
 msgid "You don't have the proper permissions to upload this type of file."
 msgstr "ليس لديك الأذونات المناسبة لتحميل هذا النوع من الملفات."
 
@@ -2406,7 +2600,7 @@ msgstr "منع"
 msgid "by"
 msgstr "بواسطة"
 
-#: apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:55./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:56./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:125./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:126./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:127./apps/zotonic_mod_admin/priv/templates/admin_media.tpl:124./apps/zotonic_mod_admin/priv/templates/admin_media.tpl:127./apps/zotonic_mod_admin/priv/templates/admin_referrers.tpl:35
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:55./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:56./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:138./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:139./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:140./apps/zotonic_mod_admin/priv/templates/admin_media.tpl:152./apps/zotonic_mod_admin/priv/templates/admin_media.tpl:155./apps/zotonic_mod_admin/priv/templates/admin_referrers.tpl:35
 #: apps/zotonic_mod_admin_config/priv/templates/admin_config.tpl:55
 #: apps/zotonic_mod_admin_identity/priv/templates/_admin_overview_list_page1.tpl:32./apps/zotonic_mod_admin_identity/priv/templates/_admin_overview_list_page1.tpl:33./apps/zotonic_mod_admin_identity/priv/templates/admin_users.tpl:70./apps/zotonic_mod_admin_identity/priv/templates/admin_users.tpl:71./apps/zotonic_mod_admin_identity/priv/templates/admin_users.tpl:73
 #: apps/zotonic_mod_admin_predicate/priv/templates/_admin_edges_list.tpl:44
@@ -2416,7 +2610,7 @@ msgstr "بواسطة"
 msgid "d M Y, H:i"
 msgstr "d M Y, H:i"
 
-#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:131
+#: apps/zotonic_mod_admin/priv/templates/admin_media.tpl:159
 #: apps/zotonic_mod_admin_predicate/priv/templates/admin_predicate.tpl:42
 #: apps/zotonic_mod_comment/priv/templates/admin_comments.tpl:39
 #: apps/zotonic_mod_mailinglist/priv/templates/admin_mailinglist_recipients.tpl:79
@@ -2427,7 +2621,7 @@ msgstr "حذف"
 msgid "e.g. might change"
 msgstr "على سبيل المثال قد يتغير"
 
-#: apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:61./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:132./apps/zotonic_mod_admin/priv/templates/admin_media.tpl:142./apps/zotonic_mod_admin/priv/templates/admin_referrers.tpl:40./apps/zotonic_mod_admin/priv/templates/admin_widget_dashboard_latest.tpl:67./apps/zotonic_mod_admin/priv/templates/admin_widget_dashboard_latest.tpl:75
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:61./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:145./apps/zotonic_mod_admin/priv/templates/admin_media.tpl:170./apps/zotonic_mod_admin/priv/templates/admin_referrers.tpl:40./apps/zotonic_mod_admin/priv/templates/admin_widget_dashboard_latest.tpl:67./apps/zotonic_mod_admin/priv/templates/admin_widget_dashboard_latest.tpl:75
 #: apps/zotonic_mod_admin_identity/priv/templates/_admin_overview_list_page1.tpl:38./apps/zotonic_mod_admin_identity/priv/templates/admin_users.tpl:81
 #: apps/zotonic_mod_admin_predicate/priv/templates/admin_predicate.tpl:45
 #: apps/zotonic_mod_search/priv/templates/_search_view_list_item.media.tpl:21./apps/zotonic_mod_search/priv/templates/_search_view_list_item.tpl:16
@@ -2438,7 +2632,7 @@ msgstr "تعديل"
 msgid "edit this page"
 msgstr "تحرير هذه الصفحة"
 
-#: apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:69
+#: apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:75
 msgid "excluding"
 msgstr "ازالة"
 
@@ -2446,7 +2640,7 @@ msgstr "ازالة"
 msgid "has been disconnected."
 msgstr "تم قطع الاتصال."
 
-#: apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:69
+#: apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:75
 #: apps/zotonic_mod_admin_identity/priv/templates/admin_users.tpl:15
 msgid "matching"
 msgstr "مطابقة"
@@ -2456,7 +2650,7 @@ msgid "modified by"
 msgstr "تم تعديله بواسطة"
 
 #: apps/zotonic_mod_admin/priv/templates/_admin_edit_block_li.tpl:20
-#: apps/zotonic_mod_survey/priv/templates/_admin_survey_question_q.tpl:19
+#: apps/zotonic_mod_survey/priv/templates/_admin_survey_question_q.tpl:22
 msgid "name"
 msgstr "اسم"
 
@@ -2469,11 +2663,11 @@ msgstr "الصفحة"
 msgid "pixels"
 msgstr "بكسل"
 
-#: apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:72./apps/zotonic_mod_admin/priv/templates/admin_widget_dashboard_latest.tpl:20./apps/zotonic_mod_admin/priv/templates/admin_widget_dashboard_latest.tpl:22
+#: apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:78./apps/zotonic_mod_admin/priv/templates/admin_widget_dashboard_latest.tpl:20./apps/zotonic_mod_admin/priv/templates/admin_widget_dashboard_latest.tpl:22
 msgid "show all"
 msgstr "عرض الكل"
 
-#: apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:39./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:109
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:39./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:122
 msgid "system content"
 msgstr "محتوى النظام"
 
@@ -2489,7 +2683,7 @@ msgstr "بلا عنوان"
 msgid "uploaded on"
 msgstr "تم الرفع في"
 
-#: apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:60./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:131./apps/zotonic_mod_admin/priv/templates/admin_referrers.tpl:39./apps/zotonic_mod_admin/priv/templates/admin_widget_dashboard_latest.tpl:66./apps/zotonic_mod_admin/priv/templates/admin_widget_dashboard_latest.tpl:74
+#: apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:60./apps/zotonic_mod_admin/priv/templates/_admin_overview_list.tpl:144./apps/zotonic_mod_admin/priv/templates/admin_referrers.tpl:39./apps/zotonic_mod_admin/priv/templates/admin_widget_dashboard_latest.tpl:66./apps/zotonic_mod_admin/priv/templates/admin_widget_dashboard_latest.tpl:74
 #: apps/zotonic_mod_admin_identity/priv/templates/_admin_overview_list_page1.tpl:37
 #: apps/zotonic_mod_comment/priv/templates/admin_comments.tpl:36
 #: apps/zotonic_mod_search/priv/templates/_search_view_list_item.media.tpl:17./apps/zotonic_mod_search/priv/templates/_search_view_list_item.tpl:12
@@ -2500,7 +2694,7 @@ msgstr "رأي"
 msgid "visit site"
 msgstr "تفضل بزيارة الموقع"
 
-#: apps/zotonic_mod_admin/priv/templates/_admin_query_preview.tpl:17./apps/zotonic_mod_admin/priv/templates/admin_media.tpl:160./apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:117./apps/zotonic_mod_admin/priv/templates/admin_referrers.tpl:57
+#: apps/zotonic_mod_admin/priv/templates/_admin_query_preview.tpl:17./apps/zotonic_mod_admin/priv/templates/admin_media.tpl:188./apps/zotonic_mod_admin/priv/templates/admin_overview.tpl:132./apps/zotonic_mod_admin/priv/templates/admin_referrers.tpl:57
 #: apps/zotonic_mod_admin_predicate/priv/templates/admin_edges.tpl:97
 msgid "{n} items found."
 msgstr "تم العثور على {n} عناصر."
@@ -2833,8 +3027,8 @@ msgstr "test@example.com"
 msgid "Add pages or click on a page in the menu."
 msgstr "أضف صفحات أو انقر على صفحة في القائمة."
 
-#: apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:69./apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:98
-#: apps/zotonic_mod_admin_identity/priv/templates/_admin_edit_sidebar_identity_live.tpl:22
+#: apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:68./apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:97
+#: apps/zotonic_mod_admin_identity/priv/templates/_admin_edit_sidebar_identity_live.tpl:24
 #: apps/zotonic_mod_mailinglist/priv/templates/_mailinglist_subscribe_form.tpl:56
 #: apps/zotonic_mod_translation/priv/templates/_translation_language_status.tpl:46./apps/zotonic_mod_translation/priv/templates/admin_translation.tpl:41
 msgid "Language"
@@ -2844,19 +3038,19 @@ msgstr "لغة"
 msgid "Loading ..."
 msgstr "جار التحميل ..."
 
-#: apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:162
+#: apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:161
 msgid "No page"
 msgstr "لا توجد صفحة"
 
-#: apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:129./apps/zotonic_mod_admin_frontend/priv/templates/page_admin_frontend_edit.tpl:83
+#: apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:128./apps/zotonic_mod_admin_frontend/priv/templates/page_admin_frontend_edit.tpl:83
 msgid "Save &amp; view"
 msgstr "حفظ &amp; مشاهدة"
 
-#: apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:164
+#: apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:163
 msgid "The page might have been deleted."
 msgstr "ربما تم حذف الصفحة."
 
-#: apps/zotonic_mod_admin_frontend/priv/templates/page_admin_frontend_edit.tpl:131
+#: apps/zotonic_mod_admin_frontend/priv/templates/page_admin_frontend_edit.tpl:129
 msgid "There are unsaved changes. Are you sure you want to leave without saving?"
 msgstr "هناك تغييرات غير محفوظة. هل أنت متأكد أنك تريد المغادرة دون حفظ؟"
 
@@ -2864,11 +3058,11 @@ msgstr "هناك تغييرات غير محفوظة. هل أنت متأكد أن
 msgid "This page"
 msgstr "هذه الصفحة"
 
-#: apps/zotonic_mod_admin_frontend/priv/templates/page_admin_frontend_edit.tpl:129
+#: apps/zotonic_mod_admin_frontend/priv/templates/page_admin_frontend_edit.tpl:127
 msgid "Yes, discard changes"
 msgstr "نعم ، تجاهل التغييرات"
 
-#: apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:53
+#: apps/zotonic_mod_admin_frontend/priv/templates/_admin_frontend_edit.tpl:52
 #: apps/zotonic_mod_backup/priv/templates/_admin_backup_diff.tpl:11
 msgid "till"
 msgstr "حتى"
@@ -2916,11 +3110,11 @@ msgstr "هل أنت متأكد أنك تريد حذف هذا الإدخال؟"
 msgid "Blocked"
 msgstr "ممنوع"
 
-#: apps/zotonic_mod_admin_identity/src/actions/action_admin_identity_dialog_set_username_password.erl:92
+#: apps/zotonic_mod_admin_identity/src/actions/action_admin_identity_dialog_set_username_password.erl:108
 msgid "Changed the username."
 msgstr "تم تغيير اسم المستخدم."
 
-#: apps/zotonic_mod_admin_identity/priv/templates/_admin_edit_basics_user.tpl:13./apps/zotonic_mod_admin_identity/priv/templates/_admin_edit_sidebar_identity_live.tpl:11
+#: apps/zotonic_mod_admin_identity/priv/templates/_admin_edit_basics_user.tpl:14./apps/zotonic_mod_admin_identity/priv/templates/_admin_edit_sidebar_identity_live.tpl:12
 msgid "Click OK to log on as this user. You will be redirected to the home page if this user has no rights to access the admin system."
 msgstr "انقر فوق \"موافق\" لتسجيل الدخول باسم هذا المستخدم. ستتم إعادة توجيهك إلى الصفحة الرئيسية إذا لم يكن لهذا المستخدم حقوق الوصول إلى نظام الإدارة."
 
@@ -2944,7 +3138,7 @@ msgstr "تعذر إنشاء المستخدم. آسف."
 msgid "Delete this e-mail address"
 msgstr "احذف عنوان البريد الإلكتروني هذا"
 
-#: apps/zotonic_mod_admin_identity/src/actions/action_admin_identity_dialog_set_username_password.erl:65
+#: apps/zotonic_mod_admin_identity/src/actions/action_admin_identity_dialog_set_username_password.erl:82
 msgid "Deleted the user account."
 msgstr "حذف حساب المستخدم."
 
@@ -3021,13 +3215,17 @@ msgstr "آخر تسجيل دخول"
 msgid "Leave empty to not change the password."
 msgstr "اتركه فارغا لعدم تغيير كلمة المرور."
 
-#: apps/zotonic_mod_admin_identity/priv/templates/_admin_edit_basics_user.tpl:13./apps/zotonic_mod_admin_identity/priv/templates/_admin_edit_sidebar_identity_live.tpl:14
+#: apps/zotonic_mod_admin_identity/priv/templates/_admin_edit_basics_user.tpl:14./apps/zotonic_mod_admin_identity/priv/templates/_admin_edit_sidebar_identity_live.tpl:15
 msgid "Log on as this user"
 msgstr "قم بتسجيل الدخول باسم هذا المستخدم"
 
 #: apps/zotonic_mod_admin_identity/priv/templates/admin_users.tpl:27
 msgid "Make a new user"
 msgstr "أنشئ مستخدمًا جديدًا"
+
+#: apps/zotonic_mod_admin_identity/priv/templates/_search_view.tpl:7
+msgid "Matching e-mail"
+msgstr "مطابقة البريد الإلكتروني"
 
 #: apps/zotonic_mod_admin_identity/priv/templates/identity_verify.tpl:22
 msgid "My page"
@@ -3071,7 +3269,7 @@ msgstr "يمكن للمسؤولين فقط حذف أسماء المستخدمي�
 msgid "Only an administrator can delete usernames."
 msgstr "يمكن للمسؤول فقط حذف أسماء المستخدمين."
 
-#: apps/zotonic_mod_admin_identity/src/actions/action_admin_identity_dialog_set_username_password.erl:57./apps/zotonic_mod_admin_identity/src/actions/action_admin_identity_dialog_set_username_password.erl:71./apps/zotonic_mod_admin_identity/src/actions/action_admin_identity_dialog_set_username_password.erl:119
+#: apps/zotonic_mod_admin_identity/src/actions/action_admin_identity_dialog_set_username_password.erl:74./apps/zotonic_mod_admin_identity/src/actions/action_admin_identity_dialog_set_username_password.erl:88./apps/zotonic_mod_admin_identity/src/actions/action_admin_identity_dialog_set_username_password.erl:135
 msgid "Only an administrator or the user him/herself can set a password."
 msgstr "يمكن للمسؤول فقط أو المستخدم نفسه تعيين كلمة مرور."
 
@@ -3099,7 +3297,7 @@ msgstr "إرسال بريد إلكتروني ترحيبي"
 msgid "Sent verification e-mail."
 msgstr "إرسال بريد إلكتروني للتحقق."
 
-#: apps/zotonic_mod_admin_identity/priv/templates/_admin_edit_basics_user.tpl:8./apps/zotonic_mod_admin_identity/priv/templates/_admin_edit_sidebar_identity_live.tpl:6./apps/zotonic_mod_admin_identity/src/actions/action_admin_identity_dialog_set_username_password.erl:51
+#: apps/zotonic_mod_admin_identity/priv/templates/_admin_edit_basics_user.tpl:9./apps/zotonic_mod_admin_identity/priv/templates/_admin_edit_sidebar_identity_live.tpl:7./apps/zotonic_mod_admin_identity/src/actions/action_admin_identity_dialog_set_username_password.erl:68
 msgid "Set username / password"
 msgstr "قم بتعيين اسم المستخدم / كلمة المرور"
 
@@ -3117,7 +3315,7 @@ msgstr "عذرا ، اسم المستخدم هذا قيد الاستخدام ب�
 msgid "Sorry, you are not allowed to verify this email address."
 msgstr "عذرًا ، غير مسموح لك بالتحقق من عنوان البريد الإلكتروني هذا."
 
-#: apps/zotonic_mod_admin_identity/src/actions/action_admin_identity_dialog_set_username_password.erl:59
+#: apps/zotonic_mod_admin_identity/src/actions/action_admin_identity_dialog_set_username_password.erl:76
 msgid "Sorry, you can not remove your own username."
 msgstr "عذرا ، لا يمكنك إزالة اسم المستخدم الخاص بك."
 
@@ -3131,7 +3329,7 @@ msgstr "شكرا لك"
 msgid "The address is invalid."
 msgstr "العنوان غير صالح."
 
-#: apps/zotonic_mod_admin_identity/src/actions/action_admin_identity_dialog_set_username_password.erl:61
+#: apps/zotonic_mod_admin_identity/src/actions/action_admin_identity_dialog_set_username_password.erl:78
 msgid "The admin user can not be removed."
 msgstr "لا يمكن إزالة المستخدم الإداري."
 
@@ -3139,7 +3337,7 @@ msgstr "لا يمكن إزالة المستخدم الإداري."
 msgid "The e-mail address has been verified."
 msgstr "تم التحقق من عنوان البريد الإلكتروني."
 
-#: apps/zotonic_mod_admin_identity/src/actions/action_admin_identity_dialog_set_username_password.erl:114
+#: apps/zotonic_mod_admin_identity/src/actions/action_admin_identity_dialog_set_username_password.erl:130
 msgid "The new username/ password has been set."
 msgstr "تم تعيين اسم المستخدم / كلمة المرور الجديدة."
 
@@ -3147,7 +3345,7 @@ msgstr "تم تعيين اسم المستخدم / كلمة المرور الجد
 msgid "The password of the admin user cannot be changed in the database. Please edit your site's configuration file at"
 msgstr "لا يمكن تغيير كلمة مرور المستخدم المسؤول في قاعدة البيانات. يرجى تحرير ملف تكوين موقعك في"
 
-#: apps/zotonic_mod_admin_identity/src/actions/action_admin_identity_dialog_set_username_password.erl:95./apps/zotonic_mod_admin_identity/src/actions/action_admin_identity_dialog_set_username_password.erl:101
+#: apps/zotonic_mod_admin_identity/src/actions/action_admin_identity_dialog_set_username_password.erl:111./apps/zotonic_mod_admin_identity/src/actions/action_admin_identity_dialog_set_username_password.erl:117
 msgid "The username is already in use, please try another."
 msgstr "اسم المستخدم قيد الاستخدام بالفعل ، يرجى المحاولة مرة أخرى."
 
@@ -3172,11 +3370,11 @@ msgstr "هذا ليس عنوان بريد إلكتروني صالح."
 msgid "This password does not meet the security requirements"
 msgstr "كلمة المرور هذه لا تلبي متطلبات الأمان"
 
-#: apps/zotonic_mod_admin_identity/priv/templates/_admin_edit_sidebar_identity_live.tpl:55
+#: apps/zotonic_mod_admin_identity/priv/templates/_admin_edit_sidebar_identity_live.tpl:57
 msgid "This person is also a user."
 msgstr "هذا الشخص هو أيضا مستخدم."
 
-#: apps/zotonic_mod_admin_identity/priv/templates/_admin_edit_sidebar_identity_live.tpl:57
+#: apps/zotonic_mod_admin_identity/priv/templates/_admin_edit_sidebar_identity_live.tpl:59
 msgid "This person is not yet a user."
 msgstr "هذا الشخص ليس مستخدمًا بعد."
 
@@ -3188,7 +3386,7 @@ msgstr "مفتاح التحقق هذا غير معروف."
 msgid "This will send a verification e-mail to "
 msgstr "سيؤدي هذا إلى إرسال بريد إلكتروني للتحقق إلى "
 
-#: apps/zotonic_mod_admin_identity/priv/templates/_admin_edit_sidebar_identity_live.tpl:36
+#: apps/zotonic_mod_admin_identity/priv/templates/_admin_edit_sidebar_identity_live.tpl:38
 #: apps/zotonic_mod_l10n/priv/templates/admin_l10n.tpl:14
 msgid "Timezone"
 msgstr "وحدة زمنية"
@@ -3205,7 +3403,7 @@ msgstr "استخدم كلمة المرور هذه"
 msgid "User account"
 msgstr "حساب المستخدم"
 
-#: apps/zotonic_mod_admin_identity/priv/templates/_admin_edit_basics_user.tpl:6
+#: apps/zotonic_mod_admin_identity/priv/templates/_admin_edit_basics_user.tpl:7
 msgid "User actions"
 msgstr "إجراءات المستخدم"
 
@@ -3213,7 +3411,7 @@ msgstr "إجراءات المستخدم"
 msgid "Username / password"
 msgstr "اسم المستخدم/كلمة المرور"
 
-#: apps/zotonic_mod_admin_identity/priv/templates/_admin_edit_sidebar_identity_live.tpl:50
+#: apps/zotonic_mod_admin_identity/priv/templates/_admin_edit_sidebar_identity_live.tpl:52
 msgid "Username <b>{username}</b>, last logon at {date}."
 msgstr "اسم المستخدم <b>{username}</b>، آخر تسجيل دخول عند {date}."
 
@@ -3257,7 +3455,7 @@ msgstr "عندما تضيف بيانات اعتماد إلى شخص ما ، يص
 msgid "You are not allowed to create the person page."
 msgstr "غير مسموح لك إنشاء الصفحة الشخصية."
 
-#: apps/zotonic_mod_admin_identity/src/actions/action_admin_identity_dialog_set_username_password.erl:68
+#: apps/zotonic_mod_admin_identity/src/actions/action_admin_identity_dialog_set_username_password.erl:85
 msgid "You are not allowed to delete this user account."
 msgstr "لا يسمح لك بحذف حساب المستخدم هذا."
 
@@ -3567,7 +3765,7 @@ msgstr "احذف كافة الاتصالات"
 msgid "Delete is canceled, there are connections with this predicate."
 msgstr "تم إلغاء الحذف ، توجد اتصالات بهذا المسند."
 
-#: apps/zotonic_mod_admin_predicate/priv/templates/_admin_edit_content.predicate.tpl:66
+#: apps/zotonic_mod_admin_predicate/priv/templates/_admin_edit_content.predicate.tpl:80
 msgid "Do not find subjects using this predicate’s object titles."
 msgstr "لا تجد موضوعات باستخدام عناوين كائن هذا المسند."
 
@@ -3579,7 +3777,7 @@ msgstr "أدخل عنوان المسند الجديد:"
 msgid "Filter on predicate"
 msgstr "تصفية على المسند"
 
-#: apps/zotonic_mod_admin_predicate/priv/templates/_admin_edit_content.predicate.tpl:20
+#: apps/zotonic_mod_admin_predicate/priv/templates/_admin_edit_content.predicate.tpl:23
 msgid "From category"
 msgstr "من فئة"
 
@@ -3587,9 +3785,13 @@ msgstr "من فئة"
 msgid "Help about predicates"
 msgstr "مساعدة حول المسندات"
 
-#: apps/zotonic_mod_admin_predicate/priv/templates/_admin_edit_content.predicate.tpl:54
+#: apps/zotonic_mod_admin_predicate/priv/templates/_admin_edit_content.predicate.tpl:70
 msgid "Insert new connections before existing connections."
 msgstr "أدخل اتصالات جديدة قبل التوصيلات الحالية."
+
+#: apps/zotonic_mod_admin_predicate/priv/templates/_admin_edit_content.predicate.tpl:63
+msgid "Instead of a search box this will show a list of all pages in the <i>To</i> categories checked above. At least one category must be checked."
+msgstr "بدلاً من مربع البحث، سيعرض هذا قائمة بجميع الصفحات الموجودة في الفئات <i>إلى</i> المحددة أعلاه. يجب التحقق من فئة واحدة على الأقل."
 
 #: apps/zotonic_mod_admin_predicate/priv/templates/admin_predicate.tpl:19./apps/zotonic_mod_admin_predicate/src/actions/action_admin_predicate_dialog_predicate_new.erl:47
 msgid "Make a new predicate"
@@ -3619,6 +3821,15 @@ msgstr "موضوع"
 msgid "Only showing connections with:"
 msgstr "إظهار الاتصالات فقط مع:"
 
+#: apps/zotonic_mod_admin_predicate/priv/templates/_admin_edit_content.predicate.tpl:93
+msgid "Ontologies define predicates for a defined set of subject and object categories. Sometimes it is more practical to have the predicate’s connection direction reversed from the formal definition. Export and import functions can use this option to swap subject/object relation when exporting or importing data."
+msgstr "تحدد الأنطولوجيا المسندات لمجموعة محددة من فئات الموضوع والكائن. في بعض الأحيان يكون من العملي أكثر أن يتم عكس اتجاه اتصال المسند عن التعريف الرسمي. يمكن لوظائف التصدير والاستيراد استخدام هذا الخيار لتبديل علاقة الموضوع/الكائن عند تصدير البيانات أو استيرادها."
+
+#: apps/zotonic_mod_admin_predicate/priv/templates/_admin_edit_content.predicate.tpl:55
+#: apps/zotonic_mod_development/priv/templates/_development_dispatch_trace.tpl:28./apps/zotonic_mod_development/priv/templates/_development_dispatch_trace.tpl:35./apps/zotonic_mod_development/priv/templates/_development_dispatch_trace.tpl:62
+msgid "Options"
+msgstr "خيارات"
+
 #: apps/zotonic_mod_admin_predicate/priv/templates/_action_dialog_delete_rsc.predicate.tpl:25
 msgid "Or click <strong>Delete All Connections</strong> to delete all connections with this predicate."
 msgstr "أو انقر فوق <strong>حذف كافة الاتصالات</strong> لحذف كافة الاتصالات بهذا المسند."
@@ -3643,7 +3854,7 @@ msgstr "عذرًا ، لا يُسمح لك بإدخال اتصالات مع هذ
 msgid "Subject"
 msgstr "موضوع"
 
-#: apps/zotonic_mod_admin_predicate/priv/templates/_admin_edit_content.predicate.tpl:60
+#: apps/zotonic_mod_admin_predicate/priv/templates/_admin_edit_content.predicate.tpl:90
 msgid "The direction (from/to) of this predicate is reversed from the normal definition."
 msgstr "يتم عكس اتجاه (من / إلى) هذا المسند عن التعريف العادي."
 
@@ -3655,17 +3866,33 @@ msgstr "لا توجد روابط صفحة مع هذا المسند."
 msgid "There is already a predicate with this name."
 msgstr "يوجد بالفعل مسند بهذا الاسم."
 
-#: apps/zotonic_mod_admin_predicate/priv/templates/_admin_edit_content.predicate.tpl:15
+#: apps/zotonic_mod_admin_predicate/priv/templates/_admin_edit_content.predicate.tpl:83
+msgid "This directs the indexers to not include the titles of connected pages with this predicate. Normally titles of connected pages are included, making it possible to eg. find articles by their author’s name."
+msgstr "يؤدي هذا إلى توجيه المفهرسين إلى عدم تضمين عناوين الصفحات المرتبطة بهذا المسند. عادةً ما يتم تضمين عناوين الصفحات المتصلة، مما يجعل من الممكن على سبيل المثال. ابحث عن المقالات حسب اسم مؤلفها."
+
+#: apps/zotonic_mod_admin_predicate/priv/templates/_admin_edit_content.predicate.tpl:17
+msgid "This is used to filter the predicates in the <i>Page connections</i> panel and the pages in the connect dialogs."
+msgstr "يتم استخدام هذا لتصفية المسندات في لوحة <i>اتصالات الصفحة</i> والصفحات الموجودة في مربعات حوار الاتصال."
+
+#: apps/zotonic_mod_admin_predicate/priv/templates/_admin_edit_content.predicate.tpl:16
 msgid "This predicate can be used between two pages of the following categories."
 msgstr "يمكن استخدام هذا المسند بين صفحتين من الفئات التالية."
 
-#: apps/zotonic_mod_admin_predicate/priv/templates/_admin_edit_content.predicate.tpl:35
+#: apps/zotonic_mod_admin_predicate/priv/templates/_admin_edit_content.predicate.tpl:38
 msgid "To category"
 msgstr "للفئة"
 
 #: apps/zotonic_mod_admin_predicate/priv/templates/admin_predicate.tpl:28
 msgid "URI"
 msgstr "URI"
+
+#: apps/zotonic_mod_admin_predicate/priv/templates/_admin_edit_content.predicate.tpl:60
+msgid "Use a list of checkboxes with titles when adding page connections."
+msgstr "استخدم قائمة مربعات الاختيار ذات العناوين عند إضافة اتصالات الصفحة."
+
+#: apps/zotonic_mod_admin_predicate/priv/templates/_admin_edit_content.predicate.tpl:73
+msgid "Usually new connections are inserted after existing connections. Check this to insert new connections before existing connections."
+msgstr "عادة يتم إدراج اتصالات جديدة بعد الاتصالات الموجودة. حدد هذا لإدراج اتصالات جديدة قبل الاتصالات الموجودة."
 
 #: apps/zotonic_mod_admin_predicate/priv/templates/_admin_edit_content.predicate.tpl:4
 msgid "Valid between"
@@ -4036,6 +4263,7 @@ msgid "Enter your email address to receive instructions on how to reset your pas
 msgstr "أدخل عنوان بريدك الإلكتروني لتلقي تعليمات حول كيفية إعادة تعيين كلمة المرور الخاصة بك."
 
 #: apps/zotonic_mod_authentication/priv/templates/logon_service_error.tpl:5
+#: apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:14
 #: apps/zotonic_mod_logging/priv/templates/admin_log_email.tpl:118
 #: apps/zotonic_mod_survey/priv/templates/_survey_block_name_check.tpl:2
 msgid "Error"
@@ -4419,7 +4647,7 @@ msgid "external service"
 msgstr "خدمة خارجية"
 
 #: apps/zotonic_mod_authentication/priv/templates/_logon_login_extra.tpl:6
-#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:66
+#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:85
 #: apps/zotonic_mod_signup/priv/templates/_signup_extra.tpl:9
 msgid "or"
 msgstr "أو"
@@ -4448,15 +4676,19 @@ msgstr "النسخ الاحتياطي المسؤول"
 msgid "Are you sure you want to revert to this version?"
 msgstr "هل أنت متأكد أنك تريد العودة إلى هذا الإصدار؟"
 
-#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:60
+#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:100
 msgid "At any moment you can make a backup of your system."
 msgstr "يمكنك عمل نسخة احتياطية من نظامك في أي لحظة."
 
-#: apps/zotonic_mod_backup/priv/templates/admin_backup_revision.tpl:54
+#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:52
+msgid "Automatic daily backups of the database and uploaded files can be enabled. This is done at night and the last 7 backups are kept."
+msgstr "يمكن تمكين النسخ الاحتياطي اليومي التلقائي لقاعدة البيانات والملفات التي تم تحميلها. يتم ذلك ليلاً ويتم الاحتفاظ بآخر 7 نسخ احتياطية."
+
+#: apps/zotonic_mod_backup/priv/templates/admin_backup_revision.tpl:53
 msgid "Back to the edit page"
 msgstr "العودة إلى صفحة التحرير"
 
-#: apps/zotonic_mod_backup/src/mod_backup.erl:84
+#: apps/zotonic_mod_backup/src/mod_backup.erl:92
 msgid "Backup"
 msgstr "دعم"
 
@@ -4472,7 +4704,7 @@ msgstr "خيارات النسخ الاحتياطي والاستعادة للمح
 msgid "Backups"
 msgstr "النسخ الاحتياطية"
 
-#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:116
+#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:120
 msgid "Changed configuration."
 msgstr "التكوين المتغير."
 
@@ -4480,7 +4712,7 @@ msgstr "التكوين المتغير."
 msgid "Changes since"
 msgstr "التغييرات منذ ذلك الحين"
 
-#: apps/zotonic_mod_backup/priv/templates/admin_backup_revision.tpl:52
+#: apps/zotonic_mod_backup/priv/templates/admin_backup_revision.tpl:57
 msgid "Check and possibly restore an earlier version of your page."
 msgstr "تحقق وربما استعد نسخة سابقة من صفحتك."
 
@@ -4488,7 +4720,11 @@ msgstr "تحقق وربما استعد نسخة سابقة من صفحتك."
 msgid "Click on <b>List and restore an earlier version</b> to get an overview of earlier saved versions of this page.<br/>You can also save the complete contents of a page to a file. Later you can reload this file, replacing the current page contents. Note that the file does not contain your unsaved changes. Connections and media are not saved as well."
 msgstr "انقر فوق قائمة <b>واستعد إصدارًا سابقًا</b> للحصول على نظرة عامة حول الإصدارات السابقة المحفوظة من هذه الصفحة.<br/>يمكنك أيضًا حفظ المحتويات الكاملة للصفحة في ملف. يمكنك لاحقًا إعادة تحميل هذا الملف ، واستبدال محتويات الصفحة الحالية. لاحظ أن الملف لا يحتوي على تغييراتك غير المحفوظة. لا يتم حفظ الاتصالات والوسائط أيضًا."
 
-#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:96
+#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:72
+msgid "Cloud file store is enabled. Backups of the database are uploaded to the cloud file store. Local files are copied to the cloud and not backed up locally."
+msgstr "تم تمكين مخزن الملفات السحابي. يتم تحميل النسخ الاحتياطية لقاعدة البيانات إلى مخزن الملفات السحابي. يتم نسخ الملفات المحلية إلى السحابة ولا يتم نسخها احتياطيًا محليًا."
+
+#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:136
 msgid "Cloud file store is enabled. The local files will not be backed up. Ensure that your cloud file store system has a proper backup."
 msgstr "مخزن الملفات السحابي ممكّن. لن يتم نسخ الملفات المحلية احتياطيًا. تأكد من أن نظام تخزين الملفات السحابي الخاص بك يحتوي على نسخة احتياطية مناسبة."
 
@@ -4508,13 +4744,17 @@ msgstr "تم الحذف بواسطة"
 msgid "Deleted on"
 msgstr "تم الحذف في"
 
-#: apps/zotonic_mod_backup/priv/templates/admin_backup_deleted.tpl:3./apps/zotonic_mod_backup/priv/templates/admin_backup_deleted.tpl:9./apps/zotonic_mod_backup/src/mod_backup.erl:97
+#: apps/zotonic_mod_backup/priv/templates/admin_backup_deleted.tpl:3./apps/zotonic_mod_backup/priv/templates/admin_backup_deleted.tpl:9./apps/zotonic_mod_backup/src/mod_backup.erl:105
 msgid "Deleted pages"
 msgstr "الصفحات المحذوفة"
 
 #: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:14
 msgid "Directory"
 msgstr "الدليل"
+
+#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:57./apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:78
+msgid "Do not make a daily backup."
+msgstr "لا تقم بعمل نسخة احتياطية يومية."
 
 #: apps/zotonic_mod_backup/priv/templates/_admin_edit_sidebar.tpl:30
 msgid "Download backup file"
@@ -4536,11 +4776,11 @@ msgstr "قائمة واستعادة نسخة سابقة"
 msgid "List of recently deleted pages and recover options via the resource revisions log."
 msgstr "قائمة الصفحات المحذوفة مؤخرًا وخيارات الاستعادة عبر سجل مراجعات الموارد."
 
-#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:48
+#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:65./apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:86
 msgid "Make a daily backup of the database and uploaded files."
 msgstr "عمل نسخة احتياطية يومية من قاعدة البيانات والملفات المرفوعة."
 
-#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:46
+#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:61./apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:82
 msgid "Make a daily backup of the database."
 msgstr "عمل نسخة احتياطية يومية من قاعدة البيانات."
 
@@ -4556,7 +4796,7 @@ msgstr "لم يتم تحميلها إلى مخزن الملفات"
 msgid "Only the texts and other properties of pages are backed up."
 msgstr "يتم الاحتفاظ بنسخة احتياطية من النصوص والخصائص الأخرى للصفحات فقط."
 
-#: apps/zotonic_mod_backup/priv/templates/admin_backup_revision.tpl:76
+#: apps/zotonic_mod_backup/priv/templates/admin_backup_revision.tpl:79
 msgid "Previous"
 msgstr "السابق"
 
@@ -4572,6 +4812,10 @@ msgstr "استرجاع النسخة الاحتياطية"
 msgid "Revert to this version..."
 msgstr "العودة إلى هذا الإصدار ..."
 
+#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:45./apps/zotonic_mod_backup/priv/templates/admin_backup_revision.tpl:58
+msgid "Revisions are kept for {n} months."
+msgstr "يتم الاحتفاظ بالمراجعات لمدة {n} أشهر."
+
 #: apps/zotonic_mod_backup/priv/templates/admin_backup_revision.tpl:3./apps/zotonic_mod_backup/priv/templates/admin_backup_revision.tpl:46./apps/zotonic_mod_backup/priv/templates/admin_backup_revision.tpl:48
 msgid "Revisions for"
 msgstr "تنقيحات لـ"
@@ -4580,15 +4824,15 @@ msgstr "تنقيحات لـ"
 msgid "Select the backup file you want to upload. The file must be a .bert file."
 msgstr "حدد ملف النسخ الاحتياطي الذي تريد تحميله. يجب أن يكون الملف ملفًا بامتداد .bert."
 
-#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:37
-msgid "Show import/export panel in the admin."
-msgstr "إظهار لوحة الاستيراد / التصدير في المسؤول."
+#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:39
+msgid "Show import/export panel on the edit pages in the admin."
+msgstr "إظهار لوحة الاستيراد/التصدير على صفحات التعديل في المشرف."
 
-#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:75
+#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:79
 msgid "Sorry, there is no module that can import this."
 msgstr "عذرا ، لا توجد وحدة يمكنها استيراد هذا."
 
-#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:82./apps/zotonic_mod_backup/src/controllers/controller_admin_backup_revision.erl:107
+#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:86./apps/zotonic_mod_backup/src/controllers/controller_admin_backup_revision.erl:107
 msgid "Sorry, there was an error replacing your page."
 msgstr "عذرا ، كان هناك خطأ في استبدال صفحتك."
 
@@ -4600,35 +4844,35 @@ msgstr "عذرا ، تم حذف هذه النسخة الاحتياطية."
 msgid "Sorry, this backup is not valid."
 msgstr "عذرا ، هذه النسخة الاحتياطية غير صالحة."
 
-#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:77
+#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:81
 msgid "Sorry, this is not a backup file or it is corrupted."
 msgstr "عذرًا ، هذا ليس ملف نسخ احتياطي أو أنه تالف."
 
-#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:85
+#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:89
 msgid "Sorry, you don't have permission to change this page."
 msgstr "عذرا ، ليس لديك إذن لتغيير هذه الصفحة."
 
-#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:118
+#: apps/zotonic_mod_backup/src/controllers/controller_admin_backup.erl:122
 msgid "Sorry, you have no permission to change the configuration."
 msgstr "عذرا ، ليس لديك إذن لتغيير التكوين."
 
-#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:69
+#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:109
 msgid "Start backup now"
 msgstr "ابدأ النسخ الاحتياطي الآن"
 
-#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:72
+#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:112
 msgid "Start database-only backup now"
 msgstr "ابدأ النسخ الاحتياطي لقاعدة البيانات فقط الآن"
 
-#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:83
+#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:123
 msgid "The \"pg_dump\" command was not found in the path. Set in zotonic.config the \"pg_dump\" config key to the path to <tt>pg_dump</tt> and return to this page."
 msgstr "لم يتم العثور على الأمر \"pg_dump\" في المسار. اضبط zotonic.config مفتاح التكوين \"pg_dump\" على المسار إلى <tt>pg_dump</tt> والعودة إلى هذه الصفحة."
 
-#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:86
+#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:126
 msgid "The \"tar\" command was not found in the path. Set in zotonic.config the \"tar\" config key to the path to <tt>tar</tt> and return to this page."
 msgstr "لم يتم العثور على الأمر \"tar\" في المسار. اضبط zotonic.config مفتاح التكوين \"tar\" على المسار إلى <tt>tar</tt> والعودة إلى هذه الصفحة."
 
-#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:62
+#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:102
 msgid "The backup comprises two parts, the database and the uploaded files."
 msgstr "تتكون النسخة الاحتياطية من جزأين ، قاعدة البيانات والملفات التي تم تحميلها."
 
@@ -4644,11 +4888,15 @@ msgstr "سيؤدي هذا إلى استبدال صفحتك بمحتويات مل
 msgid "Uploaded to filestore"
 msgstr "تم الرفع إلى مخزن الملفات"
 
-#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:79./apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:94
+#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:119
 #: apps/zotonic_mod_logging/priv/templates/admin_log_email.tpl:119
 #: apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_button.tpl:41
 msgid "Warning"
 msgstr "تحذير"
+
+#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:35
+msgid "With the import/export panel you can download a page as a file, see page revisions and restore a previous version."
+msgstr "باستخدام لوحة الاستيراد/التصدير، يمكنك تنزيل صفحة كملف، والاطلاع على مراجعات الصفحة واستعادة إصدار سابق."
 
 #: apps/zotonic_mod_backup/priv/templates/_admin_backup_list.tpl:26
 msgid "Y-m-d H:i – l"
@@ -4662,7 +4910,7 @@ msgstr "لا يسمح لك لاستعادة هذه الصفحة."
 msgid "You are not allowed to see the revisions"
 msgstr "لا يسمح لك أن ترى المراجعات"
 
-#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:64
+#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:104
 msgid "You can have one backup per day of the week, older ones will be overwritten."
 msgstr "يمكنك الحصول على نسخة احتياطية واحدة كل يوم من أيام الأسبوع ، وسيتم استبدال النسخ الاحتياطية القديمة."
 
@@ -4670,7 +4918,7 @@ msgstr "يمكنك الحصول على نسخة احتياطية واحدة كل
 msgid "You need to have access rights to the backup module."
 msgstr "يجب أن يكون لديك حقوق الوصول إلى وحدة النسخ الاحتياطي."
 
-#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:79
+#: apps/zotonic_mod_backup/priv/templates/admin_backup.tpl:119
 msgid "Your backup is not correctly configured. The backup module will not work until the problem(s) below have been resolved:"
 msgstr "لم يتم تكوين نسختك الاحتياطية بشكل صحيح. لن تعمل وحدة النسخ الاحتياطي حتى يتم حل المشكلة (المشكلات) أدناه:"
 
@@ -4947,11 +5195,11 @@ msgstr "خطأ"
 msgid "iCalendar"
 msgstr "iCalendar"
 
-#: apps/zotonic_mod_base/src/filters/filter_yesno.erl:27
+#: apps/zotonic_mod_base/src/filters/filter_yesno.erl:28
 msgid "no"
 msgstr "لا"
 
-#: apps/zotonic_mod_base/src/filters/filter_yesno.erl:26
+#: apps/zotonic_mod_base/src/filters/filter_yesno.erl:27
 msgid "yes"
 msgstr "نعم"
 
@@ -5000,6 +5248,10 @@ msgstr "تعليقات معتدلة"
 #: apps/zotonic_mod_comment/priv/templates/_comments_form.tpl:16
 msgid "Note: Comments are moderated"
 msgstr "ملاحظة: التعليقات خاضعة للإشراف"
+
+#: apps/zotonic_mod_comment/priv/templates/admin_comments.tpl:20
+msgid "Page"
+msgstr "الصفحة"
 
 #: apps/zotonic_mod_comment/priv/templates/_comments_comment.tpl:4
 msgid "Posted"
@@ -5219,7 +5471,23 @@ msgstr "لا يسمح لك بتغيير هذا."
 msgid "Action"
 msgstr "عمل"
 
-#: apps/zotonic_mod_development/priv/templates/admin_development.tpl:119
+#: apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:213
+msgid "All <tt>{extends}</tt> and <tt>{overrules}</tt> statements are referring to existing templates."
+msgstr "تشير كافة البيانات <tt>{extends}</tt> و <tt>{overrules}</tt> إلى القوالب الموجودة."
+
+#: apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:163
+msgid "All <tt>{optional}</tt> statements are referring to existing templates."
+msgstr "تشير كافة البيانات <tt>{optional}</tt> إلى القوالب الموجودة."
+
+#: apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:101
+msgid "All non-optional <tt>{include}</tt> statements are referring to existing templates."
+msgstr "تشير كافة العبارات غير الاختيارية <tt>{include}</tt> إلى القوالب الموجودة."
+
+#: apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:42
+msgid "All templates are compiling."
+msgstr "يتم تجميع جميع القوالب."
+
+#: apps/zotonic_mod_development/priv/templates/admin_development.tpl:133
 msgid "At times it can be confusing which templates are actually used during a template compilation.  Here you can see which files are included whilst compiling a template."
 msgstr "في بعض الأحيان ، قد يكون من المربك تحديد القوالب المستخدمة بالفعل أثناء تجميع القالب. هنا يمكنك معرفة الملفات التي تم تضمينها أثناء تجميع قالب."
 
@@ -5235,15 +5503,61 @@ msgstr "أدناه ترى في الوقت الفعلي النماذج التي �
 msgid "Bindings"
 msgstr "الارتباطات"
 
+#: apps/zotonic_mod_development/priv/templates/admin_development.tpl:118
+msgid "Check included templates"
+msgstr "تحقق من القوالب المضمنة"
+
+#: apps/zotonic_mod_development/src/mod_development.erl:79./apps/zotonic_mod_development/src/mod_development.erl:96
+msgid "Checking all templates..."
+msgstr "جارٍ التحقق من جميع النماذج..."
+
+#: apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:13
+msgid "Column"
+msgstr "عمود"
+
+#: apps/zotonic_mod_development/priv/templates/admin_development.tpl:128
+msgid "Compile all templates. Calculate and visualize a dependency graph of all templates."
+msgstr "تجميع كافة القوالب. حساب وتصور الرسم البياني للتبعية لجميع القوالب."
+
+#: apps/zotonic_mod_development/priv/templates/admin_development.tpl:120
+msgid "Compile all templates. The compiled templates are checked for missing includes or missing <tt>{ext}</tt> template references."
+msgstr "تجميع كافة القوالب. يتم التحقق من القوالب المجمعة للتأكد من عدم وجود تضمينات أو مراجع قالب مفقودة <tt>{ext}</tt>."
+
 #: apps/zotonic_mod_development/priv/templates/_development_dispatch_trace.tpl:26./apps/zotonic_mod_development/priv/templates/_development_dispatch_trace.tpl:33./apps/zotonic_mod_development/priv/templates/_development_dispatch_trace.tpl:60
 msgid "Controller"
 msgstr "مراقب"
 
-#: apps/zotonic_mod_development/src/support/z_development_dispatch.erl:45
+#: apps/zotonic_mod_development/priv/templates/_development_template_graph.tpl:24
+msgid "Copied dot file to the clipboard."
+msgstr "نسخ ملف النقطة إلى الحافظة."
+
+#: apps/zotonic_mod_development/priv/templates/_development_template_graph.tpl:1
+msgid "Copy GraphViz dot data"
+msgstr "انسخ بيانات نقطة GraphViz"
+
+#: apps/zotonic_mod_development/priv/templates/_development_template_graph.tpl:27
+msgid "Could not copy dot file to the clipboard."
+msgstr "تعذر نسخ ملف النقطة إلى الحافظة."
+
+#: apps/zotonic_mod_development/src/support/z_development_dispatch.erl:46
 msgid "Could not fetch tracer output, please try again."
 msgstr "تعذر جلب إخراج التتبع ، يرجى المحاولة مرة أخرى."
 
-#: apps/zotonic_mod_development/priv/templates/admin_development.tpl:3./apps/zotonic_mod_development/src/mod_development.erl:333
+#: apps/zotonic_mod_development/priv/templates/admin_development_templates_xref.tpl:12
+msgid "Cross reference check of all templates"
+msgstr "التحقق من الإسناد الترافقي لجميع القوالب"
+
+#: apps/zotonic_mod_development/priv/templates/admin_development_templates_graph.tpl:12
+msgid "Dependency graph of all templates"
+msgstr "الرسم البياني للتبعية لجميع القوالب"
+
+#: apps/zotonic_mod_development/priv/templates/_development_template_graph.tpl:3
+msgid "Dependency graph of all templates. Only includes using a direct string value for the template are shown.<br>\n"
+"    Includes using variable names or expressions are not shown.<br> <tt>{extends}</tt> are shown with a striped line, <tt>{overrules}</tt> are shown with a dotted line."
+msgstr "الرسم البياني للتبعية لجميع القوالب. يتضمن فقط استخدام قيمة سلسلة مباشرة للقالب المعروض.<br>\n"
+"    يتضمن استخدام أسماء المتغيرات أو التعبيرات غير معروضة. يتم عرض<br> <tt>{extends}</tt> بخط مخطط، ويتم عرض <tt>{overrules}</tt> بخط منقط."
+
+#: apps/zotonic_mod_development/priv/templates/admin_development.tpl:3./apps/zotonic_mod_development/src/mod_development.erl:403
 msgid "Development"
 msgstr "تطوير"
 
@@ -5255,11 +5569,11 @@ msgstr "التنمية - مراقبون"
 msgid "Disable caching by the <tt>{% cache %}</tt> tag."
 msgstr "تعطيل التخزين المؤقت بواسطة علامة <tt>{% cache %}</tt>."
 
-#: apps/zotonic_mod_development/src/support/z_development_dbtrace.erl:38
+#: apps/zotonic_mod_development/src/support/z_development_dbtrace.erl:39
 msgid "Disabled database query tracing"
 msgstr "تعطيل تتبع استعلام قاعدة البيانات"
 
-#: apps/zotonic_mod_development/priv/templates/admin_development.tpl:126
+#: apps/zotonic_mod_development/priv/templates/admin_development.tpl:140
 msgid "Dispatch rule debugging"
 msgstr "تصحيح أخطاء قاعدة الإرسال"
 
@@ -5279,7 +5593,7 @@ msgstr "قم بتمكين <tt>mod_server_storage</tt> لاستخدام تتبع 
 msgid "Enable API to recompile and build Zotonic"
 msgstr "تمكين API لإعادة ترجمة وبناء Zotonic"
 
-#: apps/zotonic_mod_development/src/support/z_development_dbtrace.erl:36
+#: apps/zotonic_mod_development/src/support/z_development_dbtrace.erl:37
 msgid "Enabled database query tracing"
 msgstr "تمكين تتبع استعلام قاعدة البيانات"
 
@@ -5287,9 +5601,13 @@ msgstr "تمكين تتبع استعلام قاعدة البيانات"
 msgid "Event"
 msgstr "حدث"
 
-#: apps/zotonic_mod_development/priv/templates/admin_development.tpl:145
+#: apps/zotonic_mod_development/priv/templates/admin_development.tpl:159
 msgid "Explain"
 msgstr "يشرح"
+
+#: apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:191
+msgid "Extends"
+msgstr "يمتد"
 
 #: apps/zotonic_mod_development/priv/templates/_development_dispatch_trace.tpl:32
 msgid "Final dispatch"
@@ -5311,13 +5629,21 @@ msgstr "التبديل القسري للبروتوكول إلى"
 msgid "Found matching dispatch rule"
 msgstr "تم العثور على قاعدة إرسال مطابقة"
 
+#: apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:63./apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:125
+msgid "Included template"
+msgstr "قالب متضمن"
+
 #: apps/zotonic_mod_development/priv/templates/admin_development_templates.tpl:8./apps/zotonic_mod_development/priv/templates/admin_development_templates.tpl:12
 msgid "Included templates"
 msgstr "القوالب المضمنة"
 
-#: apps/zotonic_mod_development/priv/templates/admin_development.tpl:156
+#: apps/zotonic_mod_development/priv/templates/admin_development.tpl:170
 msgid "Introspection"
 msgstr "استبطان - سبر غور"
+
+#: apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:12./apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:62./apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:124
+msgid "Line"
+msgstr "خط"
 
 #: apps/zotonic_mod_development/priv/templates/admin_development.tpl:50
 msgid "Live reload of changed CSS files. Reload page on change of templates or JavaScript."
@@ -5327,9 +5653,21 @@ msgstr "إعادة تحميل مباشر لملفات CSS المتغيرة. أع
 msgid "Location"
 msgstr "موقعك"
 
-#: apps/zotonic_mod_development/priv/templates/admin_development.tpl:129
+#: apps/zotonic_mod_development/priv/templates/admin_development.tpl:143
 msgid "Match a request URL, display matched dispatch rule."
 msgstr "تطابق عنوان URL للطلب ، اعرض قاعدة الإرسال المتطابقة."
+
+#: apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:50
+msgid "Missing includes"
+msgstr "يشمل المفقودين"
+
+#: apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:112
+msgid "Missing optional includes"
+msgstr "تضمينات اختيارية مفقودة"
+
+#: apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:174
+msgid "Missing {extends} or {overrules}"
+msgstr "مفقود {extends} أو {overrules}"
 
 #: apps/zotonic_mod_development/priv/templates/_development_dispatch_trace.tpl:40./apps/zotonic_mod_development/priv/templates/_development_dispatch_trace.tpl:43
 msgid "New host"
@@ -5343,6 +5681,10 @@ msgstr "مسار جديد"
 msgid "No matching dispatch rule found"
 msgstr "لم يتم العثور على قاعدة إرسال مطابقة"
 
+#: apps/zotonic_mod_development/src/mod_development.erl:84./apps/zotonic_mod_development/src/mod_development.erl:101
+msgid "No permission to use mod_development."
+msgstr "لا يوجد إذن لاستخدام mod_development."
+
 #: apps/zotonic_mod_development/priv/templates/_development_template.tpl:12
 msgid "Not found"
 msgstr "لم يتم العثور على"
@@ -5354,10 +5696,6 @@ msgstr "المراقبون"
 #: apps/zotonic_mod_development/priv/templates/admin_development.tpl:101
 msgid "Optional category for catinclude"
 msgstr "فئة اختيارية لـ catinclude"
-
-#: apps/zotonic_mod_development/priv/templates/_development_dispatch_trace.tpl:28./apps/zotonic_mod_development/priv/templates/_development_dispatch_trace.tpl:35./apps/zotonic_mod_development/priv/templates/_development_dispatch_trace.tpl:62
-msgid "Options"
-msgstr "خيارات"
 
 #: apps/zotonic_mod_development/priv/templates/_development_dispatch_trace.tpl:71./apps/zotonic_mod_development/priv/templates/_development_dispatch_trace.tpl:77
 msgid "Permanent redirect"
@@ -5371,7 +5709,15 @@ msgstr "إعادة تجميع القوالب"
 msgid "Redirect"
 msgstr "إعادة توجيه"
 
-#: apps/zotonic_mod_development/priv/templates/admin_development.tpl:162
+#: apps/zotonic_mod_development/priv/templates/admin_development_templates_xref.tpl:17
+msgid "Rerun XRef"
+msgstr "أعد تشغيل XRef"
+
+#: apps/zotonic_mod_development/priv/templates/admin_development_templates_graph.tpl:17
+msgid "Rerun graph"
+msgstr "إعادة تشغيل الرسم البياني"
+
+#: apps/zotonic_mod_development/priv/templates/admin_development.tpl:176
 msgid "Show an overview of all observers."
 msgstr "اعرض نظرة عامة على جميع المراقبين."
 
@@ -5379,7 +5725,7 @@ msgstr "اعرض نظرة عامة على جميع المراقبين."
 msgid "Show defined blocks in generated templates"
 msgstr "إظهار كتل محددة في القوالب التي تم إنشاؤها"
 
-#: apps/zotonic_mod_development/priv/templates/admin_development.tpl:159
+#: apps/zotonic_mod_development/priv/templates/admin_development.tpl:173
 msgid "Show internals of Zotonic and the modules"
 msgstr "عرض الأجزاء الداخلية من Zotonic والوحدات النمطية"
 
@@ -5387,11 +5733,11 @@ msgstr "عرض الأجزاء الداخلية من Zotonic والوحدات ا�
 msgid "Show paths to included template files in generated templates"
 msgstr "إظهار المسارات لملفات القوالب المضمنة في القوالب التي تم إنشاؤها"
 
-#: apps/zotonic_mod_development/priv/templates/admin_development.tpl:118
+#: apps/zotonic_mod_development/priv/templates/admin_development.tpl:132
 msgid "Show which files are included in a template compilation"
 msgstr "اعرض الملفات التي تم تضمينها في تجميع القوالب"
 
-#: apps/zotonic_mod_development/priv/templates/admin_development.tpl:7./apps/zotonic_mod_development/priv/templates/admin_development_observers.tpl:7./apps/zotonic_mod_development/priv/templates/admin_development_templates.tpl:7
+#: apps/zotonic_mod_development/priv/templates/admin_development.tpl:7./apps/zotonic_mod_development/priv/templates/admin_development_observers.tpl:7./apps/zotonic_mod_development/priv/templates/admin_development_templates.tpl:7./apps/zotonic_mod_development/priv/templates/admin_development_templates_graph.tpl:7./apps/zotonic_mod_development/priv/templates/admin_development_templates_xref.tpl:7
 msgid "Site Development"
 msgstr "تطوير موقع"
 
@@ -5407,13 +5753,62 @@ msgstr "مشتركين"
 msgid "Switch protocol to"
 msgstr "تبديل البروتوكول إلى"
 
+#: apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:2
+msgid "Syntax errors"
+msgstr "أخطاء في بناء الجملة"
+
+#: apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:11./apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:61./apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:123./apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:190
+#: apps/zotonic_mod_logging/priv/templates/admin_log_email.tpl:110
+msgid "Template"
+msgstr "قالب"
+
+#: apps/zotonic_mod_development/priv/templates/admin_development_templates_xref.tpl:29
+msgid "Template check results"
+msgstr "نتائج فحص القالب"
+
 #: apps/zotonic_mod_development/priv/templates/admin_development.tpl:89
 msgid "Template debugging"
 msgstr "تصحيح النموذج"
 
+#: apps/zotonic_mod_development/priv/templates/admin_development.tpl:127./apps/zotonic_mod_development/priv/templates/admin_development_templates_graph.tpl:29
+msgid "Template dependency graph"
+msgstr "الرسم البياني لتبعية القالب"
+
 #: apps/zotonic_mod_development/priv/templates/_development_template.tpl:4
 msgid "Template path"
 msgstr "مسار القالب"
+
+#: apps/zotonic_mod_development/priv/templates/admin_development_templates_xref.tpl:8
+msgid "Templates XRef check"
+msgstr "التحقق من قوالب XRef"
+
+#: apps/zotonic_mod_development/priv/templates/admin_development_templates_graph.tpl:8
+msgid "Templates dependendy graph"
+msgstr "قوالب الرسم البياني التبعية"
+
+#: apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:180
+msgid "These templates have <tt>{extends}</tt> or <tt>{overrules}</tt> statements that are referring to a missing template."
+msgstr "تحتوي هذه القوالب على عبارات <tt>{extends}</tt> أو <tt>{overrules}</tt> تشير إلى قالب مفقود."
+
+#: apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:114
+msgid "These templates have <tt>{optional}</tt> statements that are referring to missing templates."
+msgstr "تحتوي هذه القوالب على عبارات <tt>{optional}</tt> تشير إلى القوالب المفقودة."
+
+#: apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:52
+msgid "These templates have non optional <tt>{include}</tt> statements that are referring to missing templates."
+msgstr "تحتوي هذه القوالب على عبارات <tt>{include}</tt> غير اختيارية تشير إلى القوالب المفقودة."
+
+#: apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:4
+msgid "These templates have syntax errors and could not be checked for included files."
+msgstr "تحتوي هذه القوالب على أخطاء في بناء الجملة ولا يمكن التحقق من الملفات المضمنة."
+
+#: apps/zotonic_mod_development/priv/templates/admin_development_templates_graph.tpl:13
+msgid "This calculates and visualizes the dependency graph of all templates."
+msgstr "يؤدي هذا إلى حساب وتصور الرسم البياني للتبعية لجميع القوالب."
+
+#: apps/zotonic_mod_development/priv/templates/admin_development_templates_xref.tpl:13
+msgid "This checks all templates to see if included of extended templates are available."
+msgstr "يؤدي هذا إلى التحقق من كافة القوالب لمعرفة ما إذا كان تضمين القوالب الموسعة متاحًا أم لا."
 
 #: apps/zotonic_mod_development/priv/templates/_development_dispatch_trace.tpl:56
 msgid "This resource is unknown or does not have a URI"
@@ -5427,11 +5822,15 @@ msgstr "أدوات وإعدادات مفيدة لتطوير الموقع."
 msgid "Trace all database queries for the current session"
 msgstr "تتبع جميع استعلامات قاعدة البيانات للدورة الحالية"
 
-#: apps/zotonic_mod_development/src/support/z_development_dispatch.erl:48
+#: apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:64./apps/zotonic_mod_development/priv/templates/_development_template_xref.tpl:126
+msgid "Type of include"
+msgstr "نوع التضمين"
+
+#: apps/zotonic_mod_development/src/support/z_development_dispatch.erl:49
 msgid "You are not allowed to use the dispatch debugging."
 msgstr "غير مسموح لك باستخدام تصحيح أخطاء الإرسال."
 
-#: apps/zotonic_mod_development/src/support/z_development_template.erl:43
+#: apps/zotonic_mod_development/src/support/z_development_template.erl:44
 msgid "You are not allowed to use the template debugging."
 msgstr "غير مسموح لك باستخدام نموذج التصحيح."
 
@@ -5496,6 +5895,10 @@ msgstr "قص الصوره"
 msgid "Defaults to the summary of the media. Enter a single “-” to not display a caption."
 msgstr "افتراضات لملخص الوسائط. أدخل \"-\" واحدة لعدم عرض تسمية توضيحية."
 
+#: apps/zotonic_mod_editor_tinymce/priv/templates/_tinymce_dialog_zmedia_props.tpl:102
+msgid "Edit {cat}"
+msgstr "تحرير {cat}"
+
 #: apps/zotonic_mod_editor_tinymce/priv/templates/_admin_configure_module.tpl:3
 msgid "Editor version"
 msgstr "نسخة المحرر"
@@ -5519,6 +5922,10 @@ msgstr "خصائص الوسائط"
 #: apps/zotonic_mod_editor_tinymce/priv/templates/_tinymce_dialog_zmedia_props.tpl:67
 msgid "Medium"
 msgstr "متوسط"
+
+#: apps/zotonic_mod_editor_tinymce/priv/templates/_tinymce_dialog_zmedia_props.tpl:99
+msgid "Remove from text"
+msgstr "إزالة من النص"
 
 #: apps/zotonic_mod_editor_tinymce/priv/templates/_tinymce_dialog_zmedia_props.tpl:62
 msgid "Small"
@@ -6427,10 +6834,6 @@ msgstr "فشل"
 msgid "Fatal"
 msgstr "قاتلة - مهلك"
 
-#: apps/zotonic_mod_logging/priv/templates/admin_log.tpl:45./apps/zotonic_mod_logging/priv/templates/admin_log_email.tpl:157./apps/zotonic_mod_logging/priv/templates/admin_log_ui.tpl:44
-msgid "Filter"
-msgstr "منقي"
-
 #: apps/zotonic_mod_logging/priv/templates/admin_log_email.tpl:46
 msgid "Identities"
 msgstr "المتطابقات"
@@ -6519,10 +6922,6 @@ msgstr "مدير الموقع"
 msgid "Stack"
 msgstr "كومة"
 
-#: apps/zotonic_mod_logging/priv/templates/admin_log_email.tpl:110
-msgid "Template"
-msgstr "قالب"
-
 #: apps/zotonic_mod_logging/priv/templates/admin_log_email.tpl:106
 msgid "To"
 msgstr "إلى"
@@ -6574,11 +6973,11 @@ msgstr "فعل"
 msgid "Add a new recipient."
 msgstr "أضف مستلمًا جديدًا."
 
-#: apps/zotonic_mod_mailinglist/priv/templates/admin_mailinglist_recipients.tpl:24./apps/zotonic_mod_mailinglist/src/controllers/controller_admin_mailinglist_recipients.erl:51
+#: apps/zotonic_mod_mailinglist/priv/templates/admin_mailinglist_recipients.tpl:24./apps/zotonic_mod_mailinglist/src/controllers/controller_admin_mailinglist_recipients.erl:52
 msgid "Add recipient"
 msgstr "أضف المستلم"
 
-#: apps/zotonic_mod_mailinglist/src/scomps/scomp_mailinglist_mailinglist_subscribe.erl:61
+#: apps/zotonic_mod_mailinglist/src/scomps/scomp_mailinglist_mailinglist_subscribe.erl:62
 msgid "Added the recipient."
 msgstr "تمت إضافة المستلم."
 
@@ -6646,7 +7045,7 @@ msgstr "الجمع بين القائمة البريدية"
 msgid "Combine…"
 msgstr "اجمع…"
 
-#: apps/zotonic_mod_mailinglist/src/mod_mailinglist.erl:139
+#: apps/zotonic_mod_mailinglist/src/mod_mailinglist.erl:140
 msgid "Confirm mailing cancelation."
 msgstr "تأكيد إلغاء البريد."
 
@@ -6658,15 +7057,15 @@ msgstr "أكد الإرسال إلى القائمة البريدية"
 msgid "Confirm subscription"
 msgstr "تأكيد الاشتراك"
 
-#: apps/zotonic_mod_mailinglist/src/scomps/scomp_mailinglist_mailinglist_subscribe.erl:71
+#: apps/zotonic_mod_mailinglist/src/scomps/scomp_mailinglist_mailinglist_subscribe.erl:72
 msgid "Could not add the recipient."
 msgstr "تعذرت إضافة المستلم."
 
-#: apps/zotonic_mod_mailinglist/src/controllers/controller_admin_mailinglist.erl:63
+#: apps/zotonic_mod_mailinglist/src/controllers/controller_admin_mailinglist.erl:64
 msgid "Could not delete the mailing list."
 msgstr "تعذر حذف القائمة البريدية."
 
-#: apps/zotonic_mod_mailinglist/src/mod_mailinglist.erl:258
+#: apps/zotonic_mod_mailinglist/src/mod_mailinglist.erl:259
 msgid "Could not save the opt-out preference."
 msgstr "تعذر حفظ تفضيل إلغاء الاشتراك."
 
@@ -6683,7 +7082,7 @@ msgstr "احذف جميع المستلمين الحاليين قبل إضافة 
 msgid "Delete all recipients from this list?"
 msgstr "حذف كافة المستلمين من هذه القائمة؟"
 
-#: apps/zotonic_mod_mailinglist/src/controllers/controller_admin_mailinglist.erl:56
+#: apps/zotonic_mod_mailinglist/src/controllers/controller_admin_mailinglist.erl:57
 msgid "Deleted the mailing list."
 msgstr "حذف القائمة البريدية."
 
@@ -6714,7 +7113,7 @@ msgstr "تنزيل قائمة المستلمين النشطين. تحقق من �
 msgid "Drop folder filename (optional)"
 msgstr "إفلات اسم ملف المجلد (اختياري)"
 
-#: apps/zotonic_mod_mailinglist/src/controllers/controller_admin_mailinglist_recipients.erl:69
+#: apps/zotonic_mod_mailinglist/src/controllers/controller_admin_mailinglist_recipients.erl:70
 msgid "E-mail address updated"
 msgstr "تم تحديث عنوان البريد الإلكتروني"
 
@@ -6726,7 +7125,7 @@ msgstr "صفحة البريد الإلكتروني"
 msgid "E-mail this page"
 msgstr "إرسال هذه الصفحة بالبريد الإلكتروني"
 
-#: apps/zotonic_mod_mailinglist/priv/templates/admin_mailinglist_recipients.tpl:77./apps/zotonic_mod_mailinglist/src/controllers/controller_admin_mailinglist_recipients.erl:58
+#: apps/zotonic_mod_mailinglist/priv/templates/admin_mailinglist_recipients.tpl:77./apps/zotonic_mod_mailinglist/src/controllers/controller_admin_mailinglist_recipients.erl:59
 msgid "Edit recipient"
 msgstr "تحرير المستلم"
 
@@ -6807,7 +7206,7 @@ msgstr "القوائم البريدية"
 msgid "Mailing list"
 msgstr "القائمة البريدية"
 
-#: apps/zotonic_mod_mailinglist/priv/templates/_admin_mailing_status_overview.tpl:5./apps/zotonic_mod_mailinglist/priv/templates/admin_mailinglist.tpl:7./apps/zotonic_mod_mailinglist/src/mod_mailinglist.erl:511
+#: apps/zotonic_mod_mailinglist/priv/templates/_admin_mailing_status_overview.tpl:5./apps/zotonic_mod_mailinglist/priv/templates/admin_mailinglist.tpl:7./apps/zotonic_mod_mailinglist/src/mod_mailinglist.erl:512
 msgid "Mailing lists"
 msgstr "القوائم البريدية"
 
@@ -6924,7 +7323,7 @@ msgstr "معاينة البريد"
 msgid "Read more on the web"
 msgstr "اقرأ المزيد على الويب"
 
-#: apps/zotonic_mod_mailinglist/src/controllers/controller_admin_mailinglist_recipients.erl:73
+#: apps/zotonic_mod_mailinglist/src/controllers/controller_admin_mailinglist_recipients.erl:74
 msgid "Recipient deleted."
 msgstr "تم حذف المستلم."
 
@@ -6948,7 +7347,7 @@ msgstr "قم بإزالة هذا المستلم. لا يمكن التراجع."
 msgid "Removed subscription."
 msgstr "تمت إزالة الاشتراك."
 
-#: apps/zotonic_mod_mailinglist/src/mod_mailinglist.erl:256
+#: apps/zotonic_mod_mailinglist/src/mod_mailinglist.erl:257
 msgid "Saved the opt-out preference."
 msgstr "تم حفظ تفضيل إلغاء الاشتراك."
 
@@ -7016,7 +7415,7 @@ msgstr "اسم المرسل لرسائل البريد الإلكتروني (اخ
 msgid "Sending the e-mail..."
 msgstr "إرسال البريد الإلكتروني ..."
 
-#: apps/zotonic_mod_mailinglist/src/mod_mailinglist.erl:189
+#: apps/zotonic_mod_mailinglist/src/mod_mailinglist.erl:190
 msgid "Sending the page to"
 msgstr "إرسال الصفحة إلى"
 
@@ -7096,7 +7495,7 @@ msgstr "يتم إرسال رسائل البريد الإلكتروني ..."
 msgid "The key in your link does not match any subscription. Either you already unsubscribed, or the mailing list has been deleted."
 msgstr "المفتاح الموجود في الارتباط الخاص بك لا يتطابق مع أي اشتراك. إما أنك ألغيت اشتراكك بالفعل ، أو تم حذف القائمة البريدية."
 
-#: apps/zotonic_mod_mailinglist/src/mod_mailinglist.erl:152
+#: apps/zotonic_mod_mailinglist/src/mod_mailinglist.erl:153
 msgid "The mailing has been canceled."
 msgstr "تم إلغاء البريد."
 
@@ -7112,7 +7511,7 @@ msgstr "لم يتم نشر الصفحة التي تحاول إرسالها با�
 msgid "The recipients list of the mailing list will be deleted as well."
 msgstr "كما سيتم حذف قائمة المستلمين من القائمة البريدية."
 
-#: apps/zotonic_mod_mailinglist/src/mod_mailinglist.erl:162
+#: apps/zotonic_mod_mailinglist/src/mod_mailinglist.erl:163
 msgid "The statistics have been cleared."
 msgstr "تم مسح الإحصائيات."
 
@@ -7156,7 +7555,7 @@ msgstr "إلغاء الاشتراك من"
 msgid "Unsubscribe from mailing list"
 msgstr "إلغاء الاشتراك من القائمة البريدية"
 
-#: apps/zotonic_mod_mailinglist/src/scomps/scomp_mailinglist_mailinglist_subscribe.erl:101
+#: apps/zotonic_mod_mailinglist/src/scomps/scomp_mailinglist_mailinglist_subscribe.erl:102
 msgid "Updated the recipient."
 msgstr "تم تحديث المستلم."
 
@@ -7188,23 +7587,23 @@ msgstr "عندما لا ترغب في تلقي أي بريد ، يرجى تجا�
 msgid "When you don’t want to receive any more mail then"
 msgstr "عندما لا ترغب في تلقي المزيد من البريد بعد ذلك"
 
-#: apps/zotonic_mod_mailinglist/src/scomps/scomp_mailinglist_mailinglist_subscribe.erl:79
+#: apps/zotonic_mod_mailinglist/src/scomps/scomp_mailinglist_mailinglist_subscribe.erl:80
 msgid "You are not allowed to add or enable recipients."
 msgstr "غير مسموح لك بإضافة أو تمكين المستلمين."
 
-#: apps/zotonic_mod_mailinglist/src/mod_mailinglist.erl:144./apps/zotonic_mod_mailinglist/src/mod_mailinglist.erl:154
+#: apps/zotonic_mod_mailinglist/src/mod_mailinglist.erl:145./apps/zotonic_mod_mailinglist/src/mod_mailinglist.erl:155
 msgid "You are not allowed to cancel this mailing."
 msgstr "لا يسمح لك بإلغاء هذه المراسلات."
 
-#: apps/zotonic_mod_mailinglist/src/controllers/controller_admin_mailinglist.erl:60
+#: apps/zotonic_mod_mailinglist/src/controllers/controller_admin_mailinglist.erl:61
 msgid "You are not allowed to delete the mailing list."
 msgstr "لا يسمح لك بحذف القائمة البريدية."
 
-#: apps/zotonic_mod_mailinglist/src/scomps/scomp_mailinglist_mailinglist_subscribe.erl:107
+#: apps/zotonic_mod_mailinglist/src/scomps/scomp_mailinglist_mailinglist_subscribe.erl:108
 msgid "You are not allowed to edit recipients."
 msgstr "لا يسمح لك لتحرير المستلمين."
 
-#: apps/zotonic_mod_mailinglist/src/mod_mailinglist.erl:164./apps/zotonic_mod_mailinglist/src/mod_mailinglist.erl:180
+#: apps/zotonic_mod_mailinglist/src/mod_mailinglist.erl:165./apps/zotonic_mod_mailinglist/src/mod_mailinglist.erl:181
 msgid "You are not allowed to reset this mailing."
 msgstr "لا يسمح لك بإعادة تعيين هذا البريد."
 
@@ -7212,7 +7611,7 @@ msgstr "لا يسمح لك بإعادة تعيين هذا البريد."
 msgid "You are not allowed to send mail to the test mailing list."
 msgstr "غير مسموح لك بإرسال بريد إلى القائمة البريدية التجريبية."
 
-#: apps/zotonic_mod_mailinglist/src/mod_mailinglist.erl:192
+#: apps/zotonic_mod_mailinglist/src/mod_mailinglist.erl:193
 msgid "You are not allowed to send this page."
 msgstr "لا يسمح لك بإرسال هذه الصفحة."
 
@@ -7841,10 +8240,6 @@ msgstr "طريقة منح الرمز المميز"
 msgid "Unknown client or redirect, check with your website administrator."
 msgstr "عميل غير معروف أو إعادة توجيه ، تحقق مع مسؤول موقع الويب الخاص بك."
 
-#: apps/zotonic_mod_oauth2/priv/templates/_dialog_oauth2_consumer.tpl:16
-msgid "Update"
-msgstr "تحديث"
-
 #: apps/zotonic_mod_oauth2/priv/templates/_dialog_oauth2_app.tpl:70
 msgid "Update App"
 msgstr "تحديث التطبيق"
@@ -7926,20 +8321,25 @@ msgstr "لوحة تحكم تطبيق Embedly"
 msgid "Check the table for the faceted search and fill it by reindexing all pages."
 msgstr "تحقق من الجدول للبحث ذو الأوجه واملأه عن طريق إعادة فهرسة جميع الصفحات."
 
+#: apps/zotonic_mod_search/priv/templates/search_view.tpl:15
+#: apps/zotonic_mod_survey/priv/templates/_dialog_survey_link_person.tpl:59
+msgid "Matching text"
+msgstr "نص مطابق"
+
 #: apps/zotonic_mod_search/priv/templates/_admin_status.tpl:4
 msgid "Rebuild search facets"
 msgstr "إعادة بناء أوجه البحث"
 
-#: apps/zotonic_mod_search/src/mod_search.erl:68
+#: apps/zotonic_mod_search/src/mod_search.erl:90
 msgid "Rebuilding the faceted search table."
 msgstr "إعادة بناء جدول البحث ذو الأوجه."
 
-#: apps/zotonic_mod_search/src/mod_search.erl:70
+#: apps/zotonic_mod_search/src/mod_search.erl:92
 #: apps/zotonic_mod_survey/src/support/survey_admin.erl:40./apps/zotonic_mod_survey/src/support/survey_admin.erl:62./apps/zotonic_mod_survey/src/support/survey_admin.erl:107./apps/zotonic_mod_survey/src/support/survey_admin.erl:202
 msgid "Sorry, you are not allowed to do this."
 msgstr "عذرا ، لا يسمح لك القيام بذلك."
 
-#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:52
+#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:71
 msgid "Add a noindex, nofollow element to all pages."
 msgstr "أضف عنصر noindex ، nofollow إلى جميع الصفحات."
 
@@ -7959,15 +8359,15 @@ msgstr "اطلب من Google استبعاد جميع الصفحات \"{cat}\""
 msgid "Ask Google to not index this page"
 msgstr "اطلب من Google عدم فهرسة هذه الصفحة"
 
-#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:96
+#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:115
 msgid "Bing Webmaster"
 msgstr "Bing Webmaster"
 
-#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:93./apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:94
+#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:112./apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:113
 msgid "Bing Webmaster validation id"
 msgstr "معرف التحقق من Bing Webmaster"
 
-#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:83
+#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:102
 msgid "Copy the value of the content attribute in the meta tag provided by Google."
 msgstr "انسخ قيمة سمة المحتوى في العلامة الوصفية المقدمة من Google."
 
@@ -7983,11 +8383,15 @@ msgstr "تخصيص slug الصفحة"
 msgid "Description to include on every page"
 msgstr "وصف لتضمينه في كل صفحة"
 
-#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:83./apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:96./apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:110
+#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:49
+msgid "Do not show site search action"
+msgstr "لا تظهر إجراء البحث في الموقع"
+
+#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:102./apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:115./apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:129
 msgid "Enter here the verification code for"
 msgstr "أدخل هنا رمز التحقق الخاص بـ"
 
-#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:49
+#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:68
 msgid "Exclude this site from search engines"
 msgstr "استبعاد هذا الموقع من محركات البحث"
 
@@ -7995,25 +8399,29 @@ msgstr "استبعاد هذا الموقع من محركات البحث"
 msgid "General SEO Optimization"
 msgstr "تحسين SEO العام"
 
-#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:63./apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:64
+#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:82./apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:83
 msgid "Google Analytics tracking id"
 msgstr "معرف تتبع Google Analytics"
 
-#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:80./apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:81./apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:83
+#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:99./apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:100./apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:102
 msgid "Google Search Console"
 msgstr "جوجل Search Console"
 
-#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:75
+#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:94
 msgid "Google Tag Manager account page"
 msgstr "صفحة حساب Google Tag Manager"
 
-#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:72./apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:73
+#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:91./apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:92
 msgid "Google Tag Manager id"
 msgstr "معرف Google Tag Manager"
 
 #: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:9
 msgid "Here you find settings to optimize the indexing of your site by search engines."
 msgstr "تجد هنا إعدادات لتحسين فهرسة موقعك بواسطة محركات البحث."
+
+#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:52
+msgid "If your site does not have a search page, check this box to prevent displaying a search box on Google et al."
+msgstr "إذا لم يكن موقعك يحتوي على صفحة بحث، فحدد هذا المربع لمنع عرض مربع بحث على Google وآخرين."
 
 #: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:22./apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:23
 msgid "Keywords"
@@ -8047,10 +8455,6 @@ msgstr "عنوان الصفحة"
 msgid "Pages of this category can be excluded from search engines. This is useful if some categories should not be found on Google (et al). Common examples are categories and predicates."
 msgstr "يمكن استبعاد صفحات من هذه الفئة من محركات البحث. هذا مفيد إذا كان لا ينبغي العثور على بعض الفئات على Google (وآخرون). الأمثلة الشائعة هي الفئات والمسندات."
 
-#: apps/zotonic_mod_seo/src/mod_seo.erl:42
-msgid "SEO"
-msgstr "SEO"
-
 #: apps/zotonic_mod_seo/priv/templates/_admin_edit_content_seo.tpl:6
 msgid "SEO Content"
 msgstr "محتوى SEO"
@@ -8059,7 +8463,7 @@ msgstr "محتوى SEO"
 msgid "SEO indexing of this page is disabled because it is in the “{cat}” category."
 msgstr "تم تعطيل فهرسة SEO لهذه الصفحة لأنها في فئة \"{cat}\"."
 
-#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:123
+#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:142
 msgid "Save SEO settings"
 msgstr "حفظ إعدادات تحسين محركات البحث"
 
@@ -8071,39 +8475,47 @@ msgstr "محرك البحث الأمثل"
 msgid "Show current JSON-LD (updates after save)"
 msgstr "إظهار JSON-LD الحالي (التحديثات بعد الحفظ)"
 
-#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:42
+#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:38./apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:39
+msgid "Site search"
+msgstr "بحث الموقع"
+
+#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:61
 msgid "The site configuration file allows this site to be indexed by search engines."
 msgstr "يتيح ملف تكوين الموقع إمكانية فهرسة هذا الموقع بواسطة محركات البحث."
 
-#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:40
+#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:59
 msgid "The site configuration file excludes this site from search engines."
 msgstr "يستثني ملف تكوين الموقع هذا الموقع من محركات البحث."
 
-#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:67
+#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:41
+msgid "Url for the search action on the site. Defaults to:"
+msgstr "عنوان URL لإجراء البحث على الموقع. الإعدادات الافتراضية إلى:"
+
+#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:86
 msgid "Where can I find my tracking script?"
 msgstr "أين يمكنني العثور على نص التتبع الخاص بي؟"
 
-#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:110
+#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:129
 msgid "Yandex Webmaster"
 msgstr "Yandex Webmaster"
 
-#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:107./apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:108
+#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:126./apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:127
 msgid "Yandex Webmaster validation id"
 msgstr "معرف التحقق من Yandex Webmaster"
 
-#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:97./apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:111
+#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:116./apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:130
 msgid "You find this id in the content attribute of the meta tag, it has the format"
 msgstr "تجد هذا المعرف في سمة المحتوى للعلامة الوصفية ، فهو يحتوي على التنسيق"
 
-#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:66
+#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:85
 msgid "You find this id in the tracking script, it has the format"
 msgstr "تجد هذا المعرف في البرنامج النصي للتتبع ، وله التنسيق"
 
-#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:75
+#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:94
 msgid "You find this on your"
 msgstr "تجد هذا على الخاص بك"
 
-#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:75
+#: apps/zotonic_mod_seo/priv/templates/admin_seo.tpl:94
 msgid "it has the format"
 msgstr "لها الشكل"
 
@@ -8371,6 +8783,10 @@ msgstr "جارٍ إحضار التحديثات من عنصر التحكم في �
 msgid "Fetching updates..."
 msgstr "إحضار التحديثات ..."
 
+#: apps/zotonic_mod_site_update/src/mod_site_update.erl:102
+msgid "Finished rebuilding Zotonic."
+msgstr "تم الانتهاء من إعادة بناء Zotonic."
+
 #: apps/zotonic_mod_site_update/priv/templates/_z_status_button.tpl:4
 #: apps/zotonic_mod_zotonic_status_vcs/priv/templates/_z_status_button.tpl:4
 msgid "Perform a version control (git/mercurial) update this site."
@@ -8617,7 +9033,7 @@ msgstr "أضف قفزة الصفحة"
 msgid "Add question"
 msgstr "أضف سؤالاً"
 
-#: apps/zotonic_mod_survey/priv/templates/_admin_survey_question_q.tpl:40
+#: apps/zotonic_mod_survey/priv/templates/_admin_survey_question_q.tpl:43
 msgid "Add question after"
 msgstr "أضف السؤال بعد ذلك"
 
@@ -8645,7 +9061,7 @@ msgstr "يوافق على"
 msgid "Another page, video or image."
 msgstr "صفحة أو مقطع فيديو أو صورة أخرى."
 
-#: apps/zotonic_mod_survey/priv/templates/_admin_block_thurstone_answer.tpl:31./apps/zotonic_mod_survey/priv/templates/_admin_survey_question_editor.tpl:78./apps/zotonic_mod_survey/priv/templates/_admin_survey_question_editor.tpl:79./apps/zotonic_mod_survey/priv/templates/_admin_survey_question_editor.tpl:80./apps/zotonic_mod_survey/priv/templates/email_survey_result.tpl:67./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_thurstone.tpl:86
+#: apps/zotonic_mod_survey/priv/templates/_admin_block_thurstone_answer.tpl:31./apps/zotonic_mod_survey/priv/templates/_admin_survey_question_editor.tpl:78./apps/zotonic_mod_survey/priv/templates/_admin_survey_question_editor.tpl:79./apps/zotonic_mod_survey/priv/templates/_admin_survey_question_editor.tpl:80./apps/zotonic_mod_survey/priv/templates/email_survey_result.tpl:68./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_thurstone.tpl:86
 msgid "Answer"
 msgstr "إجابة"
 
@@ -8733,7 +9149,7 @@ msgstr "انقر فوق \"تحرير\" لرؤية وتغيير البيانات 
 msgid "Closed"
 msgstr "مغلق"
 
-#: apps/zotonic_mod_survey/priv/templates/email_survey_result.tpl:97./apps/zotonic_mod_survey/priv/templates/email_survey_result.tpl:131./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_thurstone.tpl:77
+#: apps/zotonic_mod_survey/priv/templates/email_survey_result.tpl:98./apps/zotonic_mod_survey/priv/templates/email_survey_result.tpl:132./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_thurstone.tpl:77
 msgid "Correct"
 msgstr "صيح"
 
@@ -8801,7 +9217,7 @@ msgstr "حذف الصفحة"
 msgid "Delete page jump"
 msgstr "حذف القفز الصفحة"
 
-#: apps/zotonic_mod_survey/priv/templates/_admin_survey_question_q.tpl:41
+#: apps/zotonic_mod_survey/priv/templates/_admin_survey_question_q.tpl:44
 msgid "Delete question"
 msgstr "حذف السؤال"
 
@@ -8841,11 +9257,11 @@ msgstr "كل سؤال يحتاج إلى تسمية سؤال"
 msgid "Example:"
 msgstr "مثال:"
 
-#: apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_button.tpl:24./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_category.tpl:20./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_country.tpl:17./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_likert.tpl:24./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_long_answer.tpl:20./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_matching.tpl:21./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_multiple_choice.tpl:21./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_narrative.tpl:21./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_short_answer.tpl:21./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_thurstone.tpl:21./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_truefalse.tpl:34./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_yesno.tpl:21
+#: apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_button.tpl:24./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_category.tpl:20./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_country.tpl:17./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_likert.tpl:24./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_long_answer.tpl:20./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_matching.tpl:21./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_multiple_choice.tpl:21./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_narrative.tpl:21./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_short_answer.tpl:21./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_thurstone.tpl:21./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_truefalse.tpl:36./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_yesno.tpl:21
 msgid "Explanation"
 msgstr "تفسير"
 
-#: apps/zotonic_mod_survey/priv/templates/_admin_survey_question_editor.tpl:56./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_truefalse.tpl:28./apps/zotonic_mod_survey/priv/templates/blocks/_block_view_survey_truefalse.tpl:11./apps/zotonic_mod_survey/priv/templates/blocks/_block_view_survey_truefalse.tpl:28./apps/zotonic_mod_survey/priv/templates/blocks/_block_view_survey_truefalse.tpl:35./apps/zotonic_mod_survey/priv/templates/blocks/_block_view_survey_yesno.tpl:11./apps/zotonic_mod_survey/src/questions/survey_q_truefalse.erl:61
+#: apps/zotonic_mod_survey/priv/templates/_admin_survey_question_editor.tpl:56./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_truefalse.tpl:30./apps/zotonic_mod_survey/priv/templates/blocks/_block_view_survey_truefalse.tpl:11./apps/zotonic_mod_survey/priv/templates/blocks/_block_view_survey_truefalse.tpl:28./apps/zotonic_mod_survey/priv/templates/blocks/_block_view_survey_truefalse.tpl:35./apps/zotonic_mod_survey/priv/templates/blocks/_block_view_survey_yesno.tpl:11./apps/zotonic_mod_survey/src/questions/survey_q_truefalse.erl:61
 msgid "False"
 msgstr "خاطئة"
 
@@ -8905,7 +9321,7 @@ msgstr "المدخلات المخفية"
 msgid "Hidden value, saved with the form but not shown to the person filling in the form."
 msgstr "القيمة المخفية ، يتم حفظها مع النموذج ولكن لا تظهر للشخص الذي يملأ النموذج."
 
-#: apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_button.tpl:58./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_category.tpl:60./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_country.tpl:36./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_likert.tpl:65./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_long_answer.tpl:39./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_matching.tpl:64./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_multiple_choice.tpl:53./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_narrative.tpl:47./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_short_answer.tpl:59./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_thurstone.tpl:174./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_truefalse.tpl:60./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_yesno.tpl:64
+#: apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_button.tpl:58./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_category.tpl:60./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_country.tpl:36./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_likert.tpl:65./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_long_answer.tpl:39./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_matching.tpl:64./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_multiple_choice.tpl:53./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_narrative.tpl:47./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_short_answer.tpl:59./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_thurstone.tpl:174./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_truefalse.tpl:62./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_yesno.tpl:64
 msgid "Hide from results"
 msgstr "إخفاء من النتائج"
 
@@ -8997,19 +9413,15 @@ msgstr "مطابقة عنوان البريد الإلكتروني"
 msgid "Matching question"
 msgstr "سؤال المطابقة"
 
-#: apps/zotonic_mod_survey/priv/templates/_dialog_survey_link_person.tpl:59
-msgid "Matching text"
-msgstr "نص مطابق"
-
 #: apps/zotonic_mod_survey/priv/templates/_admin_survey_question_editor.tpl:87
 msgid "Milk"
 msgstr "لبن"
 
-#: apps/zotonic_mod_survey/priv/templates/_admin_survey_question_q.tpl:35
+#: apps/zotonic_mod_survey/priv/templates/_admin_survey_question_q.tpl:38
 msgid "Move question down"
 msgstr "تحريك السؤال لأسفل"
 
-#: apps/zotonic_mod_survey/priv/templates/_admin_survey_question_q.tpl:34
+#: apps/zotonic_mod_survey/priv/templates/_admin_survey_question_q.tpl:37
 msgid "Move question up"
 msgstr "تحريك السؤال لأعلى"
 
@@ -9141,7 +9553,7 @@ msgstr "التقدم"
 msgid "Prompt"
 msgstr "مستعجل"
 
-#: apps/zotonic_mod_survey/priv/templates/email_survey_result.tpl:66
+#: apps/zotonic_mod_survey/priv/templates/email_survey_result.tpl:67
 msgid "Question"
 msgstr "سؤال"
 
@@ -9181,7 +9593,7 @@ msgstr "ترتيب الإجابات عشوائيًا"
 msgid "Red"
 msgstr "أحمر"
 
-#: apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_category.tpl:53./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_country.tpl:29./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_likert.tpl:58./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_long_answer.tpl:32./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_matching.tpl:58./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_multiple_choice.tpl:39./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_narrative.tpl:40./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_short_answer.tpl:52./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_thurstone.tpl:167./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_truefalse.tpl:53./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_upload.tpl:41./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_yesno.tpl:57
+#: apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_category.tpl:53./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_country.tpl:29./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_likert.tpl:58./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_long_answer.tpl:32./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_matching.tpl:58./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_multiple_choice.tpl:39./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_narrative.tpl:40./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_short_answer.tpl:52./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_thurstone.tpl:167./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_truefalse.tpl:55./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_upload.tpl:41./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_yesno.tpl:57
 msgid "Required, this question must be answered."
 msgstr "مطلوب ، يجب الإجابة على هذا السؤال."
 
@@ -9257,7 +9669,7 @@ msgstr "إظهار شريط التقدم"
 msgid "Show progress information as “<em>Question 3/10</em>”"
 msgstr "إظهار معلومات التقدم كـ \"<em>سؤال 3/10</em>\""
 
-#: apps/zotonic_mod_survey/priv/templates/_survey_start.tpl:60
+#: apps/zotonic_mod_survey/priv/templates/_survey_start.tpl:62
 msgid "Show results (admin only)"
 msgstr "إظهار النتائج (المسؤول فقط)"
 
@@ -9309,7 +9721,7 @@ msgstr "أرفض بشدة"
 msgid "Submit"
 msgstr "إرسال"
 
-#: apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_category.tpl:46./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_thurstone.tpl:48./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_truefalse.tpl:46./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_yesno.tpl:50
+#: apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_category.tpl:46./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_thurstone.tpl:48./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_truefalse.tpl:48./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_yesno.tpl:50
 msgid "Submit on clicking an option"
 msgstr "إرسال عند النقر فوق خيار"
 
@@ -9417,11 +9829,11 @@ msgstr "يسأل"
 msgid "Toggle outline view"
 msgstr "تبديل عرض المخطط التفصيلي"
 
-#: apps/zotonic_mod_survey/priv/templates/_survey_result_chart.tpl:30./apps/zotonic_mod_survey/priv/templates/survey_results_printable.tpl:66
+#: apps/zotonic_mod_survey/priv/templates/_survey_result_chart.tpl:30./apps/zotonic_mod_survey/priv/templates/survey_results_printable.tpl:67
 msgid "Totals"
 msgstr "المجاميع"
 
-#: apps/zotonic_mod_survey/priv/templates/_admin_survey_question_editor.tpl:55./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_truefalse.tpl:23./apps/zotonic_mod_survey/priv/templates/blocks/_block_view_survey_truefalse.tpl:10./apps/zotonic_mod_survey/priv/templates/blocks/_block_view_survey_truefalse.tpl:25./apps/zotonic_mod_survey/priv/templates/blocks/_block_view_survey_truefalse.tpl:32./apps/zotonic_mod_survey/priv/templates/blocks/_block_view_survey_yesno.tpl:10./apps/zotonic_mod_survey/src/questions/survey_q_truefalse.erl:63
+#: apps/zotonic_mod_survey/priv/templates/_admin_survey_question_editor.tpl:55./apps/zotonic_mod_survey/priv/templates/blocks/_admin_edit_block_li_survey_truefalse.tpl:24./apps/zotonic_mod_survey/priv/templates/blocks/_block_view_survey_truefalse.tpl:10./apps/zotonic_mod_survey/priv/templates/blocks/_block_view_survey_truefalse.tpl:25./apps/zotonic_mod_survey/priv/templates/blocks/_block_view_survey_truefalse.tpl:32./apps/zotonic_mod_survey/priv/templates/blocks/_block_view_survey_yesno.tpl:10./apps/zotonic_mod_survey/src/questions/survey_q_truefalse.erl:63
 msgid "True"
 msgstr "صحيح"
 
@@ -9457,7 +9869,7 @@ msgstr "عندما لا يكون هناك شرط صحيح ، فإن السؤال
 msgid "White"
 msgstr "أبيض"
 
-#: apps/zotonic_mod_survey/priv/templates/email_survey_result.tpl:97./apps/zotonic_mod_survey/priv/templates/email_survey_result.tpl:131
+#: apps/zotonic_mod_survey/priv/templates/email_survey_result.tpl:98./apps/zotonic_mod_survey/priv/templates/email_survey_result.tpl:132
 msgid "Wrong"
 msgstr "خاطئ"
 
@@ -9477,7 +9889,7 @@ msgstr "نعم / لا"
 msgid "You already filled this in, but you can change your previous answers."
 msgstr "لقد ملأت هذا بالفعل ، لكن يمكنك تغيير إجاباتك السابقة."
 
-#: apps/zotonic_mod_survey/priv/templates/_survey_start.tpl:39
+#: apps/zotonic_mod_survey/priv/templates/_survey_start.tpl:41
 msgid "You already filled this in."
 msgstr "لقد ملأت هذا بالفعل."
 
@@ -9789,7 +10201,7 @@ msgstr "اختار اللغة"
 msgid "Select the language to copy from:"
 msgstr "حدد اللغة المراد النسخ منها:"
 
-#: apps/zotonic_mod_translation/priv/templates/language_switch.tpl:11
+#: apps/zotonic_mod_translation/priv/templates/language_switch.tpl:13
 msgid "Select your preferred language."
 msgstr "اختر لغتك المفضلة."
 
@@ -9852,6 +10264,14 @@ msgstr "الترجمات"
 #: apps/zotonic_mod_translation/priv/templates/admin_translation.tpl:139
 msgid "Turkish"
 msgstr "اللغة التركية"
+
+#: apps/zotonic_mod_translation/priv/templates/_admin_overview_filter_panel.tpl:5
+msgid "With language"
+msgstr "مع اللغة"
+
+#: apps/zotonic_mod_translation/priv/templates/_admin_overview_filter_panel.tpl:19
+msgid "Without language"
+msgstr "بدون لغة"
 
 #: apps/zotonic_mod_translation/priv/templates/_dialog_language_edit_detail_item.tpl:60./apps/zotonic_mod_translation/priv/templates/_dialog_language_edit_detail_item.tpl:67
 msgid "not enabled"
@@ -10040,6 +10460,10 @@ msgstr "تعذر التحقق من مستودع Git:"
 #: apps/zotonic_mod_zotonic_site_management/src/zotonic_status_addsite.erl:96
 msgid "Could not connect to 'postgres' database or create the database."
 msgstr "تعذر الاتصال بقاعدة بيانات \"postgres\" أو إنشاء قاعدة البيانات."
+
+#: apps/zotonic_mod_zotonic_site_management/src/zotonic_status_addsite.erl:274
+msgid "Could not create the directory"
+msgstr "لا يمكن إنشاء الدليل"
 
 #: apps/zotonic_mod_zotonic_site_management/src/zotonic_status_addsite.erl:568
 msgid "Could not create the file:"

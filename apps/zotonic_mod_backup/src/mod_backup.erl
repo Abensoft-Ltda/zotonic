@@ -1,9 +1,10 @@
 %% @author Marc Worrell <marc@worrell.nl>
-%% @copyright 2010-2022 Marc Worrell
+%% @copyright 2010-2023 Marc Worrell
 %% @doc Backup module. Creates backup of the database and files.  Allows downloading of the backup.
 %% Support creation of periodic backups.
+%% @end
 
-%% Copyright 2010-2022 Marc Worrell
+%% Copyright 2010-2023 Marc Worrell
 %%
 %% Licensed under the Apache License, Version 2.0 (the "License");
 %% you may not use this file except in compliance with the License.
@@ -38,6 +39,8 @@
     observe_rsc_update_done/2,
     observe_rsc_upload/2,
     observe_search_query/2,
+    observe_tick_24h/2,
+
     start_backup/1,
     start_backup/2,
     list_backups/1,
@@ -70,6 +73,11 @@
 
 % Interval for checking for new and/or changed files.
 -define(BCK_POLL_INTERVAL, 3600 * 1000).
+
+% Config values for daily backup
+-define(BACKUP_NONE, 0).
+-define(BACKUP_DB, 2).
+-define(BACKUP_ALL, 1).
 
 
 observe_rsc_upload(#rsc_upload{} = Upload, Context) ->
@@ -119,9 +127,16 @@ observe_search_query(#search_query{ name = <<"backup_deleted">>, offsetlimit = O
 observe_search_query(#search_query{}, _Context) ->
     undefined.
 
+observe_tick_24h(tick_24h, Context) ->
+    m_backup_revision:periodic_cleanup(Context).
+
+
 %% @doc Callback for controller_file. Check if the file exists and return
 %% the path to the file on disk.
--spec file_exists( File :: binary(), z:context() ) -> {true, file:filename_all()} | false.
+-spec file_exists(File, Context) -> {true, FilePath} | false when
+    File :: file:filename_all(),
+    Context :: z:context(),
+    FilePath :: file:filename_all().
 file_exists(File, Context) ->
     Root = filename:rootname(filename:rootname(File)),
     Admin = read_admin_file(Context),
@@ -165,7 +180,10 @@ file_exists(File, Context) ->
     end.
 
 %% @doc Callback for controller_file. Check if access is allowed.
--spec file_forbidden( File :: binary(), z:context() ) -> boolean().
+-spec file_forbidden(File, Context) -> IsForbidden when
+    File :: file:filename_all(),
+    Context :: z:context(),
+    IsForbidden :: boolean().
 file_forbidden(_File, Context) ->
     IsAllowed = (z_acl:is_admin(Context) orelse z_acl:is_allowed(use, mod_backup, Context)),
     not IsAllowed.
@@ -302,11 +320,10 @@ handle_info(periodic_backup, #state{ backup_pid = Pid } = State) when is_pid(Pid
 handle_info(periodic_backup, #state{ upload_pid = Pid } = State) when is_pid(Pid) ->
     {noreply, State};
 handle_info(periodic_backup, State) ->
-    State1 = case m_config:get_boolean(mod_backup, daily_dump, State#state.context) of
-        true ->
-            maybe_daily_dump(State);
-        false ->
-            State
+    State1 = case daily_dump_config(State#state.context) of
+        ?BACKUP_NONE -> State;
+        ?BACKUP_ALL -> maybe_daily_dump(true, State);
+        ?BACKUP_DB -> maybe_daily_dump(false, State)
     end,
     State2 = case State1#state.backup_pid of
         undefined ->
@@ -402,7 +419,20 @@ code_change(_OldVsn, State, _Extra) ->
 %% support functions
 %%====================================================================
 
-maybe_daily_dump(State) ->
+daily_dump_config(Context) ->
+    case m_config:get_value(mod_backup, daily_dump, Context) of
+        <<"1">> ->
+            case is_filestore_enabled(Context) of
+                true -> ?BACKUP_DB;
+                false -> ?BACKUP_ALL
+            end;
+        <<"2">> ->
+            ?BACKUP_DB;
+        _ ->
+            ?BACKUP_NONE
+    end.
+
+maybe_daily_dump(IsFullBackup, State) ->
     Context = State#state.context,
     Now = {Date, Time} = calendar:universal_time(),
     case Time >= {3,0,0} of
@@ -416,7 +446,7 @@ maybe_daily_dump(State) ->
             end,
             case DoStart of
                 true ->
-                    Pid = do_backup(Now, name(Context), true, Context),
+                    Pid = do_backup(Now, name(Context), IsFullBackup, Context),
                     State#state{
                         backup_pid = Pid,
                         backup_start = Now
@@ -428,8 +458,7 @@ maybe_daily_dump(State) ->
             State
     end.
 
-maybe_filestore_upload(State) ->
-    Context = State#state.context,
+maybe_filestore_upload(#state{ context = Context } = State) ->
     case is_filestore_enabled(Context) of
         true ->
             % Check the backup.json if any files are not yet uploaded
