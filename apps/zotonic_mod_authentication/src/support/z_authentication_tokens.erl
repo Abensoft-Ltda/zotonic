@@ -207,7 +207,7 @@ set_autologon_cookie(UserId, Context) ->
     CookieOptions = [
         {max_age, autologon_expires(Context)},
         {path, <<"/">>},
-        {http_only, true},
+        {http_only, false},
         {secure, true},
         {same_site, strict}
     ],
@@ -218,7 +218,7 @@ reset_autologon_cookie(Context) ->
     CookieOptions = [
         {max_age, 0},
         {path, <<"/">>},
-        {http_only, true},
+        {http_only, false},
         {secure, true},
         {same_site, strict}
     ],
