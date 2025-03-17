@@ -91,7 +91,7 @@ set_auth_cookie(UserId, AuthOptions, Context) ->
     Cookie = encode_auth_token(UserId, AuthOptions, Context),
     CookieOptions = [
         {path, <<"/">>},
-        {http_only, true},
+        {http_only, false},
         {secure, true},
         {same_site, strict}
     ],
