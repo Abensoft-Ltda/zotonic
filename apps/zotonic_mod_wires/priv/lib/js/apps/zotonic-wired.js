@@ -254,6 +254,7 @@ function zotonic_startup() {
         cotonic.broker.publish(
           "model/sessionStorage/post/mqtt-origin-client-id",
           msg.payload.client_id,
+            {retain: true}
         );
       }
     },
@@ -1351,7 +1352,34 @@ function z_validated_form_submit(ev, theForm) {
       args = validations;
     } else {
       transport = "";
-      args = validations.concat($(theForm).formToArray());
+
+      const formArgs = $(theForm).formToArray()
+      const formData = []
+      for (const elem of Array.from(theForm.elements)) {
+        if (!elem.name || elem.disabled) continue;
+
+        let value = elem.value
+        if (elem instanceof HTMLInputElement) {
+          const index = formArgs.findIndex(({ name }) => name === elem.name)
+          const formElem = formArgs[index]
+          if (formElem && (elem.type === "checkbox" || elem.type === "radio")) {
+            const dataIndex = formData.findIndex(({ name }) => name === elem.name)
+            if (dataIndex !== -1) continue
+              const elems = document.querySelectorAll(`input[name="${elem.name}"]`)
+              if (elems.length > 1) {
+                value = []
+                elems.forEach(({ checked, value: val }) => { checked && value.push(val) })
+              } else {
+                  value = elems[0].checked ? "on" : "";
+              }
+            }
+        } else if (elem instanceof HTMLSelectElement) {
+          if (elem.selectedIndex >= 0) value = $(elem).val();
+          else value = elem.getAttribute("multiple") ? [] : "";
+        }
+        formData.push({name: elem.name, value})
+      }
+      args = validations.concat(formData)
     }
 
     // Add submitting element to data, if we know it

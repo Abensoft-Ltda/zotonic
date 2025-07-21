@@ -57,9 +57,9 @@
 -type template() :: [metakey() | {metakey(), template(), template()} | {atom()} | string()].
 -type metakey() :: atom() | [atom()].
 
--define(TRUNCATE_DEPTH, 5).
--define(TRUNCATE_LIST, 6).
--define(TRUNCATE_STRING, 1000).
+-define(TRUNCATE_DEPTH, 10).
+-define(TRUNCATE_LIST, 10).
+-define(TRUNCATE_STRING, 10000).
 
 -include_lib("zotonic_core/include/zotonic.hrl").
 
