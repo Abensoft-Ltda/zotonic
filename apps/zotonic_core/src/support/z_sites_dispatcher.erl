@@ -198,6 +198,15 @@ execute(Req, Env) ->
         #dispatch_controller{} = Match ->
             Context = Match#dispatch_controller.context,
             BindingsMap = maps:from_list( Match#dispatch_controller.bindings ),
+            % Ensure that sensitive data is only traceable in development environment
+            case m_site:environment(Context) of
+                development -> ok;
+                _ ->
+                    case proplists:get_bool(sensitive, Match#dispatch_controller.controller_options) of
+                        true -> erlang:process_flag(sensitive, true);
+                        false -> ok
+                    end
+            end,
             Metrics = #{
                 site => z_context:site(Context),
                 peer_ip => m_req:get(peer_ip, Context),
@@ -278,7 +287,6 @@ dispatch(Req, Env) ->
         protocol = Scheme,
         tracer_pid = undefined
     },
-    z_depcache:in_process(true),
     z_memo:enable(),
     dispatch_1(DispReq, Req, Env).
 
@@ -981,6 +989,9 @@ tokens_to_path(Ts) ->
     Bindings :: bindings(),
     Context :: z:context(),
     Dispatch :: dispatch().
+handle_rewrite({ok, Id, ExtraBindings}, DispReq, MatchedHost, NonMatchedPathTokens, Bindings, Context) when is_integer(Id) ->
+    Bindings1 = ExtraBindings ++ Bindings,
+    handle_rewrite({ok, Id}, DispReq, MatchedHost, NonMatchedPathTokens, Bindings1, Context);
 handle_rewrite({ok, Id}, DispReq, MatchedHost, NonMatchedPathTokens, Bindings, Context) when is_integer(Id) ->
     %% Retry with the resource's default page uri
     case rsc_dispatch(Id, Context) of
@@ -990,7 +1001,7 @@ handle_rewrite({ok, Id}, DispReq, MatchedHost, NonMatchedPathTokens, Bindings, C
         none ->
             UrlContext = case proplists:get_value(z_language, Bindings) of
                 undefined -> z_context:set_language('x-default', Context);
-                _Lang -> Context
+                Lang -> z_context:set_language(Lang, Context)
             end,
             case m_rsc:p_no_acl(Id, default_page_url, UrlContext) of
                 undefined ->

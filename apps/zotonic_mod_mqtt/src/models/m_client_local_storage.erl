@@ -18,6 +18,15 @@
 %% limitations under the License.
 
 -module(m_client_local_storage).
+-moduledoc("
+Model to access the `localStorage` on the client (browser).
+
+The client-id and routing topic in the *context* must be set when calling the functions in this module. This is the case
+for all MQTT topic calls from the client.
+
+The localStorage on the client is accessed via publishing to the topic `~client/model/localStorage/...`. In the client
+the topic is `model/localStorage/...`.
+").
 
 -export([
     get/2,
@@ -96,13 +105,13 @@ get_secure(Key, Context) ->
 
 secret(Context) ->
     case m_config:get_value(mod_mqtt, local_storage_secret, Context) of
-        <<>> -> generate_auth_anon_secret(Context);
-        undefined -> generate_auth_anon_secret(Context);
+        <<>> -> generate_local_storage_secret(Context);
+        undefined -> generate_local_storage_secret(Context);
         Secret -> Secret
     end.
 
--spec generate_auth_anon_secret( z:context() ) -> binary().
-generate_auth_anon_secret(Context) ->
+-spec generate_local_storage_secret( z:context() ) -> binary().
+generate_local_storage_secret(Context) ->
     Secret = z_ids:id(?SECRET_LENGTH),
     m_config:set_value(mod_mqtt, local_storage_secret, Secret, Context),
     Secret.

@@ -51,5 +51,34 @@
         <input type="checkbox" id="is_featured" name="is_featured" value="1" {% if id.is_featured %}checked="checked"{% endif %}/>
         {_ Featured _}
     </label>
+
+    <div class="pull-right">
+        <div class="btn-group">
+            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="{_ More actions: duplicate or delete page _}">
+                {_ More _} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right">
+                {% block more_actions %}
+                    {% if m.acl.insert[id.category.name] %}
+                        <li>
+                            <a href="#duplicate" id="duplicate-rsc-action" role="menuitem" aria-label="{_ Make a duplicate of this page. _}">
+                                <span class="glyphicon glyphicon-duplicate"></span> {_ Duplicate this page... _}
+                            </a>
+                            {% wire id="duplicate-rsc-action" action={dialog_duplicate_rsc id=id} %}
+                        </li>
+                    {% endif %}
+                    {% if id.is_deletable %}
+                        <li role="separator" class="divider"></li>
+                        <li>
+                            <a href="#delete" id="delete-rsc-action" role="menuitem" aria-label="{_ Delete this page. _}">
+                                <span class="glyphicon glyphicon-trash"></span> {_ Delete this page... _}
+                            </a>
+                        </li>
+                        {% wire id="delete-rsc-action" action={dialog_delete_rsc id=id on_success={redirect back}} %}
+                    {% endif %}
+                {% endblock %}
+            </ul>
+        </div>
+    </div>
 </div>
 {% endblock %}

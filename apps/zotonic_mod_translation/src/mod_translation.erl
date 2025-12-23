@@ -28,12 +28,130 @@
 
 
 -module(mod_translation).
+-moduledoc("
+This module provides support for dealing with multiple languages.
+
+How content and static strings are translated is explained in full in [Translation](/id/doc_developerguide_translation#guide-translation).
+
+
+
+Language as part of the URL
+---------------------------
+
+By default, [mod\\_translation](#mod-translation) prefixes each URL (using [URL
+rewriting](/id/doc_developerguide_dispatch_rules#guide-dispatch-rewriting)) in your website with the code of the current
+language. The idea behind this is that each language version of a [resource](/id/doc_glossary#term-resource) gets its
+own URL, and is as such indexable for Google.
+
+This behaviour is enabled by default, but can be switched off in the admin, by going to Structure, Translation. There is
+a checkbox labelled “Show the language in the URL”.
+
+Alternatively you can set the config key `mod_translation.rewrite_url` to `false`.
+
+
+
+Programmatically switching languages
+------------------------------------
+
+In a template, you can use [mod\\_translation](#mod-translation)’s postback hook to switch between languages:
+
+
+```erlang
+{% button text=\"Dutch\" postback={set_language code=\"nl\"} delegate=`mod_translation` %}
+```
+
+Creates a button which switches to Dutch. And another one for english:
+
+
+```erlang
+{% button text=\"English\" postback={set_language code=\"en\"} delegate=`mod_translation` %}
+```
+
+
+
+Supporting right-to-left languages
+----------------------------------
+
+For basic use you don’t need to do anything. Zotonic base site adds a `lang` attribute to the html tag, and when a
+right-to-left language is selected (for instance Arabic), the browser will interpret `lang=\"ar\"` and automatically
+adapt the content to right-to-left.
+
+
+
+### Custom right-to-left content
+
+If you write your own templates, you can add the `lang` tag in the html or body tag, for instance:
+
+
+```erlang
+<body {% include \"_language_attrs.tpl\" id=id %} >
+```
+
+This will generate the following, when Zotonic selected Arabic for the page with id id:
+
+
+```erlang
+<body xml:lang=\"ar\" lang=\"ar\" dir=\"rtl\" class=\"rtl\">
+```
+
+When you want to add an extra class added to the rtl or ltr class you can use:
+
+
+```erlang
+<body {% include \"_language_attrs.tpl\" id=id class=\"my-body-class\" %} >
+```
+
+To create individual right-to-left elements, you can use the same principle:
+
+
+```erlang
+<div {% include \"_language_attrs.tpl\" %}></div>
+```
+
+And when you want to force a specific language:
+
+
+```erlang
+<div {% include \"_language_attrs.tpl\" language=`en` %} >This is English content</div>
+```
+").
 -author("Marc Worrell <marc@worrell.nl>").
 
 -mod_title("Translation").
 -mod_description("Handle user’s language and generate .pot files with translatable texts.").
 -mod_prio(501).
 -mod_provides([translation]).
+-mod_config([
+        #{
+            module => i18n,
+            key => language,
+            type => string,
+            default => "en",
+            description => "The default language to use for this site. Defaults to 'en'. Note that "
+                           "this is set by reordering the languages in /admin/translation"
+        },
+        #{
+            module => i18n,
+            key => language_stemmer,
+            type => string,
+            default => "en",
+            description => "The default language stemmer to use for this site. Defaults to 'en'. "
+                           "This is used for search indexing and stemming."
+        },
+        #{
+            key => rewrite_url,
+            type => boolean,
+            default => true,
+            description => "Rewrite URLs to include the language code, e.g. /en/ instead of /"
+        },
+        #{
+            key => force_default,
+            type => boolean,
+            default => false,
+            description => "Force the default language if no language is set in the request. "
+                           "If not set then language negotation using the request's Accept-Language header is used."
+        }
+    ]).
 
 -export([
     observe_request_context/3,
@@ -269,18 +387,9 @@ get_q_language(Context) ->
     end.
 
 get_q_language_1(<<A, B, $-, _/binary>> = Lang, Context) ->
-    Acceptable = z_language:acceptable_languages_map(Context),
-    case maps:get(Lang, Acceptable, undefined) of
-        undefined ->
-            case maps:get(<<A,B>>, Acceptable, undefined) of
-                undefined ->
-                    undefined;
-                Code ->
-                    binary_to_atom(Code, utf8)
-            end;
-        Code ->
-            binary_to_atom(Code, utf8)
-    end;
+    get_q_language_1_sub(<<A, B>>, Lang, Context);
+get_q_language_1(<<A, B, C, $-, _/binary>> = Lang, Context) ->
+    get_q_language_1_sub(<<A, B, C>>, Lang, Context);
 get_q_language_1(Lang, Context) ->
     Acceptable = z_language:acceptable_languages_map(Context),
     case maps:get(Lang, Acceptable, undefined) of
@@ -290,8 +399,22 @@ get_q_language_1(Lang, Context) ->
             binary_to_atom(Code, utf8)
     end.
 
+get_q_language_1_sub(BaseLang, Lang, Context) ->
+    Acceptable = z_language:acceptable_languages_map(Context),
+    case maps:get(Lang, Acceptable, undefined) of
+        undefined ->
+            case maps:get(BaseLang, Acceptable, undefined) of
+                undefined ->
+                    undefined;
+                Code ->
+                    binary_to_atom(Code, utf8)
+            end;
+        Code ->
+            binary_to_atom(Code, utf8)
+    end.
+
 observe_user_context(#user_context{ id = UserId }, Context, _Context) ->
-    case m_rsc:p_no_acl(UserId, pref_language, Context) of
+    case m_rsc:p_no_acl(UserId, <<"pref_language">>, Context) of
         Code when Code /= undefined ->
             set_language(Code, Context);
         _ ->
@@ -299,7 +422,7 @@ observe_user_context(#user_context{ id = UserId }, Context, _Context) ->
     end.
 
 observe_set_user_language(#set_user_language{ id = UserId }, Context, _Context) when is_integer(UserId) ->
-    case m_rsc:p_no_acl(UserId, pref_language, Context) of
+    case m_rsc:p_no_acl(UserId, <<"pref_language">>, Context) of
         Code when Code /= undefined -> set_language(Code, Context);
         _ -> Context
     end;
@@ -791,6 +914,8 @@ maybe_language_code(<<A,B,$-,_/binary>> = Code) when A >= $a, A =< $z, B >= $a, 
     z_language:is_valid(Code);
 maybe_language_code(<<A,B,C>> = Code) when A >= $a, A =< $z, B >= $a, B =< $z, C >= $a, C =< $z ->
     z_language:is_valid(Code);
+maybe_language_code(<<A,B,C,$-,_/binary>> = Code) when A >= $a, A =< $z, B >= $a, B =< $z, C >= $a, C =< $z ->
+    z_language:is_valid(Code);
 maybe_language_code(<<$x,$-,_/binary>> = Code) ->
     % x-default, x-klingon, etc.
     z_language:is_valid(Code);
@@ -846,6 +971,7 @@ generate_core() ->
                     }),
                     translation_po:generate(translation_scan:scan(core_apps())),
                     generate_country_pot(),
+                    generate_languages_pot(),
                     consolidate_core();
                 false ->
                     {error, gettext_notfound}
@@ -858,6 +984,11 @@ generate_country_pot() ->
     ZotonicPot = filename:join([ code:priv_dir(zotonic_core), "translations", "zotonic-country.pot" ]),
     Countries = [ {Country, <<>>, undefined} || {_Code, Country} <- l10n_iso2country:iso2country() ],
     z_gettext_compile:generate(ZotonicPot, lists:sort(Countries)).
+
+generate_languages_pot() ->
+    ZotonicPot = filename:join([ code:priv_dir(zotonic_core), "translations", "zotonic-language.pot" ]),
+    Languages = [ {Language, <<>>, undefined} || Language <- z_language_data:language_names_en() ],
+    z_gettext_compile:generate(ZotonicPot, Languages).
 
 %% @doc Return a list of all core modules and sites - only for the zotonic git project.
 core_apps() ->

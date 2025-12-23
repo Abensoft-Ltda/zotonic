@@ -18,6 +18,72 @@
 %% limitations under the License.
 
 -module(mod_authentication).
+-moduledoc("
+This module contains the main Zotonic authentication mechanism. It contains the logon and logoff controllers, and
+implements the various hooks as described in the [Access control](/id/doc_developerguide_access_control#guide-auth) manual.
+
+Configuration keys:
+
+mod\\_authentication.password\\_min\\_length
+
+The minimumum length of passwords. Defaults to 8, set this to an integer value.
+
+mod\\_authentication.is\\_rememberme
+
+Set this to `1` to check the *remember me* checkbox per default
+
+mod\\_authentication.is\\_one\\_step\\_logon
+
+Normally a two-step logon is used, first the username is requested, then the password is requested. In between the
+server checks the username and is able to show alternative authentication methods based on the username. Set this to `1`
+to show the username and password field at once, and disable the display of alternative authentication methods.
+
+mod\\_authentication.is\\_signup\\_confirm
+
+Set to `1` to force user confirmation of new accounts. This is useful when using 3rd party authentication services. If a
+new identity is found then a new account is automatically added. With this option set the user will be asked if they
+want to make a new account. This prevents duplicate accounts when using multiple authentication methods.
+
+mod\\_authentication.reset\\_token\\_maxage
+
+The maximum age of the emailed reset token in seconds. Defaults to 48 hours (172800 seconds). This must be an integer value.
+
+mod\\_authentication.email\\_reminder\\_if\\_nomatch
+
+On the password reset form, a user can enter their email address for receiving an email to reset their password. If a
+user enters an email address that is not connected to an active account then we do not send an email. If this option is
+set to `1` then an email is sent. This prevents the user waiting for an email, but enables sending emails to arbitrary addresses.
+
+mod\\_authentication.auth\\_secret
+
+The secret used to sign authentication cookies. This secret is automatically generated. Changing this secret will
+invalidate all authentication cookies.
+
+mod\\_authentication.auth\\_anon\\_secret
+
+The secret to sign authentication cookies for the anonymous user. This secret is automatically generated. Changing this
+secret will invalidate all authentication cookies for anonymous users.
+
+mod\\_authentication.auth\\_user\\_secret
+
+The secret to sign authentication cookies for the identified users if there is no database to store individual secrets.
+
+mod\\_authentication.auth\\_autologon\\_secret
+
+The secret to sign *remember me* cookies. This secret is automatically generated. Changing this secret will invalidate
+all *remember me* cookies for all users.
+
+Related configurations:
+
+site.password\\_force\\_different
+
+Set to `1` to force a user picking a different password if they reset their password.
+
+site.ip\\_allowlist
+
+If the admin password is set to `admin` then logon is only allowed from local IP addresses. This configuration overrules
+the `ip_allowlist` global configuration and enables other IP addresses to login as `admin` if the password is set to `admin`.
+").
 -author("Marc Worrell <marc@worrell.nl>").
 
 -mod_title("Authentication").
@@ -25,6 +91,92 @@
 -mod_prio(500).
 -mod_depends([base, acl]).
 -mod_provides([authentication]).
+-mod_config([
+        #{
+            key => password_min_length,
+            type => integer,
+            default => 8,
+            description => "The minimum length of new passwords."
+        },
+        #{
+            key => is_signup_confirm,
+            type => boolean,
+            default => true,
+            description => "If true, users will have to confirm their signup by clicking on a link in an email."
+        },
+        #{
+            key => reset_token_max_age,
+            type => integer,
+            default => 172_800,
+            description => "The maximum age of a password reset token in seconds. Default is 2 days (172800 seconds)."
+        },
+        #{
+            key => is_one_step_logon,
+            type => boolean,
+            default => false,
+            description => "If true, the user must enter both their username and password at once. Otherwise they are entered one by one, "
+                           "which helps checking other (external) login options."
+        },
+        #{
+            key => is_rememberme,
+            type => boolean,
+            default => false,
+            description => "If true, the 'remember me' option on the login form will be pre-checked. This will set a cookie that will "
+                           "automatically log them in when they return to the site."
+        },
+        #{
+            key => email_reminder_if_nomatch,
+            type => boolean,
+            default => false,
+            description => "If true, on a password reset with a unregistered email address, an email is sent to that address with "
+                           "the message that it is unknown."
+        },
+        #{
+            key => password_disable_leak_check,
+            type => boolean,
+            default => false,
+            description => "If true, the password leak check with haveibeenpwned.com is disabled. This is useful for testing purposes, "
+                           "but must not be used in production."
+        },
+        #{
+            key => site_auth_key,
+            type => string,
+            default => "",
+            description => "The site authentication key is used to encrypt the tokens that can be exchanged for a valid authentication cookie or "
+                           "MQTT login. It is automatically set, and must be a random string that is kept secret."
+        },
+        #{
+            key => auth_secret,
+            type => string,
+            default => "",
+            description => "The site authentication secret is used to encrypt the authentication cookies. "
+                           "This key is used for sites without database connections, if there is a database connection then every user will "
+                           "receive their own key. It is automatically set, and must be a random string that is kept secret."
+        },
+        #{
+            key => auth_user_secret,
+            type => string,
+            default => "",
+            description => "The authentication user secret is placed in the encrypted authentication cookies. "
+                           "This secret is used for sites without database connections, if there is a database connection then every user will "
+                           "receive their own secret. It is automatically set, and must be a random string that is kept secret."
+        },
+        #{
+            key => auth_anon_secret,
+            type => string,
+            default => "",
+            description => "The authentication secret for anonymous users is placed in the encrypted authentication cookies. "
+                           "This is used to authenticate anonymous users only, the auth_user_secret is used for authenticated users. "
+                           "It is automatically set, and must be a random string that is kept secret."
+        },
+        #{
+            key => auth_autologon_secret,
+            type => string,
+            default => "",
+            description => "The secret used to sign the autologon cookie for automatic authentication of users that checked 'remember me'. "
+                           "It is automatically set, and must be a random string that is kept secret."
+        }
+    ]).
 
 %% gen_server exports
 -export([

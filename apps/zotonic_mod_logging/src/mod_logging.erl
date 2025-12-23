@@ -18,6 +18,57 @@
 %% limitations under the License.
 
 -module(mod_logging).
+-moduledoc("
+See also
+
+For regular application logging, use [Logger](/id/doc_developerguide_logging#dev-logging) instead.
+
+Logs messages to the database and adds log views to the admin.
+
+
+
+Logging messages to the database
+--------------------------------
+
+To persist a log message in the database, enable mod\\_logging in your Zotonic site. Then, in your code, send the
+`#zlog{}` notification:
+
+
+```erlang
+-include_lib(\"zotonic_core/include/zotonic.hrl\").
+
+some_function() ->
+    %% do some things
+
+    z_notifier:notify(
+        #zlog{
+            user_id = z_acl:user(Context),
+            props=#log_email{
+                severity = ?LOG_LEVEL_ERROR,
+                message_nr = MsgId,
+                mailer_status = bounce,
+                mailer_host = z_convert:ip_to_list(Peer),
+                envelop_to = BounceEmail,
+                envelop_from = \"<>\",
+                to_id = z_acl:user(Context),
+                props = []
+        }},
+        Context
+    );
+```
+
+
+
+E-mail log
+----------
+
+The e-mail log is a separate view, which lists which email messages have been sent to which recipients. Any mail that
+gets sent gets logged here.
+
+Todo
+
+Add more documentation
+").
 -author("Arjan Scherpenisse <arjan@scherpenisse.net>").
 -behaviour(gen_server).
 
@@ -26,6 +77,14 @@
 -mod_prio(1000).
 -mod_schema(2).
 -mod_depends([ cron ]).
+-mod_config([
+        #{
+            key => ui_log_disabled,
+            type => boolean,
+            default => false,
+            description => "Disable the logging of errors in the browser UI. This is useful for performance reasons."
+        }
+    ]).
 
 %% gen_server exports
 -export([init/1, handle_call/3, handle_cast/2, handle_info/2, terminate/2, code_change/3]).

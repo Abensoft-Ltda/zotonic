@@ -18,12 +18,65 @@
 %% limitations under the License.
 
 -module(mod_email_relay).
+-moduledoc("
+See also
+
+[mod\\_email\\_receive](/id/doc_module_mod_email_receive), [E-mail handling](/id/doc_developerguide_email#guide-email).
+
+Enables the Zotonic site to relay emails for the site’s users to their real email addresses.
+
+The user’s email address is username@hostname, where the hostname is the hostname as configured in the [site’s
+config file](/id/doc_developerguide_sites#guide-site-anatomy). Any mails to those addresses get forwarded to the
+user’s email address, as configured in the user [resource](/id/doc_glossary#term-resource).
+
+Any email that has no valid recipient is rejected.
+
+Todo
+
+Add more documentation
+").
 -author("Marc Worrell <marc@worrell.nl>").
 
 -mod_title("Email Relay").
 -mod_description("Relay e-mails via other Zotonic servers.").
 -mod_prio(500).
 -mod_schema(1).
+-mod_config([
+        #{
+            key => is_email_relay,
+            type => boolean,
+            default => false,
+            description => "Enable email relay via other Zotonic servers."
+        },
+        #{
+            key => email_relay_url,
+            type => string,
+            default => "",
+            description => "The Zotonic server URL to relay emails to."
+        },
+        #{
+            key => email_relay_send_secret,
+            type => string,
+            default => "",
+            description => "The secret used to authenticate sending emails to the relay server. "
+                           "This is a shared secret between this server and the relay server and must "
+                           "be set manually on both servers. This must be kept secret."
+        },
+        #{
+            key => email_relay_receive_secret,
+            type => string,
+            default => "",
+            description => "The secret used to authenticate receiving emails from the sending server. "
+                           "This is a shared secret between this server and the sending server and must "
+                           "be set manually on both servers. This must be kept secret."
+        },
+        #{
+            key => is_user_relay,
+            type => boolean,
+            default => false,
+            description => "[EXPERIMENTAL - DO NOT USE] Relay received emails for an user directly to known users."
+        }
+    ]).
 
 -export([
     observe_email_status/2,
@@ -159,7 +212,7 @@ task_set_email_block_status(Email, IsBlock, Retries, Context) ->
 observe_email_failed(#email_failed{
         message_nr = MsgId,
         recipient = Recipient,
-        is_final = _IsFinal,
+        is_final = IsFinal,
         reason = Reason,
         status = Status
     }, Context) ->
@@ -167,12 +220,8 @@ observe_email_failed(#email_failed{
         bounce -> permanent_failure;
         illegal_address -> permanent_failure;
         smtphost -> permanent_failure;
-        _ ->
-            case Status of
-                <<"5", _/binary>> -> permanent_failure;
-                <<"605", _/binary>> -> permanent_failure;
-                _ -> temporary_failure
-            end
+        _ when not IsFinal -> temporary_failure;
+        _ when IsFinal -> permanent_failure
     end,
     Report = #{
         <<"type">> => Severity,

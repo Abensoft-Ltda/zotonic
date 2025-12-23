@@ -1,5 +1,8 @@
 %% @author Marc Worrell <marc@worrell.nl>
 %% @copyright 2011-2021 Marc Worrell
+%% @doc Render a complete survey as a single page. Optionally
+%% with answers from a previous submit.
+%% @end
 
 %% Copyright 2011-2021 Marc Worrell
 %%
@@ -16,13 +19,21 @@
 %% limitations under the License.
 
 -module(scomp_survey_poll).
+-moduledoc("
+Show a given survey (with the `id` parameter) as a “poll”. This presents a simpler interface, in which the user is
+directly asked to enter some information, e.g. make a choice between certain things:
+
+
+```django
+{% poll id=123 %}
+```
+").
 
 -behaviour(zotonic_scomp).
 -export([vary/2, render/3]).
 -export([single_result/3]).
 
 -include_lib("zotonic_core/include/zotonic.hrl").
--include_lib("zotonic_mod_survey/include/survey.hrl").
 
 vary(_,_) -> nocache.
 

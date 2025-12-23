@@ -1,9 +1,9 @@
 %% @author Marc Worrell <marc@worrell.nl>
-%% @copyright 2024 Marc Worrell <marc@worrell.nl>
+%% @copyright 2024-2025 Marc Worrell <marc@worrell.nl>
 %% @doc Helper functions for exports.
 %% @end
 
-%% Copyright 2024 Marc Worrell
+%% Copyright 2024-2025 Marc Worrell
 %%
 %% Licensed under the Apache License, Version 2.0 (the "License");
 %% you may not use this file except in compliance with the License.
@@ -119,10 +119,10 @@ set_filename(Id, ProvidedCT, Dispatch, Context) ->
             Context)
     of
         undefined ->
-            CatId = m_rsc:p_no_acl(Id, category_id, Context),
+            CatId = m_rsc:p_no_acl(Id, <<"category_id">>, Context),
             iolist_to_binary([
                         "export-",
-                        z_convert:to_binary(m_rsc:p_no_acl(CatId, name, Context)),
+                        z_convert:to_binary(m_rsc:p_no_acl(CatId, <<"name">>, Context)),
                         "-",
                         z_convert:to_binary(Id),
                         Extension

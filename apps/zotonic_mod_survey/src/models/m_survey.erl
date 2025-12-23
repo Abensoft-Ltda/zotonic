@@ -18,6 +18,9 @@
 %% limitations under the License.
 
 -module(m_survey).
+-moduledoc("
+Not yet documented.
+").
 -author("Marc Worrell <marc@worrell.nl").
 
 -behaviour(zotonic_model).
@@ -38,6 +41,10 @@
     survey_results_prompts/3,
     survey_results_sorted/3,
     prepare_results/2,
+
+    survey_emails/2,
+    is_max_results_reached/2,
+    survey_results_count/2,
 
     is_answer_user/2,
     is_answer_user/3,
@@ -197,6 +204,8 @@ m_get([ <<"did_survey_results_readable">>, SurveyId | Rest ], _Msg, Context) ->
     {ok, {survey_answer_prep:readable_stored_result(RId, SurveyAnswer, Context), Rest}};
 m_get([ <<"is_allowed_results_download">>, SurveyId | Rest ], _Msg, Context) ->
     {ok, {is_allowed_results_download(m_rsc:rid(SurveyId, Context), Context), Rest}};
+m_get([ <<"is_max_results_reached">>, SurveyId | Rest ], _Msg, Context) ->
+    {ok, {is_max_results_reached(SurveyId, Context), Rest}};
 m_get([ <<"handlers">> | Rest ], _Msg, Context) ->
     {ok, {get_handlers(Context), Rest}};
 m_get([ <<"result_columns">>, SurveyId, Format | Rest ], _Msg, Context) ->
@@ -401,38 +410,94 @@ find_answer_id(SurveyId, UserId, _PersistendId, Context) ->
 
 -spec insert_survey_submission_1(m_rsc:resource_id(), undefined | m_rsc:resource_id(), binary(), list(), z:context() )
     -> {ok, pos_integer()|undefined} | {error, term()}.
-insert_survey_submission_1(SurveyId, undefined, PersistentId, Answers, Context) ->
+insert_survey_submission_1(SurveyId, UserId, PersistentId, Answers, Context) ->
+    {UserId1, PersistentId1} = if
+        is_integer(UserId) -> {UserId, undefined};
+        true -> {undefined, PersistentId}
+    end,
+    case do_insert_checked(SurveyId, UserId1, PersistentId1, Answers, Context) of
+        {ok, _} = Ok ->
+            publish(SurveyId, UserId1, PersistentId1, Context),
+            maybe_mail_max_results_reached(SurveyId, Context),
+            Ok;
+        {error, _} = Error ->
+            Error
+    end.
+
+%% @private
+%% @doc If max results is set, check the amount of submissions before
+%% inserting the new result. Run the check/insert as a singular job to prevent
+%% race conditions.
+do_insert_checked(SurveyId, UserId, PersistentId, Answers, Context) ->
+    case m_rsc:p_no_acl(SurveyId, <<"survey_max_results_int">>, Context) of
+        Max when is_integer(Max), Max =< 0 ->
+            {error, full};
+        Max when is_integer(Max) ->
+            jobs:run(
+                zotonic_singular_job,
+                fun() ->
+                    case is_max_results_reached(SurveyId, Context) of
+                        false ->
+                            do_insert_unchecked(SurveyId, UserId, PersistentId, Answers, Context);
+                        true ->
+                            {error, full}
+                    end
+                end);
+        undefined ->
+            do_insert_unchecked(SurveyId, UserId, PersistentId, Answers, Context)
+    end.
+
+%% @private
+do_insert_unchecked(SurveyId, UserId, PersistentId, Answers, Context) ->
     {Points, AnswersPoints} = survey_test_results:calc_test_results(SurveyId, Answers, Context),
-    Result = z_db:insert(
+    z_db:insert(
         survey_answers,
         #{
             <<"survey_id">> => SurveyId,
-            <<"user_id">> => undefined,
+            <<"user_id">> => UserId,
             <<"persistent">> => PersistentId,
             <<"is_anonymous">> => z_convert:to_bool(m_rsc:p_no_acl(SurveyId, survey_anonymous, Context)),
             <<"language">> => z_context:language(Context),
             <<"points">> => Points,
             <<"answers">> => AnswersPoints
         },
-        Context),
-    publish(SurveyId, undefined, PersistentId, Context),
-    Result;
-insert_survey_submission_1(SurveyId, UserId, _PersistentId, Answers, Context) ->
-    {Points, AnswersPoints} = survey_test_results:calc_test_results(SurveyId, Answers, Context),
-    Result = z_db:insert(
-        survey_answers,
-        #{
-            <<"survey_id">> => SurveyId,
-            <<"user_id">> => UserId,
-            <<"persistent">> => undefined,
-            <<"is_anonymous">> => z_convert:to_bool(m_rsc:p_no_acl(SurveyId, survey_anonymous, Context)),
-            <<"language">> => z_context:language(Context),
-            <<"points">> => Points,
-            <<"answers">> => AnswersPoints
-        },
-        Context),
-    publish(SurveyId, UserId, undefined, Context),
-    Result.
+        Context).
+
+
+maybe_mail_max_results_reached(SurveyId, Context) ->
+    case is_max_results_reached(SurveyId, Context) of
+        true ->
+            Vars = [
+                {id, SurveyId},
+                {results_count, survey_results_count(SurveyId, Context)},
+                {max_results, m_rsc:p_no_acl(SurveyId, <<"survey_max_results_int">>, Context)}
+            ],
+            lists:foreach(
+                fun(E) ->
+                    EmailRec = #email{
+                        to = E,
+                        html_tpl = "email_survey_full.tpl",
+                        vars = Vars
+                    },
+                    z_email:send(EmailRec, z_acl:sudo(Context))
+                end,
+                survey_emails(SurveyId, Context));
+        false ->
+            ok
+    end.
+
+-spec survey_emails(SurveyId, Context) -> [ EmailAddress ] when
+    SurveyId :: m_rsc:resource(),
+    Context :: z:context(),
+    EmailAddress :: binary().
+survey_emails(SurveyId, Context) ->
+    case m_rsc:p_no_acl(SurveyId, <<"survey_email">>, Context) of
+        undefined -> [];
+        <<>> -> [];
+        Email ->
+            Es = z_email_utils:extract_emails(Email),
+            lists:filter(fun z_email_utils:is_email/1, Es)
+    end.
 
 %% @private
 prepare_results(SurveyId, Context) ->
@@ -484,6 +549,37 @@ prep_chart(Type, Block, Stats, Context) ->
             M:prep_chart(Block, Stats, Context)
     end.
 
+-spec is_max_results_reached(SurveyId, Context) -> boolean() when
+    SurveyId :: m_rsc:resource(),
+    Context :: z:context().
+is_max_results_reached(SurveyId, Context) ->
+    case m_rsc:p_no_acl(SurveyId, <<"survey_max_results_int">>, Context) of
+        Max when is_integer(Max), Max =< 0 ->
+            true;
+        Max when is_integer(Max) ->
+            Count = survey_results_count(SurveyId, Context),
+            Count >= Max;
+        _ ->
+            false
+    end.
+
+%% @doc Fetch the number of answers to a survey.
+-spec survey_results_count(Id, Context) -> Count when
+    Id :: m_rsc:resource(),
+    Context :: z:context(),
+    Count :: non_neg_integer().
+survey_results_count(Id, Context) ->
+    case m_rsc:rid(Id, Context) of
+        undefined ->
+            0;
+        RId ->
+            z_db:q1("
+                select count(*)
+                from survey_answers
+                where survey_id = $1",
+                [RId],
+                Context)
+    end.
 
 %% @doc Fetch the aggregate answers of a survey.
 -spec survey_stats(m_rsc:resource_id(), z:context()) ->
@@ -984,7 +1080,7 @@ survey_captions(Id, Context) ->
 %% @private
 survey_totals(Id, Context) ->
     Stats = survey_stats(Id, Context),
-    case m_rsc:p(Id, blocks, Context) of
+    case m_rsc:p(Id, <<"blocks">>, Context) of
         Blocks when is_list(Blocks) ->
             All = lists:map(
                 fun(Block) ->

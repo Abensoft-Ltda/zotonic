@@ -1,8 +1,9 @@
 %% @author Marc Worrell <marc@worrell.nl>
-%% @copyright 2013 Marc Worrell
+%% @copyright 2013-2025 Marc Worrell
 %% @doc Generic export routines for data sources
+%% @end
 
-%% Copyright 2013 Marc Worrell
+%% Copyright 2013-2025 Marc Worrell
 %%
 %% Licensed under the Apache License, Version 2.0 (the "License");
 %% you may not use this file except in compliance with the License.
@@ -17,6 +18,29 @@
 %% limitations under the License.
 
 -module(mod_export).
+-moduledoc("
+Provides a generic framework to export [resources](/id/doc_glossary#term-resource).
+
+
+
+Admin interface
+---------------
+
+[](../../_images/admin_view.png)When [enabled](/id/doc_developerguide_modules#activating-modules), this module adds two things to each admin edit page:
+
+*   extra content types to the ‘View’ dropdown menu
+*   an ‘Export’ block.
+
+Both single pages and [query resources](/id/doc_developerguide_search#guide-query-resources) can be exported. For a
+query, all resources matching it will be included in the export.
+
+
+
+Customizing exports
+-------------------
+
+To customize data selection and the properties that are exported, observe one or several of the [export notifications](/id/doc_reference_notifications_import_export#export-notifications).
+").
 -author("Marc Worrell <marc@worrell.nl>").
 
 -mod_title("Export Data").
@@ -26,8 +50,7 @@
 
 -export([
     observe_content_types_dispatch/3,
-    observe_export_resource_content_disposition/2,
-    rsc_props/1
+    observe_export_resource_content_disposition/2
 ]).
 
 -include_lib("zotonic_core/include/zotonic.hrl").
@@ -49,5 +72,3 @@ observe_export_resource_content_disposition(
 observe_export_resource_content_disposition(#export_resource_content_disposition{}, _Context) ->
     {ok, <<"attachment">>}.
 
-rsc_props(Context) ->
-    m_rsc:common_properties(Context) ++ [page_url_abs].

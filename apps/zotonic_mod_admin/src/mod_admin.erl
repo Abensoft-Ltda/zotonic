@@ -18,6 +18,323 @@
 %% limitations under the License.
 
 -module(mod_admin).
+-moduledoc("
+Todo
+
+Finish documentation
+
+
+
+Extending the admin menu
+------------------------
+
+See [m\\_admin\\_menu](/id/doc_model_model_admin_menu) on how to extend the admin menu.
+
+
+
+Extending the admin edit page
+-----------------------------
+
+There are several special templates names that will be automatically included into the /admin/edit/xxx page from when
+you create these specially named templates.
+
+`_admin_edit_basics.tpl`
+
+Will be automatically included into main (left) div (at top).
+
+`_admin_edit_content.tpl`
+
+Will be automatically included into main (left) div (at bottom).
+
+`_admin_edit_sidebar.tpl`
+
+Will be automatically included into right sidebar (near middle/bottom).
+
+These templates are included using the [all catinclude](/id/doc_template_tag_tag_all_catinclude) tag; so if you need
+something in the sidebar just for persons, create a `_admin_edit_sidebar.person.tpl` file in your project.
+
+
+
+### Overriding TinyMCE options
+
+If you need to override TinyMCE options; adding plugins, or setting other settings; you can create an
+`_admin_tinymce_overrides_js.tpl` file which can contain extra settings for the TinyMCE editors in the admin.
+
+The template must contain JavasSript which modifies the tinyInit variable just before the editor is started. For
+example, to tweak the “paste” options you can put the following in the template:
+
+
+```javascript
+tinyInit.theme_advanced_blockformats = \"p,h1,h2\"
+tinyInit.paste_auto_cleanup_on_paste = true;
+tinyInit.paste_remove_styles = true;
+tinyInit.paste_remove_styles_if_webkit = true;
+tinyInit.paste_strip_class_attributes = true;
+tinyInit.paste_text_sticky = true;
+tinyInit.paste_text_sticky_default = true;
+```
+
+
+
+### TinyMCE Zotonic options
+
+Zotonic provides extra init options:
+
+`z_insert_dialog_enabled`
+
+Set this to false to prevent the insert media dialog from showing. Default `true`.
+
+`z_properties_dialog_enabled`
+
+Set this to false to prevent the media properties dialog from showing. Default `true`.
+
+
+
+Writing admin widget templates
+------------------------------
+
+This section contains examples of templates to create widgets for the /admin. Each of these examples extends basic
+several widget templates from mod\\_admin. To write your own you need to drop example content and fill holes in these
+example widgets.
+
+You can use them as basis for your site admin-related tasks.
+
+`_admin_dashboard_example.tpl`
+
+Very simple example widget for admin dashboard. Contains blocks for title and body. Look at /admin to see several
+dashboard widgets (latest events, pages, media, etc).
+
+`_admin_widget_std.tpl`
+
+Sligthly more complex widget example. Same templates are used into /admin/edit/N for main content and sidebar widgets.
+These widgets do not provide any localization abilities. Also note that there are several special widget names:
+
+`_admin_widget_i18n.tpl`
+
+Complex widget example. Is used to edit localized rsc properties. It will be rendered as tabs. See /admin/edit/N top
+left to see the tabs. If mod\\_translation disabled, then i18n-widgets are displayed same as \\_admin\\_widget\\_std.tpl.
+
+
+
+Making an admin widget conditionally visible
+--------------------------------------------
+
+See also
+
+[admin\\_edit\\_widget\\_i18n.tpl](../templates/template_admin_edit_widget_i18n.html#template-admin-edit-widget-i18n), [inherit](/id/doc_template_tag_tag_inherit)
+
+To make an entire admin widget visible or not, depending on some condition that you want to calculate inside the
+widget’s code, you can use the widget\\_wrapper block (which sits around the entire widget) in combination with the
+[inherit](/id/doc_template_tag_tag_inherit) tag, wrapping that with a condition.
+
+For instance, [mod\\_backup](/id/doc_module_mod_backup) uses this technique to display the import/export sidebar widget.
+Excerpt from mod\\_backup’s \\_admin\\_edit\\_sidebar.tpl:
+
+
+```django
+{# Make the widget conditional, based on the config value mod_backup.admin_panel #}
+{% block widget_wrapper %}
+    {% if m.config.mod_backup.admin_panel.value %}
+        {% inherit %}
+    {% endif %}
+{% endblock %}
+```
+
+In this example, when the condition is true, the wrapper is rendered normally (content is inherited from the extended
+template); when false, the wrapper block is overridden by new (but void) content.
+
+
+
+Extending the admin overview page
+---------------------------------
+
+The overview page at `admin/overview` shows a table with links to all pages. It can be filtered and sorted. This
+extension deals with the view when a category filter has been selected.
+
+The goal is to add more specific information that helps to distinguish pages.
+
+The Category column, second from the left, can be extended to carry category-specific information. As an example, pages
+of category Event show the start date for each event, grayed out when the event is in the past. Something like this:
+
+| Title       | Starts              | Created on         |
+| ----------- | ------------------- | ------------------ |
+| Great event | 2016-08-27 00:00:00 | 25 Aug 2015, 22:19 |
+| Past event  | 2014-01-02 00:00:00 | 01 Jan 2014, 13:10 |
+
+Instead of dates, the information can be anything - from color coding labels to location data, the number of comments or
+the completeness state of product descriptions.
+
+
+
+### Setting up templates
+
+To make it work we are using 3 templates (where category\\_name is the lowercase name of your category):
+
+`_admin_overview_list.category_name.tpl`
+
+Overrides the overview with a `field` variable for our custom sort. If we are using [an existing resource
+property](/id/doc_model_model_rsc) such as `date_start`, we write:
+
+
+```django
+{% include \"_admin_overview_list.tpl\"
+  field=\"pivot.date_start\"
+%}
+```
+
+`_admin_sort_header.category_name.tpl`
+
+The sort header caption. For a non-sortable header, just write the caption as text. For a sortable header, include the
+sort functionality in `_admin_sort_header.tpl` and pass the caption as variable:
+
+
+```django
+{% include \"_admin_sort_header.tpl\"
+    caption=\"My caption\"
+    type=\"date\"
+%}
+```
+
+`type=\"date\"` indicates that sorting should start descending, from new to old.
+
+`_admin_overview_list_data.category_name.tpl`
+
+Contains the category-specific information. This is a freeform Zotonic template. The Events example checks if the end
+date is in the past:
+
+
+```django
+{% if id.date_end|in_past %}
+    <span class=\"text-muted\">{{ id.date_start|timesince }}</span>
+{% else %}
+    <span>{{ id.date_start|timesince }}</span>
+{% endif %}
+```
+
+
+
+### Custom sort properties
+
+To sort on values that are not stored in the default Zotonic resources, you will need to create a [custom
+pivot](/id/doc_cookbook_custom_pivot#cookbook-custom-pivots). This will create an additional database table with the
+values to sort on.
+
+Let’s take the (unlikely) example where we want to display the summary of each page (and sort on it as well). The
+summary data is not stored in an easily accessible way (at least for sorting), so we need to add 2 pivot methods to our
+Erlang module:
+
+
+```django
+-module(mymodule).
+
+-export([
+    init/1,
+    observe_custom_pivot/2
+]).
+
+init(Context) ->
+    z_pivot_rsc:define_custom_pivot(?MODULE, [{summary, \"text\"}], Context),
+    ok.
+
+observe_custom_pivot({custom_pivot, Id}, Context) ->
+    case z_trans:lookup_fallback(m_rsc:p(Id, summary, Context), Context) of
+        undefined ->
+            none;
+        Summary ->
+            {?MODULE, [{summary, Summary}]}
+    end.
+```
+
+For this example we are just grabbing the default language text.
+
+The `field` name in `_admin_overview_list.category_name.tpl` now just needs to contain the pivot column name:
+
+
+```django
+{% include \"_admin_overview_list.tpl\"
+    field=\"pivot.mymodule.summary\"
+%}
+```
+
+And the sort header template `_admin_sort_header.category_name.tpl` adds the custom pivot variable:
+
+
+```django
+{% include \"_admin_sort_header.tpl\"
+    caption=\"Summary\"
+%}
+```
+
+
+
+Resource meta features
+----------------------
+
+Resources in the meta category can have ‘features’: certain resource properties (usually in the form of checkboxes)
+that decide what to show or hide on certain pages in the admin. To use this, create a `_admin_features.category.tpl` in
+your module.
+
+For instance, the module mod\\_geomap defines the following `_admin_features.category.tpl` to create an extra checkbox
+so that per category can be defined whether or not the geodata box should be shown:
+
+
+```django
+<div class=\"controls\">
+        <label class=\"checkbox\">
+        <input value=\"1\" type=\"checkbox\"
+               name=\"feature_show_geodata\"
+               {% if id.is_feature_show_geodata|if_undefined:true %}checked{% endif %}
+               />
+        {_ Show geo data on edit page _}
+    </label>
+</div>
+```
+
+And on the edit page there is this check to conditionally include the geodata box:
+
+
+```django
+{% if id.category_id.is_feature_show_geodata|if_undefined:true %}
+```
+
+The filter [if\\_undefined](/id/doc_template_filter_filter_if_undefined) is used so that the default value can be true
+when the checkbox has never been touched.
+
+
+
+Configuration keys
+------------------
+
+For the admin there are the following configuration keys:
+
+*   `mod_admin.rsc_dialog_tabs`
+*   `mod_admin.rsc_dialog_is_published`
+*   `mod_admin.rsc_dialog_is_dependent`
+*   `mod_admin.rsc_dialog_hide_dependent`
+*   `mod_admin.connect_created_me`
+
+The `mod_admin.rsc_dialog_tabs` key defines which tabs are shown in the new resource, media-upload, and image-link
+dialogs. Per defauls these dialogs show all the possible tabs, with this configurarion key it is possible to change that.
+
+Available tabs are: `find,new,upload,url,embed,oembed,depiction`. More can be defined by modules.
+
+Tab `depiction` is used for the TinyMCE image-link dialog; it shows all media connected using the `depiction` predicate.
+
+The configuration `mod_admin.rsc_dialog_is_published` defines the default *is\\_published* state for new resources.
+Setting this key to 1 will check the *is\\_published* checkbox.
+
+The configuration `mod_admin.edge_list_max_length` defines the maximum number of connections shown per predicate in the
+connection list sidebar. If there are more connections then the list truncated, and the message \\_Too many connections,
+only the first and last are shown.\\_ is displayed. The default is 100 connections.
+
+The configuration `mod_admin.rsc_dialog_is_dependent` defines the default *is\\_dependent* state for new resources.
+Setting this key to 1 will check the *is\\_dependent* checkbox.
+
+With the configuration `mod_admin.rsc_dialog_hide_dependent` the *dependent* checkbox can be hidden for non admin users.
+
+If the `mod_admin.connect_created_me` is set then the connect dialogs will per default filter for content made by the
+current user. The current setting is stored in the sessionStorage with the key `dialog_connect_created_me`.
+").
 -author("Marc Worrell <marc@worrell.nl>").
 
 -mod_title("Admin module").
@@ -26,6 +343,44 @@
 -mod_provides([ admin ]).
 -mod_schema(3).
 -mod_prio(1000).
+-mod_config([
+        #{
+            key => is_notrack_refers,
+            type => boolean,
+            default => false,
+            description => "If true, the admin module will not track refers connections between resources."
+        },
+        #{
+            key => connect_created_me,
+            type => boolean,
+            default => true,
+            description => "If true, the connect dialog will set per default the 'created by me' filter."
+        },
+        #{
+            key => edge_list_max_length,
+            type => integer,
+            default => 100,
+            description => "Maximum number of edges to show in the edge list on the resource edit pages."
+        },
+        #{
+            key => rsc_dialog_is_published,
+            type => boolean,
+            default => false,
+            description => "If true, the resource create dialog will check the 'is published' checkbox."
+        },
+        #{
+            key => rsc_dialog_is_dependent,
+            type => boolean,
+            default => false,
+            description => "If true, the resource create dialog will check the 'is dependent' checkbox."
+        },
+        #{
+            key => rsc_dialog_hide_dependent,
+            type => boolean,
+            default => false,
+            description => "If true, the resource create dialog will hide the dependent checkbox."
+        }
+    ]).
 
 -export([
      observe_sanitize_element/3,
@@ -33,6 +388,8 @@
      observe_admin_edit_blocks/3,
      observe_module_ready/2,
      observe_rsc_update_done/2,
+     observe_acl_is_owner/2,
+
      event/2,
 
      do_link/5,
@@ -89,6 +446,7 @@ class_to_opts(Class) ->
     end.
 
 
+%% @doc Provide standard admin menu items.
 -spec observe_admin_menu(#admin_menu{}, Acc, z:context()) -> Result when
     Acc :: MenuItems,
     Result :: MenuItems,
@@ -176,7 +534,7 @@ admin_menu_content_queries(Context) ->
             CQ ++ [ #menu_separator{ parent = admin_content, sort = 10 } ]
     end.
 
-
+%% @doc Provide standard resource block types for admin edit page.
 -spec observe_admin_edit_blocks(#admin_edit_blocks{}, Acc, z:context()) -> Result when
     Acc :: BlockGroups,
     Result :: BlockGroups,
@@ -194,11 +552,14 @@ observe_admin_edit_blocks(#admin_edit_blocks{}, Menu, Context) ->
         | Menu
     ].
 
-
+%% @doc When the module is ready, flush the admin_menu depcache. The new module might
+%% add menu entries.
 -spec observe_module_ready(module_ready, z:context()) -> any().
 observe_module_ready(module_ready, Context) ->
     z_depcache:flush(admin_menu, Context).
 
+%% @doc After a resource is saved, ensure that all embedded resource references are
+%% reflected in refers connections.
 -spec observe_rsc_update_done(#rsc_update_done{}, z:context()) -> any().
 observe_rsc_update_done(#rsc_update_done{ action = Action, id = Id }, Context) when
     Action =:= insert;
@@ -211,6 +572,16 @@ observe_rsc_update_done(#rsc_update_done{ action = Action, id = Id }, Context) w
     end;
 observe_rsc_update_done(#rsc_update_done{}, _Context) ->
     ok.
+
+%% @doc If the given resource is a temporary resource then the current session
+%% can be the owner/creator of that resource. Even if the current session does not
+%% have a user. Example is the creation of remark resources by visitors.
+-spec observe_acl_is_owner(#acl_is_owner{}, z:context()) -> boolean() | undefined.
+observe_acl_is_owner(#acl_is_owner{ id = RscId }, Context) ->
+    case filter_temporary_rsc:is_creator(RscId, Context) of
+        true -> true;
+        false -> undefined
+    end.
 
 
 event(#postback_notify{message= <<"admin-insert-block">>}, Context) ->
@@ -781,6 +1152,7 @@ context_language(Context) ->
             end
     end.
 
+-spec manage_schema(z_module_manager:manage_schema(), z:context()) -> #datamodel{}.
 manage_schema(_Version, Context) ->
     m_admin_note:install(Context),
     #datamodel{

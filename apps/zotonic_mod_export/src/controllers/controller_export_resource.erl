@@ -19,6 +19,11 @@
 %% limitations under the License.
 
 -module(controller_export_resource).
+-moduledoc("
+Todo
+
+Not yet documented.
+").
 -author("Marc Worrell <marc@worrell.nl>").
 
 -export([
@@ -84,6 +89,8 @@ process(_Method, _AcceptedCT, ProvidedCT, Context) ->
 
 get_id(Context) ->
     case z_context:get(id, Context) of
+        {ok, MaybeId} ->
+            {MaybeId, Context};
         undefined ->
             case z_context:get_q(<<"id">>, Context) of
                 undefined ->
@@ -94,7 +101,8 @@ get_id(Context) ->
                     RscId = m_rsc:rid(Id, Context),
                     {RscId, z_context:set(id, {ok, RscId}, Context)}
             end;
-        {ok, Id} ->
-            {Id, Context}
+        Id ->
+            RscId = m_rsc:rid(Id, Context),
+            {RscId, z_context:set(id, {ok, RscId}, Context)}
     end.
 

@@ -18,12 +18,70 @@
 %% limitations under the License.
 
 -module(mod_microsoft).
+-moduledoc("
+Adds logon using the Microsoft identity platform.
+
+If enabled then on `/admin/authentication-services` a panel is added for the Microsoft identity platform.
+
+Here the following can de configured:
+
+*   Application ID: as found in the app registration
+*   Client Secret: as found in the app registration
+*   Scope: space separated list of scopes that you want the user to consent to. Examples are: email, offline\\_access and profile. The openid scope is always added automatically. Defaults to `email profile`.
+*   Tenant: Control who can sign in. Allowed values are: common, organizations, consumers, and tenant identifiers. Defaults to `common`.
+
+On the [Azure Portal App registrations](https://go.microsoft.com/fwlink/?linkid=2083908) an App can be registered and configured.
+
+The redirect path for the app is shown on top of the `/admin/authentication-services` screen and is of the format: `https://example.com/oauth-service/redirect`
+").
 -author("Marc Worrell <marc@worrell.nl>").
 
 -mod_title("Microsoft").
 -mod_description("Adds Microsoft login and other Microsoft/Azure related features.").
 -mod_prio(400).
 -mod_depends([ admin, authentication, mod_oauth2 ]).
+
+% You have to add your Microsoft appid and secret to the config.
+% By default, we only request access to the Microsoft user's e-mail address.
+% The 'openid' scope is always added when requesting the access token.
+-define(MICROSOFT_SCOPE, <<"User.Read email">>).
+
+% The tenant: common, organizations, consumers or Microsot tenant id's
+-define(MICROSOFT_TENANT, <<"common">>).
+
+
+-mod_config([
+        #{
+            key => useauth,
+            type => boolean,
+            default => false,
+            description => "Enable Microsoft Azure authentication. This allows users to log in using their Microsoft Azure account."
+        },
+        #{
+            key => appid,
+            type => string,
+            default => "",
+            description => "The Microsoft Azure App ID used for user authentication."
+        },
+        #{
+            key => appsecret,
+            type => string,
+            default => "",
+            description => "The Microsoft Azure App Secret used for user authentication."
+        },
+        #{
+            key => tennant,
+            type => string,
+            default => ?MICROSOFT_TENANT,
+            description => "The Microsoft Azure tenant used for user authentication."
+        },
+        #{
+            key => scope,
+            type => string,
+            default => ?MICROSOFT_SCOPE,
+            description => "The scope used when requesting access to Microsoft Azure data."
+        }
+    ]).
 
 -export([
     event/2
@@ -33,15 +91,6 @@
 ]).
 
 -include_lib("zotonic_core/include/zotonic.hrl").
-
-
-% You have to add your Microsoft appid and secret to the config.
-% By default, we only request access to the Microsoft user's e-mail address.
-% The 'openid' scope is always added when requesting the access token.
--define(MICROSOFT_SCOPE, <<"User.Read email">>).
-
-% The tenant: common, organizations, consumers or Microsot tenant id's
--define(MICROSOFT_TENANT, <<"common">>).
 
 
 %% @doc Return the Microsoft appid, secret and scope

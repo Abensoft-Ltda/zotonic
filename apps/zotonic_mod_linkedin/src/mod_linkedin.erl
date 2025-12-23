@@ -21,6 +21,21 @@
 %% limitations under the License.
 
 -module(mod_linkedin).
+-moduledoc("
+The mod\\_linkedin module plugs into the [authentication
+systen](/id/doc_developerguide_access_control#guide-authentication) to enable LinkedIn login on your site.
+
+
+
+Configuration
+-------------
+
+[Activate](/id/doc_developerguide_modules#activating-modules) mod\\_facebook, then head to ‘Auth’ > ‘External services’ in the admin interface to enter your LinkedIn app ID and secret. Enable LinkedIn login by checking the ‘Use LinkedIn authentication’ box. This will add a ‘Log in with LinkedIn button to the logon form on your site.
+
+See also
+
+*   [mod\\_facebook](/id/doc_module_mod_facebook)
+").
 -author("Marc Worrell <marc@worrell.nl>").
 
 -mod_title("LinkedIn").
@@ -28,7 +43,26 @@
 -mod_prio(500).
 -mod_depends([ admin, authentication, mod_oauth2 ]).
 -mod_provides([ linkedin ]).
-
+-mod_config([
+        #{
+            key => useauth,
+            type => boolean,
+            default => false,
+            description => "Enable LinkedIn authentication. This allows users to log in using their LinkedIn account."
+        },
+        #{
+            key => appid,
+            type => string,
+            default => "",
+            description => "The LinkedIn App ID used for user authentication."
+        },
+        #{
+            key => appsecret,
+            type => string,
+            default => "",
+            description => "The LinkedIn App Secret used for user authentication."
+        }
+    ]).
 %% interface functions
 -export([
         event/2,

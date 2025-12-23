@@ -18,6 +18,9 @@
 %% limitations under the License.
 
 -module(m_acl_rule).
+-moduledoc("
+Not yet documented.
+").
 -author("Arjan Scherpenisse <marc@worrell.nl").
 
 -behaviour(zotonic_model).
@@ -230,19 +233,37 @@ actions(module, Context) ->
 
 
 update(Kind, Id, Props, Context) ->
-    ?LOG_DEBUG(
-        "ACL user groups update by ~p of ~p:~p with ~p",
-       [z_acl:user(Context), Kind, Id, Props]
-    ),
-    BaseProps = map_props(Props, Context),
-    RuleProps = BaseProps#{
-        <<"is_edit">> => true,
-        <<"modifier_id">> => z_acl:user(Context),
-        <<"modified">> => calendar:universal_time()
-    },
-    Result = z_db:update(table(Kind), Id, RuleProps, Context),
-    mod_acl_user_groups:rebuild(edit, Context),
-    Result.
+    ?LOG_INFO(#{
+        in => zotonic_mod_acl_user_groups,
+        text => <<"ACL user groups update">>,
+        user_id => z_acl:user(Context),
+        kind => Kind,
+        rule_id => Id,
+        props => Props
+    }),
+    case map_props(Props, Context) of
+        {error, Reason} = Error ->
+            ?LOG_ERROR(#{
+                in => zotonic_mod_acl_user_groups,
+                text => <<"ACL user groups update error">>,
+                result => error,
+                reason => Reason,
+                user_id => z_acl:user(Context),
+                kind => Kind,
+                rule_id => Id,
+                props => Props
+            }),
+            Error;
+        BaseProps ->
+            RuleProps = BaseProps#{
+                <<"is_edit">> => true,
+                <<"modifier_id">> => z_acl:user(Context),
+                <<"modified">> => calendar:universal_time()
+            },
+            Result = z_db:update(table(Kind), Id, RuleProps, Context),
+            mod_acl_user_groups:rebuild(edit, Context),
+            Result
+    end.
 
 get(_Kind, undefined, _Context) ->
     {ok, undefined};
@@ -257,42 +278,81 @@ get(Kind, Id, Context) ->
     end.
 
 insert(Kind, Props, Context) ->
-    ?LOG_DEBUG(
-        "ACL user groups insert by ~p of ~p with ~p",
-       [z_acl:user(Context), Kind, Props]
-    ),
-    BaseProps = map_props(Props, Context),
-    RuleProps = BaseProps#{
-        <<"is_edit">> => true,
-        <<"modifier_id">> => z_acl:user(Context),
-        <<"modified">> => calendar:universal_time(),
-        <<"creator_id">> => z_acl:user(Context),
-        <<"created">> => calendar:universal_time()
-    },
-    Result = z_db:insert(table(Kind), RuleProps, Context),
-    mod_acl_user_groups:rebuild(edit, Context),
-    Result.
+    ?LOG_INFO(#{
+        in => zotonic_mod_acl_user_groups,
+        text => <<"ACL user groups insert">>,
+        user_id => z_acl:user(Context),
+        kind => Kind,
+        props => Props
+    }),
+    case map_props(Props, Context) of
+        {error, Reason} = Error ->
+            ?LOG_ERROR(#{
+                in => zotonic_mod_acl_user_groups,
+                text => <<"ACL user groups insert error">>,
+                result => error,
+                reason => Reason,
+                user_id => z_acl:user(Context),
+                kind => Kind,
+                props => Props
+            }),
+            Error;
+        BaseProps ->
+            RuleProps = BaseProps#{
+                <<"is_edit">> => true,
+                <<"modifier_id">> => z_acl:user(Context),
+                <<"modified">> => calendar:universal_time(),
+                <<"creator_id">> => z_acl:user(Context),
+                <<"created">> => calendar:universal_time()
+            },
+            Result = z_db:insert(table(Kind), RuleProps, Context),
+            mod_acl_user_groups:rebuild(edit, Context),
+            Result
+    end.
 
 map_props(Props, Context) when is_list(Props) ->
     {ok, PropsMap} = z_props:from_list(Props),
     map_props(PropsMap, Context);
 map_props(Props, Context) when is_map(Props) ->
     maps:fold(
-        fun(K, V, Acc) ->
-            K1 = z_convert:to_binary(K),
-            Acc#{
-                K1 => map_prop(K1, V, Context)
-            }
+        fun
+            (_K, _V, {error, _} = Err) ->
+                Err;
+            (K, V, Acc) ->
+                K1 = z_convert:to_binary(K),
+                case map_prop(K1, V, Context) of
+                    {error, _} = Error ->
+                        Error;
+                    V1 ->
+                        Acc#{
+                            K1 => map_prop(K1, V1, Context)
+                        }
+                end
         end,
         #{},
         Props).
 
+map_prop(<<"acl_user_group_id">>, undefined, _Context) ->
+    undefined;
 map_prop(<<"acl_user_group_id">>, Id, Context) ->
-    m_rsc:rid(Id, Context);
+    case m_rsc:rid(Id, Context) of
+        undefined -> {error, {invalid_acl_user_group, Id}};
+        RId -> RId
+    end;
+map_prop(<<"content_group_id">>, undefined, _Context) ->
+    undefined;
 map_prop(<<"content_group_id">>, Id, Context) ->
-    m_rsc:rid(Id, Context);
+    case m_rsc:rid(Id, Context) of
+        undefined -> {error, {invalid_content_group, Id}};
+        RId -> RId
+    end;
+map_prop(<<"category_id">>, undefined, _Context) ->
+    undefined;
 map_prop(<<"category_id">>, Id, Context) ->
-    m_rsc:rid(Id, Context);
+    case m_rsc:rid(Id, Context) of
+        undefined -> {error, {invalid_category, Id}};
+        RId -> RId
+    end;
 map_prop(<<"actions">>, Actions, _Context) when is_list(Actions) ->
     Actions1 = lists:map(
         fun(A) -> z_convert:to_binary(A) end,
@@ -410,7 +470,8 @@ ensure_acl_rule_rsc(Context) ->
                 #column_def{name=is_owner, type="boolean", is_nullable=false, default="false"},
                 #column_def{name=is_category_exact, type="boolean", is_nullable=false, default="false"},
                 #column_def{name=category_id, type="integer", is_nullable=true},
-                #column_def{name=content_group_id, type="integer", is_nullable=true}
+                #column_def{name=content_group_id, type="integer", is_nullable=true},
+                #column_def{name=visibility, type="integer", is_nullable=true, default="null"}
             ],
             z_db:create_table(acl_rule_rsc, Columns, Context),
             fk_setnull("acl_rule_rsc", "creator_id", Context),
@@ -422,6 +483,7 @@ ensure_acl_rule_rsc(Context) ->
             ensure_column_is_category_exact(acl_rule_rsc, Context),
             ensure_column_is_block(acl_rule_rsc, Context),
             ensure_column_managed_by(acl_rule_rsc, Context),
+            ensure_column_visibility(acl_rule_rsc, Context),
             ensure_fix_nullable(acl_rule_rsc, Context)
     end.
 
@@ -448,7 +510,8 @@ ensure_acl_rule_collab(Context) ->
             Columns = shared_table_columns() ++ [
                 #column_def{name=is_owner, type="boolean", is_nullable=false, default="false"},
                 #column_def{name=category_id, type="integer", is_nullable=true},
-                #column_def{name=is_category_exact, type="boolean", is_nullable=false, default="false"}
+                #column_def{name=is_category_exact, type="boolean", is_nullable=false, default="false"},
+                #column_def{name=visibility, type="integer", is_nullable=true, default="null"}
             ],
             z_db:create_table(acl_rule_collab, Columns, Context),
             fk_setnull("acl_rule_collab", "creator_id", Context),
@@ -456,8 +519,9 @@ ensure_acl_rule_collab(Context) ->
             fk_cascade("acl_rule_collab", "category_id", Context);
         true ->
             ensure_column_is_category_exact(acl_rule_collab, Context),
-            ensure_column_is_block(acl_rule_module, Context),
-            ensure_column_managed_by(acl_rule_module, Context)
+            ensure_column_visibility(acl_rule_collab, Context),
+            ensure_column_is_block(acl_rule_collab, Context),
+            ensure_column_managed_by(acl_rule_collab, Context)
     end.
 
 ensure_column_is_category_exact(Table, Context) ->
@@ -496,6 +560,19 @@ ensure_column_managed_by(Table, Context) ->
             [] = z_db:q(lists:flatten([
                     "alter table ", atom_to_list(Table),
                     " add column managed_by character varying(255)"
+                ]), Context),
+            z_db:flush(Context)
+    end.
+
+ensure_column_visibility(Table, Context) ->
+    Columns = z_db:column_names(Table, Context),
+    case lists:member(visibility, Columns) of
+        true ->
+            ok;
+        false ->
+            [] = z_db:q(lists:flatten([
+                    "alter table ", atom_to_list(Table),
+                    " add column visibility integer default null"
                 ]), Context),
             z_db:flush(Context)
     end.

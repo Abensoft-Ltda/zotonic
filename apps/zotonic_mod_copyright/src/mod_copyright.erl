@@ -18,12 +18,36 @@
 %% limitations under the License.
 
 -module(mod_copyright).
+-moduledoc("
+Todo
+
+Not yet documented.
+").
 
 -mod_title("Copyright").
 -mod_description("Add copyrights and attribution to resources").
 -mod_prio(500).
+-mod_config([
+        #{
+            key => rights,
+            type => string,
+            default => "CR",
+            description => "The default copyrights for this site. Defaults to CR (All Rights Reserved)."
+        },
+        #{
+            key => attribution,
+            type => string,
+            default => "",
+            description => "The default copyright attribution for this site. Defaults to the title of the site."
+        },
+        #{
+            key => year,
+            type => integer,
+            default => "",
+            description => "The default copyright year for this site. Defaults to the current year."
+        }
+    ]).
 
 -export([
 ]).
 
--include_lib("zotonic_core/include/zotonic.hrl").

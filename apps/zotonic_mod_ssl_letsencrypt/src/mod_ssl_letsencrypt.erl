@@ -18,6 +18,88 @@
 %% limitations under the License.
 
 -module(mod_ssl_letsencrypt).
+-moduledoc("
+See also
+
+[mod\\_ssl\\_ca](/id/doc_module_mod_ssl_ca), [Port configurations](/id/doc_developerguide_configuration_port_ssl_configuration#ref-port-ssl-configuration)
+
+Request certificates from Let’s Encrypt.
+
+Let’s Encrypt &lt;https://www.letsencrypt.com/> provides free SSL certificates.
+
+Zotonic can request these certificates automatically, easing deployment of https secured web sites.
+
+
+
+Hostname & port requirements
+----------------------------
+
+There are some criteria that must for each site requesting a certificate.
+
+1.   Primary hostname(s) resolve using DNS
+2.   Resolved DNS address is not a LAN address
+3.   Site is reachable on the resolved address
+4.   Listening for the hostname on that address
+
+Zotonic *must* listen on http port 80 and ssl port 443 for connections. If you use any other ports then requesting a
+certificate will fail.
+
+See [Port configurations](/id/doc_developerguide_configuration_port_ssl_configuration#ref-port-ssl-configuration) for
+more information about the configuring the correct port numbers and optional proxy settings.
+
+
+
+Requesting a certificate
+------------------------
+
+In the admin, go to System > Modules and ensure that `mod_ssl_letsencrypt` is enabled.
+
+After mod\\_ssl\\_letsencrypt is enabled, go to System > SSL Certificates.
+
+In the *Let’s Encrypt* panel you can request a certificate. Check the alternative names you want to include in the
+certificates. (E.g. *example.com* and *www.example.com*).
+
+The certificate request will run on the background and the status will be shown in the panel.
+
+After a certificate was received, make sure that Let’s Encrypt is the first module on the SSL Certificates list by
+disabling all modules above Lets’s Encrypt.
+
+Now go to your site using https, you should be see your site protected by a Let’s Encrypt certificate.
+
+
+
+Certificate and key files
+-------------------------
+
+The certificate and key files are placed into the site sub-directory of the security directory. The subdirectory will
+be: `sitename/letsencrypt/`
+
+Where *sitename* must be replaced with the name of your site.
+
+The security directory can be found by inspecting the output of:
+
+
+```erlang
+bin/zotonic config
+```
+
+The Zotonic *security* directory can be in one of the following directories:
+
+*   The environment variable `ZOTONIC_SECURITY_DIR`
+*   The `~/.zotonic/security` directory
+*   The `/etc/zotonic/security` directory (only on Linux)
+*   The OS specific directory for application data files
+
+The OS specific directories are:
+
+*   On Unix: `~/.config/zotonic/security/`
+*   On macOS: `~/Library/Application Support/zotonic/security/`
+
+The default is the OS specific directory.
+
+If there is a directory `priv/security/letsencrypt` inside your site’s OTP application folder then that directory will
+be used.
+").
 
 -mod_title("SSL - Let's Encrypt").
 -mod_description("Use SSL Certificate from Let's Encrypt.").
@@ -186,10 +268,6 @@ start_link(Args) when is_list(Args) ->
 %% gen_server callbacks
 %%====================================================================
 
-%% @spec init(Args) -> {ok, State} |
-%%                     {ok, State, Timeout} |
-%%                     ignore               |
-%%                     {stop, Reason}
 %% @doc Initiates the server.
 init(Args) ->
     process_flag(trap_exit, true),
@@ -208,7 +286,12 @@ handle_call(get_self_ping, _From, State) ->
 handle_call({is_self_ping, SelfPing}, _From, #state{self_ping = Ping} = State) ->
     {reply, z_convert:to_binary(SelfPing) =:= Ping, State};
 handle_call({cert_request, _Hostname, _SANs}, _From, #state{request_letsencrypt_pid = Pid} = State) when is_pid(Pid) ->
-    ?LOG_ERROR("Letsencrypt cert request whilst another request is running"),
+    ?LOG_ERROR(#{
+        text => <<"Letsencrypt cert request whilst another request is running">>,
+        in => zotonic_mod_ssl_letsencrypt,
+        result => error,
+        reason => busy
+    }),
     {reply, {error, busy}, State};
 handle_call({cert_request, Hostname, SANs}, _From, State) ->
     case start_cert_request(Hostname, SANs, State) of
@@ -219,12 +302,22 @@ handle_call({cert_request, Hostname, SANs}, _From, State) ->
             {reply, {error, Reason}, State1}
     end;
 handle_call(get_challenge, _From, #state{request_letsencrypt_pid = undefined} = State) ->
-    ?LOG_ERROR("Fetching Letsencrypt challenge but no request running"),
+    ?LOG_ERROR(#{
+        text => <<"Fetching Letsencrypt challenge but no request running">>,
+        in => zotonic_mod_ssl_letsencrypt,
+        result => error,
+        reason => no_request_pid
+    }),
     {reply, {ok, #{}}, State};
 handle_call(get_challenge, _From, #state{request_letsencrypt_pid = _Pid} = State) ->
     case z_letsencrypt:get_challenge() of
         error ->
-            ?LOG_ERROR("Error fetching Letsencrypt challenge."),
+            ?LOG_ERROR(#{
+                text => <<"Error fetching Letsencrypt challenge.">>,
+                in => zotonic_mod_ssl_letsencrypt,
+                result => error,
+                reason => challenge_fetch_faild
+            }),
             {reply, {ok, #{}}, State};
         Map when is_map(Map) ->
             {reply, {ok, Map}, State}
@@ -298,6 +391,8 @@ handle_info({'DOWN', MRef, process, _Pid, Reason}, #state{request_monitor = MRef
         hostname => State#state.request_hostname,
         san => State#state.request_san
     }),
+    Context = z_context:new(State#state.site),
+    z_letsencrypt_job:send_admin(Reason, State#state.request_hostname, Context),
     gen_server:cast(self(), load_cert),
     {noreply, State#state{
         request_monitor = undefined,
@@ -317,7 +412,6 @@ handle_info(Info, State) ->
     }),
     {noreply, State}.
 
-%% @spec terminate(Reason, State) -> void()
 %% @doc This function is called by a gen_server when it is about to
 %% terminate. It should be the opposite of Module:init/1 and do any necessary
 %% cleaning up. When it returns, the gen_server terminates with Reason.
@@ -325,7 +419,6 @@ handle_info(Info, State) ->
 terminate(_Reason, _State) ->
     ok.
 
-%% @spec code_change(OldVsn, State, Extra) -> {ok, NewState}
 %% @doc Convert process state when code is changed
 code_change(_OldVsn, State, _Extra) ->
     {ok, State}.
@@ -428,7 +521,7 @@ start_cert_request(Hostname, SANs, #state{site = Site, request_letsencrypt_pid =
         {key_file, KeyFile}
         | ?ACME_SRV_OPTS
     ],
-    {ok, Pid} = z_letsencrypt_job:request(self(), Hostname, SANs, LetsOpts),
+    {ok, Pid} = z_letsencrypt_job:request(self(), Hostname, SANs, LetsOpts, Context),
     {ok, State#state{
         request_letsencrypt_pid = Pid,
         request_monitor = erlang:monitor(process, Pid),

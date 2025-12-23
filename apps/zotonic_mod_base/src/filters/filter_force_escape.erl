@@ -27,20 +27,42 @@
 %%% THE SOFTWARE.
 
 -module(filter_force_escape).
+-moduledoc("
+See also
+
+[escape](/id/doc_template_filter_filter_escape), [escape\\_check](/id/doc_template_filter_filter_escape_check)
+
+HTML escapes a text.
+
+Applies HTML escaping to a string (see the [escape](/id/doc_template_filter_filter_escape) filter for details). In
+contrary to the escape filter, the force\\_escape filter is applied immediately and returns a new, escaped string. This
+is useful in the rare cases where you need multiple escaping or want to apply other filters to the escaped results.
+Normally, you want to use the [escape](/id/doc_template_filter_filter_escape) filter.
+
+For example:
+
+
+```django
+{{ value|force_escape }}
+```
+
+If the value is `hel&lo` then the output is `hel&amp;lo`.
+").
 -export([force_escape/2]).
 
 -author('rsaccon@gmail.com').
 -author('emmiller@gmail.com').
 
+-include_lib("zotonic_core/include/zotonic.hrl").
 
 force_escape(undefined, _Context) ->
     <<>>;
-force_escape({trans, _} = Trans, Context) ->
+force_escape(#trans{} = Trans, Context) ->
     force_escape(z_trans:lookup_fallback(Trans, Context), Context);
 force_escape(true, _Context) ->
-    filter_yesno:yesno(true, _Context);
+    <<"true">>;
 force_escape(false, _Context) ->
-    filter_yesno:yesno(false, _Context);
+    <<"false">>;
 force_escape(Input, _Context) when is_atom(Input) ->
     escape1(atom_to_binary(Input, utf8), []);
 force_escape(Input, _Context) when is_list(Input) ->

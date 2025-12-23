@@ -1,9 +1,9 @@
 %% @author Marc Worrell <marc@worrell.nl>
-%% @copyright 2010 Marc Worrell
-%%
+%% @copyright 2010-2025 Marc Worrell
 %% @doc Facebook integration. Adds Facebook login and other functionalities.
+%% @end
 
-%% Copyright 2010 Marc Worrell
+%% Copyright 2010-2025 Marc Worrell
 %%
 %% Licensed under the Apache License, Version 2.0 (the "License");
 %% you may not use this file except in compliance with the License.
@@ -18,12 +18,62 @@
 %% limitations under the License.
 
 -module(mod_facebook).
+-moduledoc("
+See also
+
+[mod\\_linkedin](/id/doc_module_mod_linkedin)
+
+The mod\\_facebook module plugs into the [authentication
+systen](/id/doc_developerguide_access_control#guide-authentication) to enable [Facebook
+login](https://developers.facebook.com/docs/facebook-login/) on your site.
+
+
+
+Configuration
+-------------
+
+[Activate](/id/doc_developerguide_modules#activating-modules) mod\\_facebook, then head to ‘Auth’ > ‘External services’ in the admin interface to enter your Facebook app ID and secret. Enable Facebook login by checking the ‘Use Facebook authentication’ box. This will add a ‘Log in with Facebook’ button to the logon form on your site.
+
+If you need extended permissions, add them to the ‘Scope’ textbox. Note that the module needs the ‘email’
+permission for login to work.
+").
 -author("Marc Worrell <marc@worrell.nl>").
 
 -mod_title("Facebook").
 -mod_description("Adds Facebook login and other Facebook related features.").
 -mod_prio(400).
 -mod_depends([ admin, authentication, mod_oauth2 ]).
+
+% You have to add your Facebook appid and secret to the config.
+% By default, we only request access to the Facebook user's e-mail address.
+-define(FACEBOOK_SCOPE, <<"email">>).
+
+-mod_config([
+        #{
+            key => useauth,
+            type => boolean,
+            default => false,
+            description => "Enable Facebook authentication. This allows users to log in using their Facebook account."
+        },
+        #{
+            key => appid,
+            type => string,
+            default => "",
+            description => "The Facebook App ID used for user authentication."
+        },
+        #{
+            key => appsecret,
+            type => string,
+            default => "",
+            description => "The Facebook App Secret used for user authentication."
+        },
+        #{
+            key => scope,
+            type => string,
+            default => ?FACEBOOK_SCOPE,
+            description => "The scope used when requesting access to Facebook data."
+        }
+    ]).
 
 -export([
     observe_search_query/2,
@@ -34,11 +84,6 @@
 ]).
 
 -include_lib("zotonic_core/include/zotonic.hrl").
-
-
-% You have to add your Facebook appid and secret to the config.
-% By default, we only request access to the Facebook user's e-mail address.
--define(FACEBOOK_SCOPE, <<"email">>).
 
 
 %% @doc Return the facebook appid, secret and scope

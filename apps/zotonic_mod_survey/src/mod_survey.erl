@@ -18,6 +18,150 @@
 %% limitations under the License.
 
 -module(mod_survey).
+-moduledoc("
+Adds the concept of survey [resources](/id/doc_glossary#term-resource): user-definable forms which can be created in the
+admin interface and filled out by the website’s visitors.
+
+
+
+Survey question types
+---------------------
+
+The following question types are defined in the survey.
+
+likert
+
+Answer a question on a scale of 5 points, from “completely disagree” (1) to “completely agree” (5).
+
+long answer
+
+An open question with a big text field.
+
+matching
+
+Question type which allows you to match given answers to each other.
+
+narrative
+
+Question type for specifying inline questions in a narrative fashion.
+
+page break
+
+Breaks the survey into multiple pages.
+
+short answer
+
+An open question with a single-lined text field. You have the option of specifying a validation like email, date, numeric.
+
+thurstone
+
+A multiple choice field. Like multiple choice, but more powerful. The choices are translatable, and you have the
+possibility to select either a single answer, multiple answers or submit the form directly when choosing an answer.
+
+true or false
+
+Answers a true or false question. You have the option to specify custom texts for both the options.
+
+yes or no
+
+Like true or false, answers a true or false question. You have the option to specify custom texts for both the options.
+
+multiple choice
+
+A simple multiple choice field that has the added option that the multiple choice can be a numeric value, in which case
+an overview of the total value will be shown in the printable list and beneath the survey pie chart. This is useful for
+creating forms which require you to enter an amount or quantity, e.g. for a reservation system. Multiple choice fields
+cannot currently be translated, use the “thurstone” question type in that case.
+
+category
+
+Choose a single resource from a given category as the answer to this question.
+
+subhead
+
+Renders a sub-heading between questions.
+
+prompt
+
+Renders an extra prompt block.
+
+text block
+
+Renders a text block between questions.
+
+
+
+Intercepting survey submissions
+-------------------------------
+
+When a survey is submitted, the survey module sends out a `#survey_submit{}` notification.
+
+This notification has the following fields:
+
+*   id - The id of survey being submitted
+*   handler - A handler name (see below)
+*   answers - The answers that were filled in
+*   missing - answers that were missing
+*   answers\\_raw - Unprocessed answers, e.g. the raw submission
+
+To intercept a survey submission you would observe this survey\\_submit notification, and return `ok`:
+
+
+```erlang
+observe_survey_submit(#survey_submit{ id = SurveyId }, Context) ->
+    ?DEBUG(SurveyId),
+    ok.
+```
+
+
+
+Creating a custom survey handler
+--------------------------------
+
+The survey edit page has a dropdown for so-called “survey handlers”. A survey handler is a property that is set on
+the resource that indicates the handler that needs to be taken. Handlers are collected using the
+`#survey_get_handlers{}` fold notification.
+
+For instance, the following defines a handler called “email\\_me”:
+
+
+```erlang
+observe_survey_get_handlers(#survey_get_handlers{}, All, Context) ->
+  [
+   {<<\"email_me\">>, ?__(<<\"E-mail me when survey is submitted\">>, Context)}
+   | All
+  ].
+```
+
+Each handler will show up in the dropdown list and the editor can pick which handler he wants. The value chosen is
+passed along in the `handler` property of the survey submission, and as such can be used to intercept the survey submission:
+
+
+```erlang
+observe_survey_submit(#survey_submit{ handler = <<\"email_me\">>, id = SurveyId }, Context) ->
+    %% Do something here for surveys which have 'email_me' selected as handler
+    ok;
+observe_survey_submit(#survey_submit{}, _Context) ->
+    %% Let other surveys use the default submision mechanism
+    undefined.
+```
+
+
+
+Configurations keys
+-------------------
+
+In the survey result editor it is possible to link an answer to a newly created person.
+
+The category and content group for this person can be configured via the following two keys:
+
+*   `mod_survey.person_category`, default to `person`
+*   `mod_survey.person_content_group`, defaults to `default_content_group`
+
+Todo
+
+Add more documentation
+").
 -author("Marc Worrell <marc@worrell.nl>").
 
 -mod_title("Survey").
@@ -26,6 +170,21 @@
 -mod_schema(5).
 -mod_depends([ admin, mod_wires ]).
 -mod_provides([ survey, poll ]).
+-mod_config([
+        #{
+            key => person_category,
+            type => string,
+            default => "person",
+            description => "The category used for the person resource when creating a user from a survey result."
+        },
+        #{
+            key => person_content_group,
+            type => string,
+            default => "default_content_group",
+            description => "The content group used for the person resource when creating a user from a survey result. "
+                           "If empty the default group for the current ACL module is used."
+        }
+    ]).
 
 %% interface functions
 -export([
@@ -49,6 +208,7 @@
     unregister_nonce/1,
     do_submit/4,
     save_submit/2,
+    survey_start/2,
 
     collect_answers/4,
     render_next_page/8,
@@ -70,40 +230,8 @@ manage_schema(What, Context) ->
     survey_schema:manage_schema(What, Context).
 
 event(#postback{message={survey_start, Args}}, Context) ->
-    {id, SurveyId} = proplists:lookup(id, Args),
-    AnswerId = z_convert:to_integer(proplists:get_value(answer_id, Args)),
-    case is_integer(AnswerId) andalso z_acl:rsc_editable(SurveyId, Context) of
-        true ->
-            {Answers, ResultUserId} = case m_survey:single_result(SurveyId, AnswerId, Context) of
-                [] ->
-                    {[], undefined};
-                Result ->
-                    As = proplists:get_value(answers, Result, []),
-                    As1 = lists:map(
-                        fun({QName, Ans}) ->
-                            Answer = proplists:get_value(answer, Ans),
-                            {QName, Answer}
-                        end,
-                        As),
-                    {As1, proplists:get_value(user_id, Result)}
-            end,
-            Editing = {editing, AnswerId, undefined},
-            Args1 = [
-                {answer_user_id, ResultUserId},
-                {survey_session_nonce, z_nonce:nonce(?SURVEY_FILL_NONCE_TIMEOUT)}
-                | proplists:delete(answer_user_id, Args)
-            ],
-            render_update(render_next_page(SurveyId, 1, exact, Answers, [], Editing, Args1, Context), Args1, Context);
-        false ->
-            Answers = normalize_answers(proplists:get_value(answers, Args)),
-            Editing = proplists:get_value(editing, Args),
-            Args1 = [
-                {answer_user_id, z_acl:user(Context)},
-                {survey_session_nonce, z_nonce:nonce(?SURVEY_FILL_NONCE_TIMEOUT)}
-                | proplists:delete(answer_user_id, Args)
-            ],
-            render_update(render_next_page(SurveyId, 1, exact, Answers, [], Editing, Args1, Context), Args1, Context)
-    end;
+    Update = survey_start(Args, Context),
+    render_update(Update, Args, Context);
 
 event(#submit{message={survey_next, Args}}, Context) ->
     {id, SurveyId} = proplists:lookup(id, Args),
@@ -282,6 +410,46 @@ observe_acl_is_allowed(#acl_is_allowed{
     end;
 observe_acl_is_allowed(#acl_is_allowed{}, _Context) ->
     undefined.
+
+-spec survey_start(Args, Context) -> Update when
+    Args :: proplists:proplist(),
+    Context :: z:context(),
+    Update :: z:context() | #render{}.
+survey_start(Args, Context) ->
+    {id, SurveyId} = proplists:lookup(id, Args),
+    AnswerId = z_convert:to_integer(proplists:get_value(answer_id, Args)),
+    case is_integer(AnswerId) andalso z_acl:rsc_editable(SurveyId, Context) of
+        true ->
+            {Answers, ResultUserId} = case m_survey:single_result(SurveyId, AnswerId, Context) of
+                [] ->
+                    {[], undefined};
+                Result ->
+                    As = proplists:get_value(answers, Result, []),
+                    As1 = lists:map(
+                        fun({QName, Ans}) ->
+                            Answer = proplists:get_value(answer, Ans),
+                            {QName, Answer}
+                        end,
+                        As),
+                    {As1, proplists:get_value(user_id, Result)}
+            end,
+            Editing = {editing, AnswerId, undefined},
+            Args1 = [
+                {answer_user_id, ResultUserId},
+                {survey_session_nonce, z_nonce:nonce(?SURVEY_FILL_NONCE_TIMEOUT)}
+                | proplists:delete(answer_user_id, Args)
+            ],
+            render_next_page(SurveyId, 1, exact, Answers, [], Editing, Args1, Context);
+        false ->
+            Answers = normalize_answers(proplists:get_value(answers, Args)),
+            Editing = proplists:get_value(editing, Args),
+            Args1 = [
+                {answer_user_id, z_acl:user(Context)},
+                {survey_session_nonce, z_nonce:nonce(?SURVEY_FILL_NONCE_TIMEOUT)}
+                | proplists:delete(answer_user_id, Args)
+            ],
+            render_next_page(SurveyId, 1, exact, Answers, [], Editing, Args1, Context)
+    end.
 
 get_page(Id, Nr, #context{} = Context) when is_integer(Nr) ->
     case m_rsc:p(Id, <<"blocks">>, Context) of
@@ -791,7 +959,24 @@ do_submit(SurveyId, Questions, Answers, Editing, SubmitArgs, Context) ->
     SurveySessionNonce = proplists:get_value(survey_session_nonce, SubmitArgs),
     case register_nonce(SurveySessionNonce) of
         ok ->
-            do_submit_1(SurveyId, Questions, Answers, Editing, SubmitArgs, Context);
+            case do_submit_1(SurveyId, Questions, Answers, Editing, SubmitArgs, Context) of
+                ok -> ok;
+                {ok, #context{}} = OK -> OK;
+                {ok, #render{}} = OK -> OK;
+                {error, full} ->
+                    unregister_nonce(SurveySessionNonce),
+                    Context1 = z_render:wire(
+                            {alert, [
+                                {title, ?__("Sorry", Context)},
+                                {text, ?__(
+                                    "Sorry, the maximum number of submissions has been reached. You can no longer submit this form.",
+                                    Context)}
+                            ]}, Context),
+                    {ok, Context1};
+                {error, _} = Error ->
+                    unregister_nonce(SurveySessionNonce),
+                    Error
+            end;
         {error, duplicate} ->
             Context1 = z_render:wire(
                     {alert, [
@@ -832,24 +1017,27 @@ do_submit_1(SurveyId, Questions, Answers, undefined, SubmitArgs, Context) ->
         Context)
     of
         undefined ->
-            save_submit(SurveyId, FoundAnswers, Answers, Context),
-            ok;
+            case save_submit(SurveyId, FoundAnswers, Answers, Context) of
+                {ok, _} -> ok;
+                {error, _} = Error -> Error
+            end;
         ok ->
             maybe_mail(SurveyId, Answers, undefined, false, Context),
             ok;
-        {save, #context{}=Context1} ->
+        {save, #context{} = SaveContext} ->
             %% Use the passed context to save the answers.
-            save_submit(SurveyId, FoundAnswers, Answers, Context1),
-            {ok, Context1};
-        {save, #render{}=Render} ->
-            save_submit(SurveyId, FoundAnswers, Answers, Context),
-            {ok, Render};
+            case save_submit(SurveyId, FoundAnswers, Answers, SaveContext) of
+                {ok, _} -> {ok, SaveContext};
+                {error, _} = Error -> Error
+            end;
+        {save, #render{} = Render} ->
+            case save_submit(SurveyId, FoundAnswers, Answers, Context) of
+                {ok, _} -> {ok, Render};
+                {error, _} = Error -> Error
+            end;
         {ok, _ContextOrRender} = Handled ->
-            % maybe_mail(SurveyId, Answers, undefined, false, Context),
             Handled;
         {error, _Reason} = Error ->
-            SurveySessionNonce = proplists:get_value(survey_session_nonce, SubmitArgs),
-            unregister_nonce(SurveySessionNonce),
             Error
     end;
 do_submit_1(SurveyId, Questions, Answers, {editing, AnswerId, _Actions}, _SubmitArgs, Context) ->
@@ -873,10 +1061,11 @@ do_submit_1(SurveyId, Questions, Answers, {editing, AnswerId, _Actions}, _Submit
 
 %% @doc Save the form in the submit. Can be called from survey_submit observers if they
 %% need the answer id.
--spec save_submit(SurveySubmit, Context) -> {ok, AnswerId} when
+-spec save_submit(SurveySubmit, Context) -> {ok, AnswerId} | {error, Reason} when
     SurveySubmit :: #survey_submit{},
     Context :: z:context(),
-    AnswerId :: integer().
+    AnswerId :: integer(),
+    Reason :: full | term().
 save_submit(#survey_submit{
         id = SurveyId,
         answers = FoundAnswers,
@@ -884,17 +1073,22 @@ save_submit(#survey_submit{
     }, Context) ->
     save_submit(SurveyId, FoundAnswers, Answers, Context).
 
--spec save_submit(SurveyId, FoundAnswers, Answers, Context) -> {ok, AnswerId} when
+-spec save_submit(SurveyId, FoundAnswers, Answers, Context) -> {ok, AnswerId} | {error, Reason} when
     SurveyId :: m_rsc:resource_id(),
     FoundAnswers :: list(),
     Answers :: list(),
     Context :: z:context(),
-    AnswerId :: integer().
+    AnswerId :: integer(),
+    Reason :: full | term().
 save_submit(SurveyId, FoundAnswers, Answers, Context) ->
     StorageAnswers = survey_answers_to_storage(FoundAnswers),
-    {ok, ResultId} = insert_survey_submission(SurveyId, StorageAnswers, Context),
-    maybe_mail(SurveyId, Answers, ResultId, false, Context),
-    {ok, ResultId}.
+    case insert_survey_submission(SurveyId, StorageAnswers, Context) of
+        {ok, ResultId} ->
+            maybe_mail(SurveyId, Answers, ResultId, false, Context),
+            {ok, ResultId};
+        {error, _} = Error ->
+            Error
+    end.
 
 
 insert_survey_submission(SurveyId, StorageAnswers, Context) ->
@@ -932,31 +1126,24 @@ probably_email(SurveyId, Context) ->
 
 %% @doc mail the survey result to an e-mail address
 mail_result(SurveyId, PrepAnswers, SurveyResult, Attachments, Context) ->
-    case m_rsc:p_no_acl(SurveyId, survey_email, Context) of
-        undefined -> skip;
-        <<>> -> skip;
-        Email ->
-            Es = z_email_utils:extract_emails(Email),
+    case m_survey:survey_emails(SurveyId, Context) of
+        [] -> skip;
+        Es ->
             lists:foreach(
                 fun(E) ->
-                    case z_email_utils:is_email(E) of
-                        true ->
-                            Vars = [
-                                {is_result_email, true},
-                                {id, SurveyId},
-                                {answers, PrepAnswers},
-                                {result, SurveyResult}
-                            ],
-                            EmailRec = #email{
-                                to=E,
-                                html_tpl="email_survey_result.tpl",
-                                vars=Vars,
-                                attachments=Attachments
-                            },
-                            z_email:send(EmailRec, Context);
-                        false ->
-                            ok
-                    end
+                    Vars = [
+                        {is_result_email, true},
+                        {id, SurveyId},
+                        {answers, PrepAnswers},
+                        {result, SurveyResult}
+                    ],
+                    EmailRec = #email{
+                        to=E,
+                        html_tpl="email_survey_result.tpl",
+                        vars=Vars,
+                        attachments=Attachments
+                    },
+                    z_email:send(EmailRec, Context)
                 end,
                 Es)
     end.

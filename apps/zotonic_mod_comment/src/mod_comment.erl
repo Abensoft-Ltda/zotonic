@@ -1,9 +1,9 @@
 %% @author Marc Worrell <marc@worrell.nl>
-%% @copyright 2010 Marc Worrell
-%% Date: 2010-01-15
+%% @copyright 2010-2025 Marc Worrell
 %% @doc Simple comment module. Adds comments to any rsc.
+%% @end
 
-%% Copyright 2010 Marc Worrell
+%% Copyright 2010-2025 Marc Worrell
 %%
 %% Licensed under the Apache License, Version 2.0 (the "License");
 %% you may not use this file except in compliance with the License.
@@ -18,12 +18,34 @@
 %% limitations under the License.
 
 -module(mod_comment).
+-moduledoc("
+Implements a basic commenting system, enabling commenting on [resources](/id/doc_glossary#term-resource).
+
+The module has an admin comment overview, allowing the administrator to review the comments or delete them.
+
+To enable commenting in your site, include `_comments.tpl` on your resource’s page template, passing an id parameter
+for the resource on which you want users to be able to comment.
+").
 -author("Marc Worrell <marc@worrell.nl>").
 
 -mod_title("Comments").
 -mod_description("Comments for pages. Implements a simple comment system with comments stored locally.").
 -mod_depends([admin, base]).
 -mod_provides([comment]).
+-mod_config([
+        #{
+            key => moderate,
+            type => boolean,
+            default => false,
+            description => "If set, new comments will not be visible until approved by an administrator."
+        },
+        #{
+            key => anonymous,
+            type => boolean,
+            default => true,
+            description => "Allow anonymous users to comment. If set to false, only authenticated users can comment."
+        }
+    ]).
 
 %% gen_server exports
 -export([init/1]).

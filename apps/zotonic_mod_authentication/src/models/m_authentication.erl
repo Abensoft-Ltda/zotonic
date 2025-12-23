@@ -18,6 +18,9 @@
 %% limitations under the License.
 
 -module(m_authentication).
+-moduledoc("
+Not yet documented.
+").
 
 -behaviour(zotonic_model).
 
@@ -171,7 +174,7 @@ acceptable_password(Password, Context) ->
     case is_valid_password(Password, Context) of
         true ->
             case not m_config:get_boolean(mod_authentication, password_disable_leak_check, Context)
-                andalso m_authentication:is_powned(Password)
+                andalso is_powned(Password)
             of
                 true ->
                     {error, dataleak};

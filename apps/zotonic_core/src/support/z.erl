@@ -57,6 +57,8 @@
     dispatch_path/2,
     dispatch_list/1,
 
+    setconfig/3,
+
     debug_msg/2,
 
     log/3,
@@ -154,6 +156,7 @@ flush(Site) when is_atom(Site) ->
 flush(Context) ->
     z_depcache:flush(Context),
     z_dispatcher:reload(Context),
+    z_memo:flush(Context),
     n(module_ready, Context),
     ok.
 
@@ -287,6 +290,11 @@ dispatch_list(SiteOrContext) ->
         {error, _} = Error ->
             Error
     end.
+
+%% @doc Set a runtime config value. This is useful to enable or disable certain
+%% runtime features without restarting Zotonic.
+setconfig(zotonic, Name, Value) when is_atom(Name) ->
+    z_config:set(Name, Value).
 
 %% @doc Echo and return a debugging value. This is useful for adding
 %% debug anywhere in the code, as the passed argument is also returned.

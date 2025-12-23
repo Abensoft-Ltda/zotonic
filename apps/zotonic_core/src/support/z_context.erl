@@ -36,6 +36,7 @@
 
     db_pool/1,
     db_driver/1,
+    db_connection/1,
 
     is_request/1,
     is_session/1,
@@ -158,7 +159,7 @@
 
 
 %% @doc Return a new empty context, no request is initialized.
--spec new( z:context() | atom() | cowboy_req:req() ) -> z:context().
+-spec new( z:context() | atom() | undefined ) -> z:context().
 new(#context{} = C) ->
     #context{
         site = C#context.site,
@@ -181,8 +182,10 @@ new(undefined) ->
         undefined -> throw({error, no_site_enabled})
     end;
 new(Site) when is_atom(Site) ->
-    set_default_language_tz(
-        set_server_names(#context{ site = Site })).
+    Context = set_default_language_tz(
+        set_server_names(#context{ site = Site })),
+    z_memo:flush(Context),
+    Context.
 
 %% @doc Create a new context record for a site with a certain language
 -spec new( Site :: atom(), Language :: atom() | [ atom() ] ) -> z:context().
@@ -250,7 +253,6 @@ set_server_names(#context{ site = Site } = Context) ->
         translation_table = z_trans_server:table(Site)
     },
     Context1#context{
-        % session_manager=list_to_atom("z_session_manager"++SiteAsList),
         db = { z_db_pool:db_pool_name(Site), z_db_pool:db_driver(Context1) }
     }.
 
@@ -356,7 +358,6 @@ prune_for_database(Context) ->
         db = Context#context.db,
         dbc = Context#context.dbc,
         depcache = Context#context.depcache,
-        % session_manager=Context#context.session_manager,
         dispatcher = Context#context.dispatcher,
         template_server = Context#context.template_server,
         scomp_server = Context#context.scomp_server,
@@ -500,6 +501,11 @@ db_pool(#context{ db = {Pool, _Driver} }) ->
 -spec db_driver(z:context()) -> atom().
 db_driver(#context{ db = {_Pool, Driver} }) ->
     Driver.
+
+%% @doc Fetch the database connection
+-spec db_connection(z:context()) -> undefined | pid().
+db_connection(#context{ dbc = Connection }) ->
+    Connection.
 
 %% @doc Fetch the protocol for absolute urls referring to the site (always https).
 -spec site_protocol(z:context()) -> binary().
@@ -1385,7 +1391,7 @@ set_security_headers(Context) ->
         {<<"content-security-policy">>, flatten_csp(CSP1)},
         {<<"x-content-type-options">>, <<"nosniff">>},
         {<<"x-permitted-cross-domain-policies">>, <<"none">>},
-        {<<"referrer-policy">>, <<"origin-when-cross-origin">>}
+        {<<"referrer-policy">>, <<"strict-origin-when-cross-origin">>}
     ],
     Default1 = case z_context:get(allow_frame, Context, false) of
         true -> Default;
@@ -1466,7 +1472,7 @@ hsts_header(Context) ->
             F = fun() ->
                 MaxAge = z_convert:to_integer(m_config:get_value(site, hsts_maxage, ?HSTS_MAXAGE, Context)),
                 IncludeSubdomains = z_convert:to_bool(m_config:get_value(site, hsts_include_subdomains, false, Context)),
-                Preload = z_convert:to_bool(m_config:get_value(site, preload, false, Context)),
+                Preload = z_convert:to_bool(m_config:get_value(site, hsts_preload, false, Context)),
                 Options = case {IncludeSubdomains, Preload} of
                     {true, true} -> <<"; includeSubDomains; preload">>;
                     {true, _} -> <<"; includeSubDomains">>;

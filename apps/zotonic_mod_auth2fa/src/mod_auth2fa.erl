@@ -18,12 +18,25 @@
 %% limitations under the License.
 
 -module(mod_auth2fa).
+-moduledoc("
+Todo
+
+Not yet documented.
+").
 -author("Marc Worrell <marc@worrell.nl>").
 
 -mod_title("Two-Factor authentication").
 -mod_description("Add two-factor authentication using TOTP").
 -mod_prio(400).
 -mod_depends([authentication, server_storage]).
+-mod_config([
+        #{
+            key => mode,
+            type => integer,
+            default => 0,
+            description => "How often we ask for setting the 2FA code. 0 = never, 1 = once after logon, 2 = every page, 3 = force on logon"
+        }
+    ]).
 
 -export([
     event/2,

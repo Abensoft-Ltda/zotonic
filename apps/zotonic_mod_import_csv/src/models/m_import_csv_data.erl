@@ -16,6 +16,16 @@
 %% limitations under the License.
 
 -module(m_import_csv_data).
+-moduledoc("
+Model to track resources imported from CSV and XLSX files.
+
+This stores the which resources are imported and the data that was
+used for the update. Also a checksum is added to quickly see if the
+resource data has been changed. This is useful for repeated imports
+of the same (partially updated) data.
+
+There are no API endpoints for this model.
+").
 -author("Marc Worrell <marc@worrell.nl>").
 
 -export([

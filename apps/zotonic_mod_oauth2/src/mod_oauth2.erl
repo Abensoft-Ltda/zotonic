@@ -18,6 +18,11 @@
 %% limitations under the License.
 
 -module(mod_oauth2).
+-moduledoc("
+Todo
+
+Not yet documented.
+").
 -author("Marc Worrell <marc@worrell.nl>").
 
 -mod_title("OAuth2").
@@ -25,6 +30,15 @@
 -mod_prio(900).
 -mod_schema(13).
 -mod_depends([ authentication ]).
+-mod_config([
+        #{
+            key => oauth_key,
+            type => string,
+            default => "",
+            description => "The secret key used for symmetrically encrypting OAuth2 tokens. "
+                           "This is automatically generated and must be kept secret."
+        }
+    ]).
 
 -export([
     event/2,

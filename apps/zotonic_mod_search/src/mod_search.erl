@@ -1,11 +1,11 @@
 %% @author Marc Worrell <marc@worrell.nl>
-%% @copyright 2009-2023 Marc Worrell
+%% @copyright 2009-2025 Marc Worrell
 %% @doc Defines PostgreSQL queries for basic content searches in Zotonic.
 %% This module needs to be split in specific PostgreSQL queries and standard SQL queries
 %% when you want to support other databases (like MySQL).
 %% @end
 
-%% Copyright 2009-2023 Marc Worrell
+%% Copyright 2009-2025 Marc Worrell
 %%
 %% Licensed under the Apache License, Version 2.0 (the "License");
 %% you may not use this file except in compliance with the License.
@@ -20,12 +20,127 @@
 %% limitations under the License.
 
 -module(mod_search).
+-moduledoc("
+See also
+
+[Search](/id/doc_developerguide_search#guide-datamodel-query-model), [Custom search](/id/doc_cookbook_custom_search#cookbook-custom-search)
+
+mod\\_search implements various ways of searching through the main resource table using [m\\_search](/id/doc_model_model_search).
+
+
+
+Configuration
+-------------
+
+There are two [site configuration
+variables](/id/doc_developerguide_configuration_site_configuration#ref-site-configuration) to tweak [PostgreSQL text
+search settings](https://www.postgresql.org/docs/current/static/textsearch-controls.html).
+
+
+
+### mod\\_search.rank\\_behaviour
+
+An integer representation to influence PostgreSQL search behaviour.
+
+Default: `37` (`1 | 4 | 32`)
+
+
+
+### mod\\_search.rank\\_weight
+
+A set of four numbers to override relative weights for the ABCD categories.
+
+Default: `{0.05, 0.25, 0.5, 1.0}`
+
+The following searches are implemented in mod\\_search:
+
+| Name                         | Description                                                                      | Required arguments           |
+| ---------------------------- | -------------------------------------------------------------------------------- | ---------------------------- |
+| query                        | Very powerful search with which you can implement almost all of the other search functionality. See: [Search](/id/doc_developerguide_search#guide-datamodel-query-model) |                              |
+| facets                       | Performs a `query` (see above) and then calculates facets. The facets are defined using the `pivot/facet.tpl` template. Facets are returned in the `facets` field of the search result. This shows per facet the counts for alternative values. |                              |
+| subfacets                    | Performs a `query` (see above) and then calculates facets. The facets are defined using the `pivot/facet.tpl` template. Facets are returned in the `facets` field of the search result. This is a *drill down* where the facets are counted from the matching resources in the query. That means that only facet values that are in the result set are shown. |                              |
+| facet\\\\_values               | Returns an empty result with the facets field set to all possible values per facet, or the min/max range for a range facet. |                              |
+| featured                     | List of pages, featured ones first.                                              |                              |
+| featured                     | List of pages in a category, featured ones first.                                | cat                          |
+| featured                     | List of pages in a category having a certain object, featured pages first.       | cat, object, predicate       |
+| latest                       | The newest pages.                                                                |                              |
+| latest                       | The newest pages within in a category.                                           | cat                          |
+| upcoming                     | Selects pages with future date\\\\_end.                                            |                              |
+| upcoming\\\\_on                | Selects pages with date\\\\_end after the given time.                              | datetime                     |
+| upcoming\\\\_date              | Selects pages with date\\\\_end after the given date.                              | date                         |
+| finished                     | Selects pages with a past date\\\\_end.                                            |                              |
+| finished\\\\_on                | Selects pages with a date\\\\_end before the given time.                           | datetime                     |
+| finished\\\\_date              | Selects pages with a date\\\\_end before the given date.                           | date                         |
+| unfinished                   | Selects pages with a date\\\\_end in the future.                                   |                              |
+| unfinished\\\\_on              | Selects pages with a date\\\\_end after the given time.                            | datetime                     |
+| unfinished\\\\_date            | Selects pages with a date\\\\_end after the given date.                            | date                         |
+| ongoing                      | Pages with past date\\\\_start and future date\\\\_end.                              |                              |
+| ongoing\\\\_on                 | Pages with a date\\\\_start - date\\\\_end range around the given time.              | datetime                     |
+| ongoing\\\\_date               | Pages with a date\\\\_start - date\\\\_end range around the given date.              | date                         |
+| autocomplete                 | Full text search where the last word gets a wildcard.                            | text                         |
+| autocomplete                 | Full text search where the last word gets a wildcard, filtered by category.      | cat, text                    |
+| fulltext                     | Full text search. Returns `{id,score}` tuples.                                   | text                         |
+| fulltext                     | Full text search, filtered by category. Returns `{id,score}` tuples.             | cat, text                    |
+| referrers                    | All subjects of a page.                                                          | id                           |
+| media\\\\_category\\\\_image     | All pages with a medium and within a certain category. Used to find category images. | cat                          |
+| media\\\\_category\\\\_depiction | All pages with a depiction edge to an image. Used to find category images.       | cat                          |
+| media                        | All pages with a medium, ordered by descending creation date.                    |                              |
+| all\\\\_bytitle                | Return all `{title,id}` pairs for a category, sorted on title.                   | cat                          |
+| all\\\\_bytitle\\\\_featured     | Return all `{title,id}` pairs for a category, sorted on title, featured pages first | cat                          |
+| all\\\\_bytitle                | Return all `{title,id}` pairs for a category without subcategories, sorted on title. | cat\\\\_is                     |
+| all\\\\_bytitle\\\\_featured     | Return all `{title,id}` pairs for a category without subcategories, sorted on title, featured pages first. | cat\\\\_is                     |
+| match\\\\_objects              | Returns a list of pages with similar object ids to the objects of the given resource with the given id. Accepts optional `cat` parameters for filtering on category. Optionally accepts a `predicate` parameter to only use the objects that are connected to the given `id` using the predicate or predicates. | id                           |
+| match\\\\_objects\\\\_cats       | Returns a list of pages with similar object ids or categories. Accepts an optional `cat` parameter for filtering on category. | id                           |
+| archive\\\\_year               | Returns an overview on publication year basis, for a specified category. Every row returned has parts: “as\\\\_date”, “year” and “count”. The order is descending, newest year first. | cat                          |
+| archive\\\\_year\\\\_month       | Return a grouped “archive” overview of resources within a category. The result is a double list, consisting of `[ {year, [ months ] }]`. The result is grouped on publication year and month, and includes counts. The order is descending, newest year first. | cat                          |
+| keyword\\\\_cloud              | Return a list of `{keyword_id, count}` for all resources within a given category. The list is ordered on keyword title. Default predicate is `subject`, default category is `keyword`. Change optional `keywordpred` and `keywordcat` to create a different cloud. | cat, keywordpred, keywordcat |
+| previous                     | Given an id, return a list of “previous” ids in the given category. This list is ordered by publication date, latest first. | id, cat                      |
+| next                         | Given an id, return a list of “next” ids in the given category. This list is ordred by publication date, oldest first. | id, cat                      |
+").
 -author("Marc Worrell <marc@worrell.nl>").
 -behaviour(gen_server).
 
 -mod_title("Search Queries").
 -mod_description("Defines PostgreSQL queries for basic content searches in Zotonic.").
 -mod_prio(1000).
+
+% For the ranking defined below, check:
+% https://www.postgresql.org/docs/14/textsearch-controls.html
+
+% Default weights for ranking texts in D, C, B and A blocks.
+% PostgreSQL default is {0.1, 0.2, 0.4, 1.0}
+% The max weight is 1.0
+-define(RANK_WEIGHT, <<"'{0.01, 0.02, 0.2, 1.0}'">>).
+
+% Default rank behaviour for psql text searches:
+%
+% 0 (the default) ignores the document length
+% 1 divides the rank by 1 + the logarithm of the document length
+% 2 divides the rank by the document length
+% 4 divides the rank by the mean harmonic distance between extents (this is implemented only by ts_rank_cd)
+% 8 divides the rank by the number of unique words in document
+% 16 divides the rank by 1 + the logarithm of the number of unique words in document
+% 32 divides the rank by itself + 1
+%
+-define(RANK_BEHAVIOUR, 1 bor 4).
+
+-mod_config([
+        #{
+            key => rank_weight,
+            type => string,
+            default => ?RANK_WEIGHT,
+            description => "Default weights for ranking texts in D, C, B and A blocks, used in the full text search queries. "
+                           "The default for PostgreSQL is '{0.1, 0.2, 0.4, 1.0}'."
+        },
+        #{
+            key => rank_behaviour,
+            type => integer,
+            default => 5,
+            description => "Default rank behaviour for PostgreSQL text searches. "
+                           "The default is 1 bor 4, which divides the rank by 1 + the logarithm of the document length "
+                           "and divides the rank by the mean harmonic distance between extents."
+        }
+    ]).
 
 %% gen_server exports
 -export([init/1, handle_call/3, handle_cast/2, handle_info/2, terminate/2, code_change/3]).
@@ -57,25 +172,6 @@
 
 -define(TIMEOUT_GC, 1000).
 
-% For the ranking defined below, check:
-% https://www.postgresql.org/docs/14/textsearch-controls.html
-
-% Default weights for ranking texts in D, C, B and A blocks.
-% PostgreSQL default is {0.1, 0.2, 0.4, 1.0}
-% The max weight is 1.0
--define(RANK_WEIGHT, <<"'{0.01, 0.02, 0.2, 1.0}'">>).
-
-% Default rank behaviour for psql text searches:
-%
-% 0 (the default) ignores the document length
-% 1 divides the rank by 1 + the logarithm of the document length
-% 2 divides the rank by the document length
-% 4 divides the rank by the mean harmonic distance between extents (this is implemented only by ts_rank_cd)
-% 8 divides the rank by the number of unique words in document
-% 16 divides the rank by 1 + the logarithm of the number of unique words in document
-% 32 divides the rank by itself + 1
-%
--define(RANK_BEHAVIOUR, 1 bor 4).
 
 
 event(#postback{ message={facet_rebuild, _Args}}, Context) ->

@@ -1,8 +1,9 @@
 %% @author Marc Worrell <marc@worrell.nl>
-%% @copyright 2015-2023 Marc Worrell
+%% @copyright 2015-2025 Marc Worrell
 %% @doc Creates a temporary resource. If not modified then it will be deleted.
+%% @end
 
-%% Copyright 2015-2023 Marc Worrell
+%% Copyright 2015-2025 Marc Worrell
 %%
 %% Licensed under the Apache License, Version 2.0 (the "License");
 %% you may not use this file except in compliance with the License.
@@ -17,11 +18,49 @@
 %% limitations under the License.
 
 -module(filter_temporary_rsc).
+-moduledoc("
+Creates a temporary resource if its input value is not defined.
+
+The created resource receives the properties of the second parameter.
+
+After the resource is created, every hour a check is made if the resource has been edited and still registered in the
+Server Storage.
+
+Note
+
+`mod_server_storage` must be enabled for this filter to work.
+
+If the resource is abandoned and not changed since its creation, then it is automatically deleted.
+
+Only a single temporary resource can exist per category per session. Requesting a second resource of the same category
+for a session will return the earlier created resource. If the earlier resource has been updated, then a new resource is created.
+
+This filter is used for situations where an edit form is needed but an intermediate dialog requesting for the title of
+the resource is unwanted.
+
+Example:
+
+
+```none
+{% with id|temporary_rsc:%{ title:_\"New\", category_id: `article` } as id %}
+    {% wire id=#form type=\"submit\" postback=`rscform` delegate=`controller_admin_edit` %}
+    <form id=\"{{ #form }}\" action=\"postback\">
+        <input type=\"hidden\" name=\"id\" value=\"{{ id }}\" />
+        <input type=\"hidden\" name=\"is_published\" value=\"1\" />
+        <input type=\"text\" name=\"title\" value=\"{{ id.title }}\" />
+        ...
+    </form>
+{% endwith %}
+```
+
+See [mod\\_admin](/id/doc_module_mod_admin), [mod\\_server\\_storage](/id/doc_module_mod_server_storage)
+").
 -export([
     temporary_rsc/2,
     temporary_rsc/3,
 
-    task_delete_inactive/4
+    task_delete_inactive/4,
+    is_creator/2
 ]).
 
 %% Check every hour if the page can be deleted.
@@ -30,14 +69,17 @@
 -include_lib("kernel/include/logger.hrl").
 
 temporary_rsc(RscId, Context) ->
-    temporary_rsc(RscId, {props, []}, Context).
+    temporary_rsc(RscId, #{}, Context).
 
+temporary_rsc(undefined, Props, Context) when is_map(Props) ->
+    PropsMap = z_props:from_map(Props),
+    make_temporary_rsc(PropsMap, Context);
 temporary_rsc(undefined, {props, Props}, Context) when is_list(Props) ->
-    make_temporary_rsc(Props, Context);
-temporary_rsc(undefined, [{_,_}|_] = Props, Context) ->
-    make_temporary_rsc(Props, Context);
-temporary_rsc(undefined, [], Context) ->
-    make_temporary_rsc([], Context);
+    {ok, PropsMap} = z_props:from_list(Props),
+    make_temporary_rsc(PropsMap, Context);
+temporary_rsc(undefined, Props, Context) when is_list(Props) ->
+    {ok, PropsMap} = z_props:from_list(Props),
+    make_temporary_rsc(PropsMap, Context);
 temporary_rsc(<<>>, Props, Context) ->
     temporary_rsc(undefined, Props, Context);
 temporary_rsc([], Props, Context) ->
@@ -72,6 +114,30 @@ task_delete_inactive(RscId, Key, SessionId, Context) ->
             end
     end.
 
+%% @doc Check if the current session user/session is the creator of the given temporary resource.
+-spec is_creator(RscId, Context) -> boolean() when
+    RscId :: m_rsc:resource() | undefined,
+    Context :: z:context().
+is_creator(RscId, Context) when is_integer(RscId) ->
+    case m_rsc:p_no_acl(RscId, <<"is_temporary">>, Context) of
+        true ->
+            CatId = m_rsc:p_no_acl(RscId, <<"category_id">>, Context),
+            case find_existing(CatId, Context) of
+                {ok, TmpRscId} when TmpRscId =:= RscId ->
+                    true;
+                {ok, _TmpRscId} ->
+                    false;
+                {error, _} ->
+                    false
+            end;
+        _ ->
+            false
+    end;
+is_creator(undefined, _Context) ->
+    false;
+is_creator(RscId, Context) ->
+    is_creator(m_rsc:rid(RscId, Context), Context).
+
 
 %% --- internal functions ---
 
@@ -81,7 +147,7 @@ make_temporary_rsc(Props, Context) ->
 make_temporary_rsc({error, _}, _Props, _Context) ->
     undefined;
 make_temporary_rsc({ok, _SessionId}, Props, Context) ->
-    {Cat, Props1} = ensure_category(Props, Context),
+    {Cat, Props1} = ensure_category(Props),
     case m_rsc:rid(Cat, Context) of
         undefined ->
             ?LOG_WARNING(#{
@@ -100,7 +166,9 @@ make_temporary_rsc({ok, _SessionId}, Props, Context) ->
 make_rsc({ok, RscId}, _CatId, _Props, _Context) ->
     RscId;
 make_rsc({error, not_found}, CatId, Props, Context) ->
-    Props1 = [ {is_temporary, true} | Props ],
+    Props1 = Props#{
+        <<"is_temporary">> => true
+    },
     case m_rsc:insert(Props1, Context) of
         {ok, RscId} ->
             Key = {temporary_rsc, CatId},
@@ -145,14 +213,16 @@ find_existing(CatId, Context) ->
 is_unmodified_rsc(Id, Context) ->
     m_rsc:exists(Id, Context) andalso m_rsc:p_no_acl(Id, version, Context) =:= 1.
 
-ensure_category(Props, Context) ->
-    case cat(Props, Context) of
-        undefined -> {article, [{category, article}|Props]};
-        Cat -> {Cat, Props}
+ensure_category(Props) ->
+    case cat(Props) of
+        undefined ->
+            Props1 = maps:without([ <<"category">>, <<"category_id">> ], Props),
+            {article, Props1#{ <<"category_id">> => article }};
+        Cat ->
+            {Cat, Props}
     end.
 
-cat(Props, Context) ->
-    case z_template_compiler_runtime:find_value(category, Props, #{}, Context) of
-        undefined -> z_template_compiler_runtime:find_value(category_id, Props, #{}, Context);
-        Cat -> Cat
-    end.
+cat(#{ <<"category">> := Cat }) -> Cat;
+cat(#{ <<"category_id">> := Cat }) -> Cat;
+cat(_) -> undefined.
+

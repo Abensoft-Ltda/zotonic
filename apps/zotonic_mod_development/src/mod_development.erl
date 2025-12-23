@@ -1,10 +1,10 @@
 %% @author Marc Worrell <marc@worrell.nl>
-%% @copyright 2009-2023 Marc Worrell
+%% @copyright 2009-2025 Marc Worrell
 %% @doc Support functions for site development and introspection of the
 %% live system for template and database query tracing.
 %% @end
 
-%% Copyright 2009-2023 Marc Worrell
+%% Copyright 2009-2025 Marc Worrell
 %%
 %% Licensed under the Apache License, Version 2.0 (the "License");
 %% you may not use this file except in compliance with the License.
@@ -19,12 +19,185 @@
 %% limitations under the License.
 
 -module(mod_development).
+-moduledoc("
+Presents various tools for development.
+
+
+
+Admin page
+----------
+
+After the development module is enabled a menu item Development is added to the System menu in the admin.
+
+On the development page it is possible to set debugging options, trace template compilation, and test dispatch rules.
+
+
+
+### Options
+
+This can toggle various development options:
+
+Show paths to included template files in generated templates
+
+Checking this will add comments in the compiled templates. The comments will list the exact file included at that point.
+
+Show defined blocks in generated templates
+
+Checking this will add comments in the compiled templates. The comments will show the start and end of any template `{%
+block %} ... {% endblock %}`.
+
+Download css and javascript files as separate files (ie. don’t combine them in one url).
+
+Checking this will generate separate `<link/\\>` and `<script/\\>` tags for all files mentioned in a single `{% lib %}`
+tag. This makes debugging those files easier but makes loading pages slower as more requests will be done per page.
+
+Enable API to recompile &amp;amp; build Zotonic
+
+The api on `/api/model/development/get/recompile` can be accessed to trigger a full compilation and cache flush of
+Zotonic. This checkbox must be checked to enable this api.
+
+
+
+### Template debugging
+
+The template selection mechanism is quite complicated. It takes into account all modules, their priority, the user-agent
+class (desktop, tablet, phone or text) and optionally the category of a resource.
+
+With this debugging tool you can optionally select a category, and fill in the name of the template. Per user-agent
+class the selected template will be shown.
+
+
+
+The second debug option is a page with a live display of all templates being compiled. With this it is possible to get
+greater insight in the template selection and compilation.
+
+
+
+### Dispatch rule debugging
+
+With this it is possible to see for a request path which dispatch rules are matched and/or how it is rewritten.
+
+
+### Function call tracing
+
+The function tracing tool allows you to trace calls to a specific function in a module. You can specify the module name,
+function name and the number of calls to trace. The output will be sent to the page that started the trace, via MQTT.
+
+Function tracing can be enabled or disabled in the zotonic.config file. Per default it is enabled for the
+development and test environments. You can enable it runtime using:
+
+    bin/zotonic setconfig zotonic function_tracing_enabled true
+
+Or disable it with:
+
+    bin/zotonic setconfig zotonic function_tracing_enabled false
+
+In dispatch rules it is possible to protect certain requests from being traced. This is done by adding the
+dispatch rule option `sensitive`. This option is set for the authentication requests. On development
+environments this dispatch option is ignored.
+
+
+Automatic recompilation
+-----------------------
+
+Note
+
+The system can only scan for changed files if either `inotify-tools` or `fswatch` is installed.
+
+The core Zotonic system starts either `inotify-tools` or `fswatch`, depending on which one is available. You have to
+install one of these to enable auto-compile and auto-load of changed files.
+
+See below for platform-specific installation instructions.
+
+If a changed file is detected then Zotonic will:
+
+*   If an .erl file changes then the file is recompiled.
+*   If a .scss or .sass file changes then `sassc` is called to compile it to its .css equivalent. If the changed `.sass` file starts with a `_` then all `.sass` files without a `_` will be compiled.
+*   If a .less file changes then `lessc` is called to compile it to its .css equivalent.
+*   If a .coffee file changes then `coffee` is called to compile it to its .js equivalent.
+*   If a lib file changes then the module indexer will be called so that any removed or added templates will be handled correctly.
+*   If a template file changes then the module indexer will be called so that any removed or added template will be handled correctly.
+*   If a dispatch file changes then all dispatch rules are reloaded.
+*   If a beam file changes then the module will be loaded. If the beam file is a Zotonic module then it will be automatically restarted if either the function exports or the `mod_schema` changed.
+*   If the .yrl definition of the template parser changes, then the .erl version of the parser is regenerated. (This will trigger a compile, which triggers a beam load).
+
+
+
+### Linux installation
+
+On Linux this feature depends on the inotifywait tool, which is part of the `inotify-tools` package. For displaying
+notifications, it uses `notify-send`:
+
+
+```erlang
+sudo apt-get install inotify-tools libnotify-bin
+```
+
+
+
+### Mac OS X installation
+
+On Mac OS X (version 10.8 and higher), we use the external programs `fswatch` and `terminal-notifier`:
+
+
+```erlang
+sudo brew install fswatch
+sudo brew install terminal-notifier
+```
+
+
+Configuration options
+---------------------
+
+`mod_development.libsep`
+
+Boolean value. If true, [lib](/id/doc_template_tag_tag_lib) files will be included separately instead of in one big
+concatenated file.
+").
 -author("Marc Worrell <marc@worrell.nl>").
 -behaviour(gen_server).
 
 -mod_title("Development").
 -mod_description("Development support, periodically builds and loads changed files.").
 -mod_prio(1000).
+-mod_config([
+        #{
+            key => livereload,
+            type => boolean,
+            default => false,
+            description => "Enable live reloading of CSS, JS and templates in the browser. This requires the mod_livereload module to be loaded."
+        },
+        #{
+            key => debug_includes,
+            type => boolean,
+            default => false,
+            description => "Enable debugging of template includes, this will add markers for all template includes in rendered templates."
+        },
+        #{
+            key => debug_blocks,
+            type => boolean,
+            default => false,
+            description => "Enable debugging of template blocks, this will add markers for all template blocks in rendered templates."
+        },
+        #{
+            key => enable_api,
+            type => boolean,
+            default => false,
+            description => "Enable the APIs for mod_development, this allows the unauthenticated use of the development APIs."
+        },
+        #{
+            key => libsep,
+            type => boolean,
+            default => false,
+            description => "If set, then separate script and style tags are generated for all css and js files."
+        },
+        #{
+            key => nocache,
+            type => boolean,
+            default => false,
+            description => "If set, disable caching by the <tt>{% cache %}</tt> tag."
+        }
+    ]).
 
 %% gen_server exports
 -export([init/1, handle_call/3, handle_cast/2, handle_info/2, terminate/2, code_change/3]).
@@ -173,8 +346,86 @@ event(#postback{ message = log_client_enable }, Context) ->
             z_render:growl(?__("No permission to access the console logs.", Context), Context);
         {error, _} ->
             z_render:growl(?__("Error changing the console logs.", Context), Context)
+    end;
+event(#submit{ message = function_trace }, Context) ->
+    case z_acl:user(Context) of
+        ?ACL_ADMIN_USER_ID ->
+            case z_config:get(function_tracing_enabled) of
+                true ->
+                    recon_trace:clear(),
+                    Module = z_context:get_q(<<"module">>, Context),
+                    Function = z_context:get_q(<<"function">>, Context),
+                    Count = z_convert:to_integer(z_context:get_q(<<"count">>, Context)),
+                    case z_utils:ensure_existing_module(z_string:trim(Module)) of
+                        {ok, Mod} ->
+                            Fun = case z_string:trim(Function) of
+                                <<>> -> '_';
+                                <<"_">> -> '_';
+                                F ->
+                                    try binary_to_existing_atom(F, utf8)
+                                    catch error:badarg -> {error, nofun}
+                                    end
+                            end,
+                            if
+                                is_atom(Fun) ->
+                                    recon_rec:import([z]),
+                                    N = function_trace_start(Mod, Fun, Count, Context),
+                                    Output = io_lib:format("<i>Set ~p traces...</i>\n\n", [N]),
+                                    z_render:update("trace", Output, Context);
+                                true ->
+                                    z_render:update("trace", ?__("<i>Function name does not exist.</i>", Context), Context)
+                            end;
+                        {error, _} ->
+                            z_render:update("trace", ?__("<i>Module not found.</i>", Context), Context)
+                    end;
+                false ->
+                    z_render:growl_error(?__("Function tracing has been disabled in the Zotonic config.", Context), Context)
+            end;
+        _ ->
+            z_render:growl_error(?__("Only the admin user can set traces.", Context), Context)
     end.
 
+function_trace_start(Mod, Fun, Count, Context) ->
+    Pid = self(),
+    ContextAsync = z_context:prune_for_async(Context),
+    z_proc:spawn_md(
+        fun() ->
+            Options = [
+                {io_server, self()}
+            ],
+            N = recon_trace:calls({Mod, Fun, '_'}, Count, Options),
+            Pid ! {start_trace, N},
+            function_tracer_output(Count, ContextAsync)
+        end),
+    receive
+        {start_trace, Funs} ->
+            Funs
+    end.
+
+function_tracer_output(Count, Context) when Count =< 0 ->
+    recon_trace:clear(),
+    function_tracer_stream_data(<<"\n\n\nTrace limit reached.">>, Context);
+function_tracer_output(Count, Context) ->
+    receive
+        {io_request, From, ReplyAs, {put_chars, unicode, io_lib, format, Data}} ->
+            function_tracer_stream_data(Data, Context),
+            From ! {io_reply, ReplyAs, ok},
+            function_tracer_output(Count - 1, Context);
+        {io_request, From, ReplyAs, _} ->
+            recon_trace:clear(),
+            From ! {io_reply, ReplyAs, {error, enotsup}}
+        after 600000 ->
+            recon_trace:clear(),
+            function_tracer_stream_data(<<"\n\n\nStreaming timeout after 10 minutes.\n">>, Context)
+    end.
+
+function_tracer_stream_data(Data, Context) ->
+    z_mqtt:publish(
+        [ <<"~client">>, <<"development">>, <<"function_trace_output">> ],
+        #{
+            <<"data">> => unicode:characters_to_binary(Data)
+        },
+        Context).
 
 task_xref_check(EltId, Context) ->
     {ok, XRef} = z_development_template_xref:check(Context),

@@ -1,8 +1,9 @@
 %% @author Marc Worrell <marc@worrell.nl>
-%% @copyright 2010-2022 Marc Worrell
+%% @copyright 2010-2024 Marc Worrell
 %% @doc Let new members register themselves.
+%% @end
 
-%% Copyright 2010-2022 Marc Worrell
+%% Copyright 2010-2024 Marc Worrell
 %%
 %% Licensed under the Apache License, Version 2.0 (the "License");
 %% you may not use this file except in compliance with the License.
@@ -17,6 +18,125 @@
 %% limitations under the License.
 
 -module(mod_signup).
+-moduledoc("
+This module presents an interface for letting users register themselves.
+
+
+
+Configuration
+-------------
+
+You can adjust this module’s behaviour with the following [Module configuration](/id/doc_developerguide_modules#dev-configuration-parameters):
+
+`mod_signup.``request_confirm`
+
+true (default)
+
+send a signup confirmation e-mail to new users
+
+false
+
+disable the signup confirmation e-mail
+
+`mod_signup.``username_equals_email`
+
+false (default)
+
+users have a username separate from their e-mail address and use that username for logging in
+
+true
+
+the user’s e-mail address is also the user’s username, so users can log in with their e-mail address.
+
+`mod_signup.``member_category`
+
+Name of the category that users created through sign up will be placed in.
+
+Defaults to `person`.
+
+`mod_signup.``content_group`
+
+Name of the content group that users created through sign up will be placed in.
+
+Defaults to `default_content_group`.
+
+`mod_signup.``depiction_as_medium`
+
+If set then any depiction\\_url is added as a medium record to the person who signed up. Normally the depiction is added
+as a separate *depending* image resource and connected from the person using a `depiction` predicate.
+
+
+
+Config: Using the user’s e-mail address as username
+---------------------------------------------------
+
+By setting a configuration value, it is possible to use the entered email address as the username.
+
+Set the configuration value `mod_signup.username_equals_email` to `true`.
+
+This makes the username equal to the email address, so that the user can log in using his email address instead of a
+separate user name. Note that when you allow a user to change his email, take care to update the `{username_pw,
+{Username, Password}}` identity as well, otherwise the username remains equal to the old email address.
+
+
+
+Notifications
+-------------
+
+
+
+### `signup_form_fields`
+
+Fold for determining which signup fields to validate. This is an array of `{Fieldname, Validate}` tuples, defaulting to:
+
+
+```erlang
+[
+    {email, true},
+    {name_first, true},
+    {name_surname_prefix, false},
+    {name_surname, true}
+]
+```
+
+Observers can add / remove fields using the accumulator value that is passed into the notification.
+
+
+
+### `identify_verification{user_id=UserId, identity=Ident}`
+
+Send verification requests to unverified identities.
+
+
+
+### `signup_check`
+
+Fold for the signup preflight check. Allows to add extra user properties or abort the signup.
+
+If no `{ok, _Props1, SignupProps}` is returned, but `{error, Reason}`, the signup is aborted.
+
+
+
+### `signup_done{id=Id, is_verified=IsVerified, props=Props, signup_props=SignupProps}`
+
+Fired when a signup procedure is done and a user has been created.
+
+
+
+### `signup_confirm{id=UserId}`
+
+Fired when a users have signed up and confirmed their identity (e.g. via e-mail).
+
+
+
+### `signup_confirm_redirect{id=UserId}`
+
+Decide to which page a user gets redirected to after signup.
+
+Todo
+
+Add more documentation
+").
 -author("Marc Worrell <marc@worrell.nl>").
 
 -mod_title("Sign up users").
@@ -25,6 +145,43 @@
 -mod_schema(1).
 -mod_depends([ base, mod_authentication, mod_server_storage ]).
 -mod_provides([signup]).
+-mod_config([
+        #{
+            key => member_category,
+            type => string,
+            default => "person",
+            description => "The category to assign to new members. Defaults to 'person'."
+        },
+        #{
+            key => content_group,
+            type => string,
+            default => "",
+            description => "The content group to assign to new members. Defaults to the empty string, "
+                           "which means the default content group for the current ACL module."
+        },
+        #{
+            key => depiction_as_medium,
+            type => boolean,
+            default => false,
+            description => "If true, the depiction of the user will be the medium beloging to the user's resource, "
+                           "otherwise it will be uploaded as a separate image resource and connected to the user using "
+                           "a depiction connection."
+        },
+        #{
+            key => request_confirm,
+            type => boolean,
+            default => true,
+            description => "If true, the user will not be verified immediately, but will receive a verification email to confirm their identity. "
+                           "If false, the user is verified immediately."
+        },
+        #{
+            key => username_equals_email,
+            type => boolean,
+            default => false,
+            description => "If true, the username will be set to the email address of the user. "
+                           "If false, the user can choose a different username."
+        }
+    ]).
 
 
 -export([

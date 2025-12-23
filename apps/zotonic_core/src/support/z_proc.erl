@@ -25,6 +25,7 @@
 -export([
     spawn_link_md/1,
     spawn_md/1,
+    spawn_md_opt/2,
 
     whereis/2,
     register/3,
@@ -54,9 +55,11 @@
     Pid :: pid().
 spawn_link_md(Fun) ->
     MD = logger:get_process_metadata(),
+    Memo = z_memo:get_status(),
     proc_lib:spawn_link(
         fun() ->
             set_process_metadata(MD),
+            z_memo:set_status(Memo),
             Fun()
         end).
 
@@ -67,15 +70,35 @@ spawn_link_md(Fun) ->
     Pid :: pid().
 spawn_md(Fun) ->
     MD = logger:get_process_metadata(),
+    Memo = z_memo:get_status(),
     proc_lib:spawn(
         fun() ->
             set_process_metadata(MD),
+            z_memo:set_status(Memo),
             Fun()
         end).
 
+%% @doc Spawn a new process using proc_lib and copy the logger metadata
+%% from the calling process to the new process. Pass options to proc_lib
+%% for spawning the process.
+-spec spawn_md_opt( Fun, SpawnOpts ) -> Pid | {Pid, Reference} when
+    Fun :: function(),
+    SpawnOpts :: [ proc_lib:spawn_option() ],
+    Pid :: pid(),
+    Reference :: reference().
+spawn_md_opt(Fun, SpawnOpts) ->
+    MD = logger:get_process_metadata(),
+    Memo = z_memo:get_status(),
+    proc_lib:spawn_opt(
+        fun() ->
+            set_process_metadata(MD),
+            z_memo:set_status(Memo),
+            Fun()
+        end,
+        SpawnOpts).
+
 set_process_metadata(undefined) -> ok;
 set_process_metadata(MD) -> logger:set_process_metadata(MD).
-
 
 %% @doc Lookup the pid of the process.
 -spec whereis(Name, Site) -> undefined | pid() when

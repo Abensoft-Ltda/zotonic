@@ -49,6 +49,10 @@
 %%% Server header returned by Cowboy, defaults to "Zotonic"
    %% {server_header, "Zotonic"},
 
+%%% Email address for admin emails, sent to both the site's admin and this email
+%%% address (if defined).
+   %% {admin_email, ""},
+
 %%% IP address on which Zotonic will listen for HTTP requests.
 %%% Always overridden by the ZOTONIC_IP environment variable.
 %%% This can be a tuple, or a (domain) string ("localhost" or "127.0.0.1")
@@ -275,6 +279,12 @@
 %%% Show a growl message on the terminal if a file is compiled or handled.
    %% {filewatcher_terminal_notifier, true},
 
+%%% Allow the development module to set traces on functions. Default only enabled on
+%%% a Zotonic server with default environment 'development' or 'test'
+%%% Enabling this will will allow the admin user to trace almost all functions in the
+%%% running server and is a security risk.
+   %% {function_tracing_enabled, true},
+
 %%% Maximum number of entries in the metrics log buffer. There are two buffers, one for 1/2/3xx
 %%% results and one for 4/5xx results. All metrics are buffered so that the loggers can easily
 %%% handle spikes.
@@ -287,6 +297,10 @@
 %%% Maximum number of concurrent spawned sidejobs. This includes processes spawned and linked
 %%% to the session and page-sessions. Default is 50% of the process_limit.
    %% {sidejobs_limit, 100000},
+
+%%% Maximum number of concurrent spawned ImageMagick image resizers. More CPU cores and memory
+%%% allows more resizers at the same time. Default is 3.
+   %% {media_resizer_limit, 3},
 
 %%% 'tar' command to be used when archiving files, also used by mod_backup
    %% {tar, "tar"},
