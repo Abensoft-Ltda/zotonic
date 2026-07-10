@@ -70,6 +70,7 @@ runcmd:
   - sudo echo "fs.inotify.max_user_watches=10000" > /etc/sysctl.d/40-max-user-watches.conf
   # Enable ImageMagick PDF rendering
   - sed -i 's/^.*pattern="PDF".*$/<!-- &1 -->/g' /etc/ImageMagick-6/policy.xml
+  - test -f /etc/ImageMagick-7/policy.xml && sed -i 's/^.*pattern="PDF".*$/<!-- &1 -->/g' /etc/ImageMagick-7/policy.xml || true
   # Let clamav listen on localhost and update definitions
   - service clamav-daemon stop
   - systemctl stop clamav-freshclam

@@ -26,6 +26,8 @@ RUN echo "fs.inotify.max_user_watches=10000" > /etc/sysctl.d/40-max-user-watches
 
 # Enable ImageMagick PDF rendering
 RUN sed -i 's/^.*pattern="PDF".*$/<!-- &1 -->/g' /etc/ImageMagick-6/policy.xml
+RUN [ -f /etc/ImageMagick-7/policy.xml ] && \
+    sed -i 's/^.*pattern="PDF".*$/<!-- &1 -->/g' /etc/ImageMagick-7/policy.xml || true
 
 COPY docker/docker-entrypoint.sh /opt/zotonic-docker/docker-entrypoint.sh
 
